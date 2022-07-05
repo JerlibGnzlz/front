@@ -10,9 +10,9 @@ import moment from "moment";
 import Swal from "sweetalert2";
 import { useAuth } from "../context/AuthContext.js";
 
-const { REACT_APP_BACKEND_URL } = process.env;
-
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
+const { REACT_APP_BACKEND_URL } = process.env;
 
 export const UserRegister = () => {
   const navigate = useNavigate();
