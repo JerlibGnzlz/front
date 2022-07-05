@@ -6,12 +6,13 @@ export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const RESET = "RESET";
 export const TOP_SELLERS = "TOP_SELLERS";
 
-
 export const MERCADO_PAGO = "MERCADO_PAGO";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const RESET_CART = "RESET_CART";
 export const ADD_TO_CART_DETAIL = "ADD_TO_CART_DETAIL";
 
+const { REACT_APP_BACKEND_URL } = process.env;
+console.log(REACT_APP_BACKEND_URL);
 
 export const getProduct =
   ({
@@ -23,7 +24,7 @@ export const getProduct =
     search = "",
   }) =>
   async (dispatch) => {
-    const product = await axios.get("http://localhost:3001/product", {
+    const product = await axios.get(`${REACT_APP_BACKEND_URL}/product`, {
       params: {
         id: id,
         price: price,
@@ -40,7 +41,7 @@ export const getProduct =
 export const getCategories =
   ({ genre = undefined, brand = undefined }) =>
   async (dispatch) => {
-    const categories = await axios.get("http://localhost:3001/categories", {
+    const categories = await axios.get(`${REACT_APP_BACKEND_URL}/categories`, {
       params: {
         genre: genre,
         brand: brand,
@@ -56,7 +57,7 @@ export const getCategories =
 export const getBrand =
   ({ genre = undefined, category = undefined }) =>
   async (dispatch) => {
-    const brand = await axios.get("http://localhost:3001/brands", {
+    const brand = await axios.get(`${REACT_APP_BACKEND_URL}/brands`, {
       params: {
         genre: genre,
         category: category,
@@ -70,7 +71,7 @@ export const getBrand =
   };
 
 export const getProductDetail = (id) => async (dispatch) => {
-  const product = await axios.get("http://localhost:3001/product", {
+  const product = await axios.get(`${REACT_APP_BACKEND_URL}/product`, {
     params: {
       id: id,
     },
@@ -90,11 +91,9 @@ export const resetCart = () => {
   };
 };
 
-
-
 export function topSeller() {
   return async function (dispatch) {
-    var json = await axios.get("http://localhost:3001/orderItem");
+    var json = await axios.get(`${REACT_APP_BACKEND_URL}/orderItem`);
 
     return dispatch({
       type: TOP_SELLERS,
@@ -103,14 +102,12 @@ export function topSeller() {
   };
 }
 
-
-
 export const postMercadoPago = (data) => {
   // console.log(data, "action");
 
   return async function (dispatch) {
     return axios
-      .post("http://localhost:3001/mp/payment", data)
+      .post(`${REACT_APP_BACKEND_URL}/mp/payment`, data)
       .then((response) => {
         dispatch({ type: MERCADO_PAGO, payload: response.data });
       })
@@ -118,33 +115,28 @@ export const postMercadoPago = (data) => {
   };
 };
 
-
-
-
 export function addToCart(product) {
   return function (dispatch) {
     return dispatch({
       type: ADD_TO_CART,
       payload: product,
-    })
-  
-  }
+    });
+  };
 }
 export function addToCartDetail(product) {
   return function (dispatch) {
     return dispatch({
       type: ADD_TO_CART_DETAIL,
       payload: product,
-    })
-  
-  }
+    });
+  };
 }
 
 export function userGoogleRegister(payload) {
   return async function () {
     try {
       const createUser = await axios.post(
-        "http://localhost:3001/users",
+        `${REACT_APP_BACKEND_URL}/users`,
         payload
       );
 
@@ -159,12 +151,9 @@ export function verification(payload) {
   return async function () {
     try {
       var json = await axios.get(
-        `http://localhost:3001/verify?email=${payload}`
+        `${REACT_APP_BACKEND_URL}/verify?email=${payload}`
       );
       return json;
     } catch (error) {}
   };
 }
-
-
-
