@@ -105,8 +105,10 @@ export const postMercadoPago = (data) => {
   // console.log(data, "action");
 
   return async function (dispatch) {
+    console.log(data);
     return axios
       .post(`${REACT_APP_BACKEND_URL}/mp/payment`, data)
+
       .then((response) => {
         dispatch({ type: MERCADO_PAGO, payload: response.data });
       })
