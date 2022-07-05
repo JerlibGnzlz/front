@@ -14,139 +14,115 @@ import NavBar from "../NavBar";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import TopSellers from "../topSeller/TopSellers";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Home() {
+  //const { user } = useAuth();
+
+  /* console.log(user); */
   return (
     <div className="background">
       <NavBar />
-      <div className="slider ">
-        <div className="uli ">
-          <img className="w-1/3 " src={eslogan} alt="eslogan" />
-          <img className="w-1/3 " src={linea} alt="linea" />
-          <img className="w-1/3 " src={envios} alt="envios" />
-        </div>
-        {/* <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul> */}
+      <div className="slider">
+        <ul>
+          <li>
+            <img src={eslogan} alt="eslogan" />
+          </li>
+          <li>
+            <img src={linea} alt="linea" />
+          </li>
+          <li>
+            <img src={envios} alt="envios" />
+          </li>
+        </ul>
       </div>
-      <div className="grid grid-cols-1 gap-2 pr-8 pl-8 mt-4 sm:grid-cols-2 lg:grid-cols-4 sm:pr-4 sm:pl-4">
-        <div className="flex flex-col gap-2">
-          <h4 className="names">Women Clothes</h4>
-          <img className="w-full" src={mujer} alt="mujer " />
-          <button className="bg-secondary text-white bottomRadius pt-2 pb-2 w-full">
-            <Link to="/products/women">See more</Link>
-          </button>
-        </div>
-        <div className="flex flex-col gap-2">
-          <h4 className="names">Women Clothes</h4>
-          <img className="w-full" src={hombre} alt="hombre" />
-          <button className="bg-secondary text-white bottomRadius pt-2 pb-2 w-full">
-            <Link to="/products/men">See more</Link>
-          </button>
-        </div>
-        <div className="flex flex-col gap-2">
-          <h4 className="names">Women Clothes</h4>
-          <img className="w-full" src={niños} alt="niños" />
-          <button className="bg-secondary text-white bottomRadius pt-2 pb-2 w-full">
-            <Link to="/products/kids">See more</Link>
-          </button>
-        </div>
-        <div className="flex flex-col gap-2">
-          <h4 className="names">Women Clothes</h4>
-          <img className="w-full" src={accesorios} alt="accesorios" />
-          <button className="bg-secondary text-white bottomRadius pt-2 pb-2 w-full">
-            <Link to="/products/accesories">See more</Link>
-          </button>
-        </div>
-        {/* <h4 className="names">Women Clothes</h4>
+      <div className="all">
+        <h4 className="names">Women Clothes</h4>
         <h4 className="names">Men Clothes</h4>
         <h4 className="names">Kids Clothes</h4>
         <h4 className="names">Accessories</h4>
-        <img className="w-full" src={mujer} alt="mujer " />
-        <img className="w-full" src={hombre} alt="hombre" />
-        <img className="w-full" src={niños} alt="niños" />
-        <img className="w-full" src={accesorios} alt="accesorios" />
+        <img src={mujer} alt="mujer" />
+        <img src={hombre} alt="hombre" />
+        <img src={niños} alt="niños" />
+        <img src={accesorios} alt="accesorios" />
 
-        <button className="bg-secondary text-white bottomRadius pt-2 pb-2">
+        <button className="boton">
           <Link to="/products/women">See more</Link>
         </button>
-        <button className="bg-secondary text-white bottomRadius pt-2 pb-2">
+        <button className="boton">
           <Link to="/products/men">See more</Link>
         </button>
-        <button className="bg-secondary text-white bottomRadius pt-2 pb-2">
+        <button className="boton">
           <Link to="/products/kids">See more</Link>
         </button>
-        <button className="bg-secondary text-white bottomRadius pt-2 pb-2">
+        <button className="boton">
           <Link to="/products/accesories">See more</Link>
-        </button> */}
+        </button>
       </div>
 
       <h4 className="Top">Top Sellers</h4>
 
       <TopSellers />
-      <h2 className="font-extra-bold text-5xl text-center w-full mb-3">
-        Our Costumers Speak
-      </h2>
-      <h3 className="w-full text-center mb-3">
+
+      <h2 className="opinions">Our Costumers Speak</h2>
+      <h3 className="under-text">
         We have been working with costumers around the world
       </h3>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pr-4 pl-4 mt-8 ">
-        {/* <blockquote> */}
-        <div className="flex flex-col items-center">
-          <h5>The best clothes</h5>
-          <p className="bg-testimony mt-5 mb-5 p-3 rounded-3xl text-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-            a natus laboriosam vitae eos. In optio, perspiciatis deleniti nemo{" "}
-          </p>
-          <img className="Photo mb-2" src={testimonial1} alt="testimonial" />
+      <div className="testimonials">
+        <blockquote>
+          <div className="frame">
+            <h5>The best clothes</h5>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Perferendis a natus laboriosam vitae eos. In optio, perspiciatis
+              deleniti nemo{" "}
+            </p>
+          </div>
+          <img className="Photo" src={testimonial1} alt="testimonial" />
           <cite>David Cooper</cite>
-        </div>
-        {/* </blockquote>
-        <blockquote> */}
-        <div className="flex flex-col items-center ">
-          <h5>On-time delivery</h5>
-          <p className="bg-testimony mt-5 mb-5 p-3 rounded-3xl text-center ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-            a natus laboriosam vitae eos. In optio, perspiciatis deleniti nemo{" "}
-          </p>
-          <img className="Photo mb-2 " src={testimonial2} alt="testimonial" />
-          <cite>Esther Hawkins</cite>
-        </div>
-        {/* </blockquote>
-        <blockquote> */}
-        <div className="flex flex-col items-center">
-          <h5>I could buy easily</h5>
-          <p className="bg-testimony mt-5 mb-5 p-3 rounded-3xl text-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-            a natus laboriosam vitae eos. In optio, perspiciatis deleniti nemo{" "}
-          </p>
-          <img className="Photo mb-2" src={testimonial3} alt="testimonial" />
-          <cite>Devon Lane</cite>
-        </div>
+        </blockquote>
+        <blockquote>
+          <div className="frame">
+            <h5>On-time delivery</h5>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Perferendis a natus laboriosam vitae eos. In optio, perspiciatis
+              deleniti nemo{" "}
+            </p>
+          </div>
+          <img className="Photo" src={testimonial2} alt="testimonial" />
 
-        {/* </blockquote> */}
+          <cite>Esther Hawkins</cite>
+        </blockquote>
+        <blockquote>
+          <div className="frame">
+            <h5>I could buy easily</h5>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Perferendis a natus laboriosam vitae eos. In optio, perspiciatis
+              deleniti nemo{" "}
+            </p>
+          </div>
+
+          <img className="Photo" src={testimonial3} alt="testimonial" />
+          <cite>Devon Lane</cite>
+        </blockquote>
       </div>
 
-      <div className="stats grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 place-items-center ">
-        <div className="itemsStats">
-          <h3>5K+</h3>
-          <h4>Happy Costumers</h4>
-        </div>
-        <div className="itemsStats">
-          <h3>4.5K+</h3>
-          <h4>Deliveries</h4>
-        </div>
-        <div className="itemsStats">
-          <h3>3K+</h3>
-          <h4>Rewiews</h4>
-        </div>
-        <div className="itemsStats">
-          <h3>25+</h3>
-          <h4>Awards Won</h4>
-        </div>
+      <div className="stats">
+        <h3>5K+</h3>
+        <h3>4.5K+</h3>
+        <h3>3K+</h3>
+        <h3>25+</h3>
+        <h4>Happy Costumers</h4>
+        <h4>Deliveries</h4>
+        <h4>Rewiews</h4>
+        <h4>Awards Won</h4>
+        <b></b>
+        <b></b>
+        <b></b>
+        <b></b>
       </div>
 
       <Footer />
