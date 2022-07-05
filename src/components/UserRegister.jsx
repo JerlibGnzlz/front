@@ -10,6 +10,8 @@ import moment from "moment";
 import Swal from "sweetalert2";
 import { useAuth } from "../context/AuthContext.js";
 
+const { REACT_APP_BACKEND_URL } = process.env;
+
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export const UserRegister = () => {
@@ -75,17 +77,19 @@ export const UserRegister = () => {
           await logout();
         } catch (error) {}
 
-        axios.post("http://localhost:3001/users", values).then((response) => {
-          console.log("Data added successfully.");
-          Swal.fire({
-            // position: 'center',
-            // icon: 'success',
-            title: "User created successfully",
-            showConfirmButton: false,
-            timer: 2000,
+        axios
+          .post(`${REACT_APP_BACKEND_URL}/users`, values)
+          .then((response) => {
+            console.log("Data added successfully.");
+            Swal.fire({
+              // position: 'center',
+              // icon: 'success',
+              title: "User created successfully",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            navigate("/login");
           });
-          navigate("/login");
-        });
       }}
     >
       {(formik) => (
@@ -138,8 +142,6 @@ export const UserRegister = () => {
                 type="password"
                 placeholder="******"
               />
-
-
 
               <TextField
                 label="Email"
