@@ -5,10 +5,10 @@ import axios from "axios";
 import Swal from "sweetalert2";
 //import { useNavigate } from "react-router-dom";
 
+const { REACT_APP_BACKEND_URL } = process.env;
+
 function CheckoutAddress() {
   //const navigate = useNavigate();
-
-  
 
   const validate = Yup.object({
     // names: Yup.string().min(2, "Too Short!").max(50, "Too Long!"),
@@ -39,26 +39,25 @@ function CheckoutAddress() {
         annotations: "",
       }}
       validationSchema={validate}
-      
       onSubmit={(values) => {
         // console.log(values, 'valores')
-      axios.post('http://localhost:3001/userAddress', values).then((response)=>{
-        // console.log('Shipping information added successfully')
-        Swal.fire({
-          // position: 'center',
-          // icon: 'success',
-          title: "Information added successfully",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        // navigate("/mercadopago");
-        
-      })
-       
+        axios
+          .post(`${REACT_APP_BACKEND_URL}/userAddress`, values)
+          .then((response) => {
+            // console.log('Shipping information added successfully')
+            Swal.fire({
+              // position: 'center',
+              // icon: 'success',
+              title: "Information added successfully",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            // navigate("/mercadopago");
+          });
       }}
     >
       {(formik, errors, touched) => (
-        <Form >
+        <Form>
           <h2 className="mt-10 text-xl text-white font-bold ">
             Contact information
           </h2>
@@ -67,7 +66,6 @@ function CheckoutAddress() {
             <label
               htmlFor="email"
               className="block text-md font-medium text-white"
-            
             >
               Email address
             </label>
@@ -278,13 +276,13 @@ function CheckoutAddress() {
               </div>
             </div>
 
-              <button onSubmit={formik.handleSubmit}
-                type="submit"
-                className="w-full mt-10 bg-primary border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary"
-              >
-                Confirm Information
-              </button>
-         
+            <button
+              onSubmit={formik.handleSubmit}
+              type="submit"
+              className="w-full mt-10 bg-primary border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary"
+            >
+              Confirm Information
+            </button>
           </div>
         </Form>
       )}
