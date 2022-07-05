@@ -12,7 +12,6 @@ export const RESET_CART = "RESET_CART";
 export const ADD_TO_CART_DETAIL = "ADD_TO_CART_DETAIL";
 
 const { REACT_APP_BACKEND_URL } = process.env;
-console.log(REACT_APP_BACKEND_URL);
 
 export const getProduct =
   ({
