@@ -13,7 +13,8 @@ import Products from "./components/Products/Products";
 
 //import orderDetails from "./components/OrderDetails/orderDetails";
 
-import Checkout from "./components/Checkout/Checkout.jsx";
+// import Checkout from "./components/Checkout/Checkout.jsx";
+import CheckoutAddress from "./components/Checkout/CheckoutAddress";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
           <Route path="/detail/:id" exact element={<ProductDetail />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<UserRegister />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<CheckoutAddress />} />
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/reset" component={<Reset />} />
         </Routes>
