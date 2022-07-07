@@ -158,3 +158,7 @@ export function verification(payload) {
     } catch (error) {}
   };
 }
+
+export const process_payment = ({data, body}) => async () => {
+  axios.post(`http://localhost:3001/mp/process_payment${data}`, body)
+};
