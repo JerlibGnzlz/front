@@ -3,17 +3,27 @@ import { Formik, ErrorMessage, Field, Form } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Swal from "sweetalert2";
-//import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import CheckoutPaymentMp from "./CheckoutPaymentMp";
+import { useState } from "react";
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
 function CheckoutAddress() {
   //const navigate = useNavigate();
+  const [formData, setFormData] = useState(null);
+
+  const divStyle = {
+    backgroundColor: "#0d0d0d",
+    backgroundImage: "linear-gradient(149deg, #0d0d0d 59%, #404040 83%)",
+  };
 
   const validate = Yup.object({
     // names: Yup.string().min(2, "Too Short!").max(50, "Too Long!"),
     // lastNames: Yup.string().min(2, "Too Short!").max(50, "Too Long!"),
-    email: Yup.string().email("Invalid email"),
+    // email: Yup.string().email("Invalid email"),
     postalCode: Yup.string()
       .min(4, "Must be at least 4 charaters")
       .required("Required"),
@@ -31,7 +41,7 @@ function CheckoutAddress() {
       initialValues={{
         // names: "",
         // lastNames: "",
-        email: "",
+        // email: "",
         postalCode: "",
         state: "",
         city: "",
@@ -45,20 +55,35 @@ function CheckoutAddress() {
           .post(`${REACT_APP_BACKEND_URL}/userAddress`, values)
           .then((response) => {
             // console.log('Shipping information added successfully')
+            setFormData(values);
+
             Swal.fire({
-              // position: 'center',
-              // icon: 'success',
+              position: "center",
+              icon: "success",
               title: "Information added successfully",
               showConfirmButton: false,
               timer: 2000,
             });
-            // navigate("/mercadopago");
           });
       }}
     >
       {(formik, errors, touched) => (
-        <Form>
-          <h2 className="mt-10 text-xl text-white font-bold ">
+        <div className="grid grid-cols-2 ">
+          <div className="">
+            <div
+              style={divStyle}
+              className="max-w-xl rounded-md mx-auto h-fit mt-10 mb-10 pt-10 pb-10 px-4 sm:px-6 lg:max-w-2xl lg:px-8 "
+            >
+              <Link to="/Cart">
+                <div className="bg-white w-8 p-1 ml-6 text-black hover:bg-tertiary hover:text-white rounded">
+                  <button>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                  </button>
+                </div>
+              </Link>
+
+              <Form>
+                {/* <h2 className="mt-10 text-xl text-white font-bold ">
             Contact information
           </h2>
 
@@ -86,15 +111,15 @@ function CheckoutAddress() {
                 className="text-red-700"
               />
             </div>
-          </div>
+          </div> */}
 
-          {/* Shipping information */}
-          <div className="mt-4 pt-4">
-            <h2 className="text-xl font-bold text-white">
-              Shipping information
-            </h2>
-            <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-              {/* <div>
+                {/* Shipping information */}
+                <div className="mt-4 pt-4">
+                  <h2 className="text-xl font-bold text-white">
+                    Shipping information
+                  </h2>
+                  <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                    {/* <div>
                 <label
                   htmlFor="first-name"
                   className="block text-md font-medium text-white"
@@ -117,7 +142,7 @@ function CheckoutAddress() {
                 </div>
               </div> */}
 
-              {/* <div>
+                    {/* <div>
                 <label
                   htmlFor="last-name"
                   className="block text-md font-medium text-white "
@@ -140,151 +165,155 @@ function CheckoutAddress() {
                 </div>
               </div> */}
 
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="address"
-                  className="block text-md font-medium text-white"
-                >
-                  Address
-                </label>
-                <div className="mt-1">
-                  <Field
-                    type="text"
-                    name="address"
-                    id="address"
-                    autoComplete="street-address"
-                    className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
-                  />
-                  <ErrorMessage
-                    component="div"
-                    name="address"
-                    className="text-red-400"
-                  />
-                </div>
-              </div>
+                    <div className="sm:col-span-2">
+                      <label
+                        htmlFor="address"
+                        className="block text-md font-medium text-white"
+                      >
+                        Address
+                      </label>
+                      <div className="mt-1">
+                        <Field
+                          type="text"
+                          name="address"
+                          id="address"
+                          autoComplete="street-address"
+                          className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
+                        />
+                        <ErrorMessage
+                          component="div"
+                          name="address"
+                          className="text-red-400"
+                        />
+                      </div>
+                    </div>
 
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="apartment"
-                  className="block text-md font-medium text-white"
-                >
-                  Apartment, suite, etc.
-                </label>
-                <div className="mt-1">
-                  <Field
-                    type="text"
-                    name="annotations"
-                    id="apartment"
-                    className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
-                  />
-                  <ErrorMessage
-                    component="div"
-                    name="annotations"
-                    className="text-red-400"
-                  />
-                </div>
-              </div>
+                    <div className="sm:col-span-2">
+                      <label
+                        htmlFor="apartment"
+                        className="block text-md font-medium text-white"
+                      >
+                        Apartment, suite, etc.
+                      </label>
+                      <div className="mt-1">
+                        <Field
+                          type="text"
+                          name="annotations"
+                          id="apartment"
+                          className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
+                        />
+                        <ErrorMessage
+                          component="div"
+                          name="annotations"
+                          className="text-red-400"
+                        />
+                      </div>
+                    </div>
 
-              <div>
-                <label
-                  htmlFor="state"
-                  className="block text-md font-medium text-white"
-                >
-                  State
-                </label>
-                <div className="mt-1">
-                  <Field
-                    type="text"
-                    name="state"
-                    id="city"
-                    className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
-                  />
-                  <ErrorMessage
-                    component="div"
-                    name="state"
-                    className="text-red-400"
-                  />
-                </div>
-              </div>
+                    <div>
+                      <label
+                        htmlFor="state"
+                        className="block text-md font-medium text-white"
+                      >
+                        State
+                      </label>
+                      <div className="mt-1">
+                        <Field
+                          type="text"
+                          name="state"
+                          id="city"
+                          className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
+                        />
+                        <ErrorMessage
+                          component="div"
+                          name="state"
+                          className="text-red-400"
+                        />
+                      </div>
+                    </div>
 
-              <div>
-                <label
-                  htmlFor="country"
-                  className="block text-md font-medium text-white"
-                >
-                  City
-                </label>
-                <div className="mt-1">
-                  <Field
-                    id="country"
-                    name="city"
-                    autoComplete="city"
-                    className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
-                  />
-                  <ErrorMessage
-                    component="div"
-                    name="city"
-                    className="text-red-400"
-                  />
-                </div>
-              </div>
+                    <div>
+                      <label
+                        htmlFor="country"
+                        className="block text-md font-medium text-white"
+                      >
+                        City
+                      </label>
+                      <div className="mt-1">
+                        <Field
+                          id="country"
+                          name="city"
+                          autoComplete="city"
+                          className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
+                        />
+                        <ErrorMessage
+                          component="div"
+                          name="city"
+                          className="text-red-400"
+                        />
+                      </div>
+                    </div>
 
-              <div>
-                <label
-                  htmlFor="postal-code"
-                  className="block text-md font-medium text-white"
-                >
-                  Postal code
-                </label>
-                <div className="mt-1">
-                  <Field
-                    type="text"
-                    name="postalCode"
-                    id="postal-code"
-                    autoComplete="postal-code"
-                    className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
-                  />
-                  <ErrorMessage
-                    component="div"
-                    name="postalCode"
-                    className="text-red-400"
-                  />
-                </div>
-              </div>
+                    <div>
+                      <label
+                        htmlFor="postal-code"
+                        className="block text-md font-medium text-white"
+                      >
+                        Postal code
+                      </label>
+                      <div className="mt-1">
+                        <Field
+                          type="text"
+                          name="postalCode"
+                          id="postal-code"
+                          autoComplete="postal-code"
+                          className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
+                        />
+                        <ErrorMessage
+                          component="div"
+                          name="postalCode"
+                          className="text-red-400"
+                        />
+                      </div>
+                    </div>
 
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-md font-medium text-white"
-                >
-                  Phone
-                </label>
-                <div className="mt-1">
-                  <Field
-                    type="text"
-                    name="phone"
-                    id="phone"
-                    autoComplete="tel"
-                    className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
-                  />
-                  <ErrorMessage
-                    component="div"
-                    name="phone"
-                    className="text-red-400"
-                  />
+                    <div>
+                      <label
+                        htmlFor="phone"
+                        className="block text-md font-medium text-white"
+                      >
+                        Phone
+                      </label>
+                      <div className="mt-1">
+                        <Field
+                          type="text"
+                          name="phone"
+                          id="phone"
+                          autoComplete="tel"
+                          className="text-black font-bold block w-full py-3 border-gray-300 rounded-md drop-shadow-xl focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-tertiary placeholder:pl-2"
+                        />
+                        <ErrorMessage
+                          component="div"
+                          name="phone"
+                          className="text-red-400"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onSubmit={formik.handleSubmit}
+                    type="submit"
+                    className="w-full mt-10 bg-primary border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary"
+                  >
+                    Confirm Information
+                  </button>
                 </div>
-              </div>
+              </Form>
             </div>
-
-            <button
-              onSubmit={formik.handleSubmit}
-              type="submit"
-              className="w-full mt-10 bg-primary border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary"
-            >
-              Confirm Information
-            </button>
           </div>
-        </Form>
+          <CheckoutPaymentMp formData={formData} />
+        </div>
       )}
     </Formik>
   );
