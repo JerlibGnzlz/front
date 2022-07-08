@@ -4,7 +4,7 @@ import Filter from "../Filter/Filter";
 import Card from "../Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getCategories, getProduct, getBrand } from "../Redux/action";
+import { getCategories, getProduct, getBrand, getFavorites } from "../Redux/action";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Paginado from "../Paginado/Paginado";

@@ -5,7 +5,7 @@ export const GET_BRAND = "GET_BRAND";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const RESET = "RESET";
 export const TOP_SELLERS = "TOP_SELLERS";
-
+export const FAVORITES = "FAVORITES"
 export const MERCADO_PAGO = "MERCADO_PAGO";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const RESET_CART = "RESET_CART";
