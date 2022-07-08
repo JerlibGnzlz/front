@@ -119,6 +119,18 @@ export default function Filter({ paginado }) {
         setPrice(undefined);
 
         break;
+      case "unisex":
+        navigate("/products/unisex");
+        console.log(genre)
+        paginado(1);
+        dispatch(getProduct({ search: "", genre: genre }));
+        dispatch(getBrand({ genre: genre }));
+        dispatch(getCategories({ genre: genre }));
+        setBrand(undefined);
+        setCategory(undefined);
+        setPrice(undefined);
+
+        break;
       default:
         navigate("/products");
         paginado(1);
@@ -209,6 +221,18 @@ export default function Filter({ paginado }) {
               onClick={(e) => handleReset(e)}
             >
               Accesories
+            </button>
+          </div>
+        </div>
+        <h1 className="text-3xl font-semibold">Espacial</h1>
+          <div className="ml-2 ">
+            <div className="">
+            <button
+              className="text-lg"
+              name="unisex"
+              onClick={(e) => handleReset(e)}
+            >
+              unisex
             </button>
           </div>
         </div>

@@ -8,7 +8,7 @@ import { UserRegister } from "./components/UserRegister";
 import ShoppingCart from "./components/ShoppingCart/ShopppingCart";
 import { AuthProvider } from "./context/AuthContext";
 import Reset from "./components/reset/Reset";
-
+import Favorites from "./components/Favorites/Favorites";
 import Products from "./components/Products/Products";
 
 //import orderDetails from "./components/OrderDetails/orderDetails";
@@ -30,6 +30,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutAddress />} />
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/reset" component={<Reset />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </AuthProvider>
     </div>
