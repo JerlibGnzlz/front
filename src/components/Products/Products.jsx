@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCategories, getProduct, getBrand } from "../Redux/action";
 import { useParams, useSearchParams } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import Paginado from "../Paginado/Paginado";
 import "./Products.css";
 
@@ -14,6 +15,7 @@ export default function Products() {
   const cartProduct = useSelector((state) => state.cart);
   const [params] = useSearchParams();
   const paymentStatus = params.get("status");
+  const { user } = useAuth()
   // console.log(paymentStatus, "Este es el paymentStatus");
   // console.log(cartProduct, "ESTE ES EL CART PRODUCT ");
   const dispatch = useDispatch();
@@ -38,11 +40,14 @@ export default function Products() {
   }
   paymentStatus === "approved" && localStorage.removeItem("cart");
   useEffect(() => {
+    if(user){
+      dispatch(getFavorites(user.email))
+    }
     dispatch(getProduct({ genre: genre }));
     // console.log(genre,'esto es el genre del useEffect')
     dispatch(getCategories({ genre: genre }));
     dispatch(getBrand({ genre: genre }));
-  }, [dispatch, genre]);
+  }, [dispatch, genre, user]);
 
   // const localStorageCard = localStorage.getItem("cartProducts");
   // const localStorageCardObj =

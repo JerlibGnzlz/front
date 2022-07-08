@@ -79,6 +79,20 @@ export const getProductDetail = (id) => async (dispatch) => {
   return dispatch({ type: GET_PRODUCT_DETAIL, payload: product.data });
 };
 
+export const getFavorites = (email) => async (dispatch) => {
+  const fav = await axios.get(`${REACT_APP_BACKEND_URL}/favorites/${email}`)
+  return dispatch({ type: FAVORITES, payload: fav.data });
+};
+
+export const addFavorites = ({email, id}) => async (dispatch) => {
+  axios.post(`${REACT_APP_BACKEND_URL}/favorites/${email}?id=${id}`)
+};
+
+export const removeFavorites = ({email, id}) => async (dispatch) => {
+  axios.delete(`${REACT_APP_BACKEND_URL}/favorites/${email}?id=${id}`)
+};
+
+
 export const reset = () => {
   return (dispatch) => {
     dispatch({ type: RESET });

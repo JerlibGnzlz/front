@@ -9,6 +9,7 @@ import {
   ADD_TO_CART,
   RESET_CART,
   ADD_TO_CART_DETAIL,
+  FAVORITES
 
 } from "./action";
 
@@ -21,6 +22,7 @@ const initialState = {
   cartDetail:{},
   topSel: [],
   linkmp: [],
+  favorites: [],
  
 
 };
@@ -83,7 +85,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         cartDetail:action.payload
       }
-
+    case FAVORITES:
+      return{
+        ...state,
+        favorites: action.payload
+      }
 
       case MERCADO_PAGO:
         return {

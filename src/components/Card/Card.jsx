@@ -1,19 +1,26 @@
 import { React} from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import './Card.css'
-import { getProductDetail,addToCart } from "../Redux/action";
-export default function Card({ id, name, price, category, image, brand }) {
+import { useAuth } from "../../context/AuthContext";
+import { getProductDetail,addToCart, addFavorites, removeFavorites, getFavorites} from "../Redux/action";
+import { useRadioGroup } from "@mui/material";
+
+
+export default function Card({ id, name, price, category, image, brand}) {
+  const { user} = useAuth()
   let contador = 0;
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.detail);
+  const favorite = useSelector((state) => state.favorites)
   //const cartProduct = useSelector((state) => state.cart);
 
   // console.log(cartProduct,'esto es el cartProduct de la CARD')
   // const { id } = useParams();
   // contador < 2 && console.log(productDetail, 'Soy el producto');
-
-  // console.log(productDetail,'esto es del details')
+  
   if (productDetail.length) {
     productDetail[0].quantity = 1
     dispatch(addToCart(productDetail[0]))
@@ -25,7 +32,21 @@ export default function Card({ id, name, price, category, image, brand }) {
   //   localStorage.setItem("cartProducts", JSON.stringify(cartProduct));
   // }
   
+  function addFavorite(e, email, id){
+    e.preventDefault()
+    dispatch(addFavorites({email: email, id: id}))
+    setTimeout(function(){
+      dispatch(getFavorites(user.email))
+    }, 70)
+  }
 
+  function removeFavorite(e, email, id){
+    e.preventDefault()
+    dispatch(removeFavorites({email: email, id: id}))
+    setTimeout(function(){
+      dispatch(getFavorites(user.email))
+    }, 70)
+  }
   // useEffect(() => {
 
   //   if (productDetail?.length) {
@@ -39,8 +60,8 @@ export default function Card({ id, name, price, category, image, brand }) {
     contador += 1;
     e.preventDefault();
     contador < 2 && dispatch(getProductDetail(id));
-
   }
+
 
   return (
     <Link to={`/detail/${id}`}>
@@ -84,6 +105,11 @@ export default function Card({ id, name, price, category, image, brand }) {
               <Link to="/cart">
                 <button className="button-primary">Cart</button>
               </Link>
+              {
+                user ? favorite?.some((p) => (p.id === id)) ? <button className="fav-button" onClick={(e) => removeFavorite(e, user.email, id)}><FavoriteIcon/></button> : 
+                                                      <button className="fav-button" onClick={(e) => addFavorite(e, user.email, id)} ><FavoriteBorderIcon/></button> : 
+                      null
+              }
             </div>
           </div>
         </div>
