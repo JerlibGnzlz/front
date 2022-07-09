@@ -2,7 +2,9 @@ import { React} from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import './Card.css'
-import { getProductDetail,addToCart } from "../Redux/action";
+import { getProductDetail, addToCart } from "../Redux/action";
+
+
 export default function Card({ id, name, price, category, image, brand }) {
   let contador = 0;
   const dispatch = useDispatch();
@@ -57,7 +59,7 @@ export default function Card({ id, name, price, category, image, brand }) {
             {name}
           </h3>
 
-          <p className="text-xl font-bold">Precio: U$S {price}</p>
+          <p className="text-xl font-bold">Precio: U$S {parseFloat(price).toFixed(2)}</p>
 
           {/* <div className="flex items-center gap-2 mt-1">
           <span className="text-sm line-through opacity-50">U$S 59.99</span>

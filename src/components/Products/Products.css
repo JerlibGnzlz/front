@@ -1,8 +1,9 @@
-.products{
+.productsCards{
     font-size: 2vw;
  display: flex;
  justify-content: center;
- margin: 3vw;  
+ margin: 3vw;
+ font-weight: 600;  
 
 }
 
@@ -33,7 +34,7 @@
     grid-column: 2/5;
 }
 
-.container{
+.containerCards{
 
     /* display: flex ;
     flex-wrap: wrap; */

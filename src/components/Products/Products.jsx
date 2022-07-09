@@ -94,14 +94,14 @@ export default function Products() {
   return (
     <div>
       <NavBar />
-      <div className="products">
+      <div className="productsCards">
         <h1>Products</h1>
       </div>
       <div className="cards2">
         <div className="card2">
           <Filter paginado={paginado} />
         </div>
-        <div className="container">
+        <div className="containerCards">
           {currentProduct &&
             currentProduct?.map((p) => {
               return (

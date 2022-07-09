@@ -90,7 +90,7 @@ useEffect(() => {
                 brandName={e.brand?.name}
               />
             ))
-          : "tu carrito esta vacio"}
+          : "Your Cart is empty"}
       </div>
       <Counter product={product} />
     </>

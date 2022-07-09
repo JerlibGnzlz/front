@@ -14,6 +14,12 @@ import Products from "./components/Products/Products";
 //import orderDetails from "./components/OrderDetails/orderDetails";
 
 import Checkout from "./components/Checkout/Checkout.jsx";
+import Admin from "./components/Admin/Admin";
+import SideBar from "./components/SideBarUser.jsx/SideBar";
+import FormProduct from './components/Admin/Products/formProduct';
+import EditProduct from "./components/Admin/Products/EditProduct";
+import ProductsAdmi from "./components/Admin/Products/ProductsAdmi";
+
 
 function App() {
   return (
@@ -28,7 +34,12 @@ function App() {
           <Route path="/register" element={<UserRegister />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/cart" element={<ShoppingCart />} />
-          <Route path="/reset" component={<Reset />} />
+          <Route path="/reset" element={<Reset />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/profile" element={<SideBar />} />
+          <Route path="/admin/products" element={<ProductsAdmi />} />
+          <Route path="/admin/create" element={<FormProduct />} />
+          <Route path="/admin/products/:id" element={<EditProduct />} />
         </Routes>
       </AuthProvider>
     </div>
