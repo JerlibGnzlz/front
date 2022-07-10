@@ -11,8 +11,16 @@ import Swal from "sweetalert2";
 import { useAuth } from "../context/AuthContext.js";
 
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-
+import UserRegisterSelect from "./UserRegisterSelect";
 const { REACT_APP_BACKEND_URL } = process.env;
+
+
+const options=[
+    {value: 'male', label: 'Male'},
+    {value: 'female', label: 'Female'},
+    {value: 'other', label: 'Other'},
+  ]
+
 
 export const UserRegister = () => {
   const navigate = useNavigate();
@@ -67,6 +75,7 @@ export const UserRegister = () => {
         confirmPassword: "",
         phone: "",
         birthDate: "",
+        genre: 'female',
       }}
       validationSchema={validate}
       onSubmit={async (values) => {
@@ -93,7 +102,7 @@ export const UserRegister = () => {
       }}
     >
       {(formik) => (
-        <div className="flex w-screen bg-zinc-100 text-white h-screen justify-center items-center m-auto ">
+        <div className="flex w-screen bg-zinc-100 text-white h-fit justify-center items-center m-auto ">
           <div
             style={divStyle}
             className="flex flex-col text-center h-fit w-2/5 rounded-md py-10 bg-primary  "
@@ -114,7 +123,7 @@ export const UserRegister = () => {
               <p>Welcome!</p>
             </div>
 
-            <Form className="mx-10 flex flex-wrap md:justify-center sm:justify-center">
+            <Form className=" m-auto pr-4 flex flex-wrap md:justify-center sm:justify-center gap-2 ">
               <TextField
                 label="First Name"
                 name="names"
@@ -164,7 +173,19 @@ export const UserRegister = () => {
                 placeholder="yyyy-mm-dd"
               />
 
-              <div className="mt-20 flex flex-row justify-center space-x-4 ">
+          
+               <div className="mb-3 mt-4 flex justify-center">
+               <UserRegisterSelect
+               options={options}
+               value={formik.values.genre}
+              //className={'input'}
+              className="p-2 ml-5 w-60 outline-none rounded text-sm  text-black font-bold  placeholder:text-slate-500 "
+               onChange={value=>formik.setFieldValue('genre', value.value)}
+               
+               />
+              </div> 
+
+              <div className="mt-8 ml-2 flex flex-row justify-center space-x-4 ">
                 <button
                   className="p-2 w-64 outline-none rounded  text-primary bg-white font-bold hover:bg-tertiary hover:cursor-pointer hover:text-white"
                   type="submit"
