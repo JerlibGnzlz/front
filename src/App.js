@@ -15,6 +15,8 @@ import Products from "./components/Products/Products";
 
 // import Checkout from "./components/Checkout/Checkout.jsx";
 import CheckoutAddress from "./components/Checkout/CheckoutAddress";
+import EditProfile from "./components/UserDashboard/EditProfile";
+import UserProfile from "./components/UserDashboard/UserProfile";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="/checkout" element={<CheckoutAddress />} />
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/reset" component={<Reset />} />
+          <Route path="/profile/:id" element={<EditProfile/>} />
+          <Route path="/profile" element={<UserProfile/>} />
         </Routes>
       </AuthProvider>
     </div>
