@@ -1,3 +1,4 @@
+import { faListSquares } from "@fortawesome/free-solid-svg-icons";
 import {
   GET_PRODUCT,
   GET_CATEGORIES,
@@ -9,7 +10,9 @@ import {
   ADD_TO_CART,
   RESET_CART,
   ADD_TO_CART_DETAIL,
-
+  GET_COMMENTS,
+  PERMISON,
+  RESET_ALL_COMMENTS
 } from "./action";
 
 const initialState = {
@@ -21,8 +24,8 @@ const initialState = {
   cartDetail:{},
   topSel: [],
   linkmp: [],
- 
-
+  comments: false,
+  permison: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -66,7 +69,27 @@ function rootReducer(state = initialState, action) {
       };
     }
   
+    case GET_COMMENTS: {
+      return{
+        ...state,
+        comments: action.payload
+      }
+    }
 
+    case PERMISON: {
+      return{
+        ...state,
+        permison: action.payload
+      }
+    }
+
+    case RESET_ALL_COMMENTS: {
+      return{
+        ...state,
+        permison: false,
+        comments: false
+      }
+    }
 
     case TOP_SELLERS:
       return {

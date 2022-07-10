@@ -1,20 +1,29 @@
 import Navbar from "../NavBar";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductDetail, reset, addToCartDetail,resetCart } from "../Redux/action";
-import { useEffect} from "react";
+import { getProductDetail, reset, addToCartDetail,resetCart, getComments, permisonUser, postComments, editComment, deleteComment } from "../Redux/action";
+import { useEffect, useState} from "react";
 import { useParams,useNavigate} from "react-router-dom";
+import Rating from "@mui/material/Rating"
+import CancelIcon from '@mui/icons-material/Cancel';
+import Typography from "@mui/material/Typography"
 import "./Detail.css";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user} = useAuth()
   const productDetail = useSelector((state) => state.detail);
   const cartProductDetail = useSelector((state) => state.cartDetail);
-  // console.log(cartProductDetail,'esto es el cartProductDetail del detalle')
+  const comments = useSelector((state) => state.comments);
+  const permison = useSelector((state) => state.permison);
   const { id } = useParams();
-  
+  const [edit, setEdit] = useState(false)
+  const [postComment, setPostComment] = useState({
+    rating: "",
+    review: "",
+  }) 
 
-  // console.log(productDetail, "prodDetail");
   useEffect(() => {
     dispatch(getProductDetail(id));
   }, [dispatch, id]);
@@ -32,41 +41,87 @@ export default function ProductDetail() {
           "cart",
           JSON.stringify([...localConverted, cartProductDetail])
         );
-        // console.log("entre al array");
       }
     } else {
       const localCart = JSON.parse(localStorageCart);
-      // console.log(localCart,'ESTO ES EL LOCALCART')
       if (localCart!==null&&localCart.hasOwnProperty('name') && cartProductDetail !== null && cartProductDetail?.name!==localCart.name) {
-        // console.log(localCart, "soy el localCart del detalle");
         localStorage.setItem("cart", JSON.stringify([localCart, cartProductDetail]));
       } else if (cartProductDetail.hasOwnProperty('name')) {
-        // console.log(cartProductDetail,'soy el cartProoduct' )
         localStorage.setItem("cart", JSON.stringify(cartProductDetail));
       }
     }
   }, [cartProductDetail]);
 
-  // const cart2=localStorage.getItem("cart")
-  // const objCart2=JSON.parse(cart2)
+
+  const handleChange = (e) => {
+    setPostComment({
+        ...postComment, 
+        [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSumit = (e) => {
+    e.preventDefault()
+    dispatch(postComments(postComment, user.email, id))
+    setTimeout(() => {
+      dispatch(getComments(id))
+      dispatch(permisonUser(user.email, id))
+      dispatch(getProductDetail(id))
+    }, 100)
+
+  }
 
   const localStorageCart = localStorage.getItem("cart");
-  //const localStorageObj = JSON.parse(localStorageCart);
-  // console.log(localStorageObj, "llego el lechero");
 
   function handleAddToCart() {
     productDetail[0].quantity = 1;
     dispatch(addToCartDetail(productDetail[0]));
-    // console.log('me ejecute addToCart')
-    // if (!objCart2.some((p) => p.name.includes(productDetail[0].name))) {
-    //   setCart([...objCart2,productDetail[0]]);
-    //   console.log("entre al if")
-    // }
   }
   function backOnClicke(e) {
     e.preventDefault()
     dispatch(reset())
     navigate('/products')
+  }
+
+  function handleDelete(e, orderId){
+    e.preventDefault()
+    dispatch(deleteComment(orderId, id))
+    setTimeout(() => {
+      dispatch(getComments(id))
+      dispatch(permisonUser(user.email, id))
+      dispatch(getProductDetail(id))
+      setEdit(false)
+    }, 100)
+  }
+
+  function handleComments(e) {
+    if(user){
+    e.preventDefault()
+    dispatch(getComments(id))
+    dispatch(permisonUser(user.email, id))}
+    else{
+      navigate("/login")
+    }
+  }
+
+  function handleEdit(e, rating, review, id){
+    setPostComment({
+      rating: rating,
+      review: review,
+      orderId: id
+    })
+    setEdit(true)
+  }
+
+  function handleEdited(e){
+    e.preventDefault()
+    dispatch(editComment(postComment, user.email, id))
+    setTimeout(() => {
+      dispatch(getComments(id))
+      dispatch(permisonUser(user.email, id))
+      dispatch(getProductDetail(id))
+      setEdit(false)
+    }, 100)
   }
 
 
@@ -121,15 +176,9 @@ export default function ProductDetail() {
                 {/* Product Score */}
                 {/* Sustituir el 4 por productDetail[0].rating */}
                 <h3 className=" mt-2 text-xl font-bold text-gray-900">Score</h3>
-                <div className="flex ">
-                  {Array(4)
-                    .fill()
-                    .map((_, i) => (
-                      <p key={i} className="text-2xl">
-                        &#9733;
-                      </p>
-                    ))}
-                </div>
+                {
+                  productDetail[0] ? <Rating value={productDetail[0].rating} readOnly /> : null
+                }
               </div>
 
               {/* Product price */}
@@ -139,6 +188,12 @@ export default function ProductDetail() {
                   ${productDetail[0] && productDetail[0].price}
                 </p>
 
+                <button
+                    type="submit"
+                    className="mt-10 w-full bg-primary border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onClick={(e) => handleComments(e)}>
+                    see comments
+                </button>
                 {/* Product bottom cart */}
                 <div className="">
                   <button
@@ -152,17 +207,82 @@ export default function ProductDetail() {
               </div>
             </div>
           </div>
-
+          {
+            comments ? 
+              permison ? 
+              <form onSubmit={e => handleSumit(e)}>
+                <div>
+                  <Rating
+                    name="rating"
+                    value={parseInt(postComment.rating)}
+                    onChange={e =>handleChange(e)}
+                  />
+                </div>
+                <div>
+                <label></label>
+                    <input
+                            type="text"
+                            name="review"
+                            value={postComment.review}
+                            onChange={e =>handleChange(e)}
+                    />
+                </div>
+                <button type="submit" ><span>comment</span></button>
+              </form>
+              : null 
+            : null
+          }
+          {
+            edit ? <form onSubmit={e => handleEdited(e)}>
+                      <div>
+                        <Rating
+                          name="rating"
+                          value={parseInt(postComment.rating)}
+                          onChange={e =>handleChange(e)}
+                        />
+                      </div>
+                      <div>
+                      <label></label>
+                      <input
+                        type="text"
+                        name="review"
+                        value={postComment.review}
+                        onChange={e =>handleChange(e)}
+                      />
+                      </div>
+                    <button type="submit" ><span>comment</span></button>
+                    </form> 
+                : null
+          }
+          {
+            comments ? comments[0] ? <div> 
+                                        Comments{comments.map((c, index) => {  
+                                                                      return <div key={index} className={c.user.email === user?.email && edit ? "disable" : "anable"}>review at {c.user.email.split("@")[0]} 
+                                                                                <Rating name="read-only" value={c.rating} readOnly />
+                                                                                <div>{c.review}</div>
+                                                                                {
+                                                                                  c.user.email === user?.email ? 
+                                                                                                                <div>
+                                                                                                                  <button onClick={(e) => handleEdit(e, c.rating, c.review, c.id)}>Edit Comment</button>
+                                                                                                                  <button onClick={(e) => handleDelete(e, c.id)}><CancelIcon/></button>
+                                                                                                                </div>
+                                                                                                              : null
+                                                                                  
+                                                                                }
+                                                                              </div>
+                                                                      })}
+                                      </div>: 
+                                    <div>there are no comments for this product</div> : 
+                      null
+          }
           {/* Bottom Back */}
           <div className="w-full h-16 fixed bottom-0 mt-28 bg-primary">
-            
               <button
                 onClick={(e) => backOnClicke(e)}
                 className="text-center mt-5 text-white hover:text-tertiary"
               >
                 Go Back
               </button>
-           
           </div>
         </div>
       }

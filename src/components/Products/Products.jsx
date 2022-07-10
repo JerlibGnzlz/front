@@ -4,7 +4,7 @@ import Filter from "../Filter/Filter";
 import Card from "../Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getCategories, getProduct, getBrand, process_payment } from "../Redux/action";
+import { getCategories, getProduct, getBrand, process_payment, resetAllComments } from "../Redux/action";
 import { useParams, useSearchParams, useLocation, useNavigate} from "react-router-dom";
 import Paginado from "../Paginado/Paginado";
 import "./Products.css";
@@ -55,6 +55,7 @@ export default function Products() {
     dispatch(getProduct({ genre: genre }));
     dispatch(getCategories({ genre: genre }));
     dispatch(getBrand({ genre: genre }));
+    dispatch(resetAllComments())
   }, [dispatch, genre, user]);
 
   // const localStorageCard = localStorage.getItem("cartProducts");

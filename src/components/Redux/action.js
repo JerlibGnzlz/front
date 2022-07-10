@@ -5,11 +5,13 @@ export const GET_BRAND = "GET_BRAND";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const RESET = "RESET";
 export const TOP_SELLERS = "TOP_SELLERS";
-
+export const GET_COMMENTS = "GET_COMMENTS";
 export const MERCADO_PAGO = "MERCADO_PAGO";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const RESET_CART = "RESET_CART";
 export const ADD_TO_CART_DETAIL = "ADD_TO_CART_DETAIL";
+export const PERMISON = "PERMISON";
+export const RESET_ALL_COMMENTS = "RESET_ALL_COMMENTS"
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -157,6 +159,62 @@ export function verification(payload) {
       return json;
     } catch (error) {}
   };
+}
+
+
+export const deleteComment = (id, productId) => async (dispatch) => {
+  await axios.delete(`${REACT_APP_BACKEND_URL}/comments/delete/${id}/${productId})`)
+};
+
+export const getComments = (id) => async (dispatch) => {
+  const comments = await axios.get(`${REACT_APP_BACKEND_URL}/comments`, {
+    params: {
+      id: id,
+    },
+  });
+
+  return dispatch({ type: GET_COMMENTS, payload: comments.data });
+};
+
+export const permisonUser = (email, id) => async (dispatch) => {
+  const permison = await axios.get(`${REACT_APP_BACKEND_URL}/comments/permison`, {
+    params: {
+      id: id,
+      email: email
+    },
+  });
+
+  return dispatch({ type: PERMISON, payload: permison.data });
+};
+
+export const postComments = (data, email, id) => async (dispatch) => {
+  console.log(data, email, id)
+  await axios.post(`${REACT_APP_BACKEND_URL}/comments/register`, {
+      productId: id,
+      email: email,
+      rating: data.rating,
+      review: data.review,
+  }
+  ,
+  );
+};
+
+
+
+export const editComment = (data, email, id) => async (dispatch) => {
+  console.log(data, email, id)
+  await axios.put(`${REACT_APP_BACKEND_URL}/comments/update`, {
+      productId: id,
+      email: email,
+      rating: data.rating,
+      review: data.review,
+      id: data.orderId
+  }
+  );
+};
+
+export const resetAllComments = () => (dispatch) => {
+  return dispatch({ type: RESET_ALL_COMMENTS});
 }
 
 export const process_payment = ({data, body}) => async () => {
