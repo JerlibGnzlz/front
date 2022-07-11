@@ -22,6 +22,10 @@ export default function UserProfile() {
   }, [dispatch, user]);
 
   //console.log(userInfo, "usuario db");
+  const divStyle = {
+    backgroundColor: "#0d0d0d",
+    backgroundImage: "linear-gradient(149deg, #eeecec 59%, #404040 83%)",
+  };
 
   return (
     <div>
@@ -32,9 +36,9 @@ export default function UserProfile() {
               <div className="flex-1 flex xl:overflow-hidden">
                 {/* Main content */}
                 <div className="flex-1 max-h-screen xl:overflow-y-auto">
-                  <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
-                    <h1 className="text-3xl font-extrabold text-blue-gray-900">
-                      Account
+                  <div style={divStyle} className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-16 border rounded-md bg-white mt-12 mb-12 border-gray-500">
+                    <h1 className="text-3xl font-extrabold text-blue-gray-900 text-center">
+                      My Account
                     </h1>
 
                     <form className="mt-6 space-y-8 divide-y divide-y-blue-gray-200">
@@ -49,7 +53,7 @@ export default function UserProfile() {
                           </p>
                         </div>
                         
-                        <div>
+                        <div className="w-36 ml-3">
                             {userInfo?.image ? (
                             <img src={userInfo?.image}  readOnly className='inline-block h-36 w-36 mt-4 rounded-full' alt="img" />
                               ) : (
@@ -57,7 +61,7 @@ export default function UserProfile() {
                               )}
                             </div>
 
-                        <div className=" items-center ml-12 mt-12 sm:col-span-2">
+                        <div className=" ml-20 mt-12 sm:col-span-2">
                           <label
                             htmlFor="first-name"
                             className="block text-sm font-medium text-blue-gray-900"
@@ -71,7 +75,8 @@ export default function UserProfile() {
                             id="names"
                             readOnly
                             disabled={true}
-                            className="mt-1 font-bold text-primary block py-2 w-full border-blue-gray-100 rounded-md   sm:text-sm "
+                          
+                            className=" mt-1 bg-transparent font-bold text-primary block py-2 w-full rounded-md   sm:text-sm "
                           />
                         </div>
 
@@ -89,7 +94,7 @@ export default function UserProfile() {
                             value={userInfo.lastNames || ""}
                             disabled={true}
                             autoComplete="family-name"
-                            className="mt-1 font-semibold block py-2 w-full border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm"
+                            className="mt-1 bg-transparent font-semibold block py-2 w-full border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm"
                           />
                           
                         </div>
@@ -97,7 +102,7 @@ export default function UserProfile() {
                         <div className="sm:col-span-6">
                           <label
                             htmlFor="photo"
-                            className="block text-sm font-semibold text-blue-gray-900 ml-6"
+                            className="block text-sm font-semibold text-blue-gray-900 ml-16"
                           >
                             Avatar
                           </label>
@@ -129,7 +134,7 @@ export default function UserProfile() {
                             value={userInfo.email || ""}
                             autoComplete="email"
                             disabled={true}
-                            className="mt-1 font-bold block py-2 w-full border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm"
+                            className="mt-1 bg-transparent font-bold block py-2 w-full border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm"
                           />
                         </div>
 
@@ -147,7 +152,7 @@ export default function UserProfile() {
                             value={userInfo.phone || ""}
                             disabled
                             autoComplete="tel"
-                            className="mt-1 font-bold block py-2 w-full border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                            className="mt-1 bg-transparent font-bold block py-2 w-full border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
                           />
                         
                         </div>
@@ -166,7 +171,7 @@ export default function UserProfile() {
                             autoComplete="off"
                             value={userInfo.birthDate || ""}
                             disabled
-                            className="mt-1 font-bold block w-full py-2 border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                            className="mt-1 font-bold bg-transparent block w-full py-2 border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
                           />
                          
                         </div>
