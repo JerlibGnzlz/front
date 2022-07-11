@@ -70,9 +70,10 @@ function CheckoutAddress() {
       {(formik, errors, touched) => (
         <div className="grid grid-cols-2 ">
           <div className="">
+            <div className="mt-12 ml-12 flex items-center justify-center flex-shrink-0 w-12 h-12 text-xl font-bold rounded-full dark:bg-primary dark:text-white">1</div>
             <div
               style={divStyle}
-              className="max-w-xl rounded-md mx-auto h-fit mt-10 mb-10 pt-10 pb-10 px-4 sm:px-6 lg:max-w-2xl lg:px-8 "
+              className="max-w-xl rounded-md mx-auto h-fit mt-10 mb-10 pt-10 pb-10 px-4 sm:px-6 lg:max-w-xl lg:px-8 "
             >
               <Link to="/Cart">
                 <div className="bg-white w-8 p-1 ml-6 text-black hover:bg-tertiary hover:text-white rounded">
@@ -81,6 +82,7 @@ function CheckoutAddress() {
                   </button>
                 </div>
               </Link>
+
 
               <Form>
                 {/* <h2 className="mt-10 text-xl text-white font-bold ">
