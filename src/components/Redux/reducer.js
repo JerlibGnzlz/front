@@ -9,6 +9,8 @@ import {
   ADD_TO_CART,
   RESET_CART,
   ADD_TO_CART_DETAIL,
+  GET_USER_BY_EMAIL,
+  USER_UPDATE,
 
 } from "./action";
 
@@ -21,8 +23,7 @@ const initialState = {
   cartDetail:{},
   topSel: [],
   linkmp: [],
- 
-
+  user:{},
 };
 
 function rootReducer(state = initialState, action) {
@@ -91,7 +92,16 @@ function rootReducer(state = initialState, action) {
           linkmp: action.payload,
         };
 
-
+      case GET_USER_BY_EMAIL:
+        return{
+          ...state,
+          user: action.payload,
+        }
+      
+      case USER_UPDATE:
+          return{
+            ...state
+          }
 
     default:
       return state;

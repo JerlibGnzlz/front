@@ -1,68 +1,99 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postMercadoPago } from "../Redux/action";
+import { postMercadoPago} from "../Redux/action";
 // import { Link } from "react-router-dom";
+import accounting from "accounting";
+import logo from "../../img/mercadopago_off.png";
+import Swal from "sweetalert2";
 
-function CheckoutPaymentMp() {
+function CheckoutPaymentMp({formData}) {
   const dispatch = useDispatch();
-  const mp= useSelector((state) => state.linkmp)
+  const mp = useSelector((state) => state.linkmp);
 
-  // const cart = [
-  //   {
-  //     id: 1,
-  //     name: "Classic meet for men",
-  //     description: "cualquiera",
-  //     image: "https://m.media-amazon.com/images/I/51inY39-t8L._AC_UY535_.jpg",
-  //     quantity: 3,
-  //     price: 55,
-  //   },
-    
-  // ];
+  const orderSummaryTotal = localStorage.getItem("cart");
+  const [productItem, setproductItem] = useState(JSON.parse(orderSummaryTotal));
 
-  // const [body, setBody] = useState({
-  //   product: [],
-  //   back_urls: {
-  //     failure: "http://localhost:3000/success",
-  //     pending: "http://localhost:3000/success",
-  //     success: "http://localhost:3000/success",
-  //   },
-  //   auto_return: "approved",
-  //   total: 55,
-  //   user:1
+  const LocalStorageCheckOut = JSON.parse(localStorage.getItem("cart"));
+  // console.log(LocalStorageCheckOut, "LocalStorageCheckout");
 
-  // });
-  const LocalStorageCheckOut = JSON.parse(localStorage.getItem('cart'));
-  function handleClick(e) {
-    e.preventDefault()
-    // setBody(
-    //   cart &&
-    //     cart.map((e) =>
-    //       body.product.push({
-    //         name: e.name,
-    //         price: e.price,
-    //         description: e.description,
-    //         quantity: e.quantity,
-    //         image: e.image,
-    //         id: e.id,
-    //       })
-    //     )
-    // );
-    
-    dispatch(postMercadoPago({product: LocalStorageCheckOut,user:"neubigin0@4shared.com" }));
-    // console.log(LocalStorageCheckOut, "LocalStorageCheckOut");
+  let total = 0;
+  
+
+  if (orderSummaryTotal) {
+    for (let i = 0; i < productItem.length; i++) {
+      total += productItem[i].quantity * parseFloat(productItem[i].price);
+      //  console.log(product[i].price,subTotal,'ESTE ES EL SUBTOTAL DENTRO DEL FOR')
+      
+    }
   }
 
-//  console.log(mp)
+
+
+  function handleClick(e) {
+    e.preventDefault();
+    if(formData === null){
+      // alert('agrega los datos del form')
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please complete the form below',
+      })
+    }else{
+
+      dispatch(
+        postMercadoPago({
+          product: LocalStorageCheckOut,
+          user: "neubigin0@4shared.com",
+        })
+      );
+      // console.log(LocalStorageCheckOut, "LocalStorageCheckOut");
+    }
+  }
+
+  // console.log(mp)
 
   return (
-    <div>
-        <div className=" border-gray-200 py-6 px-4 sm:px-6">
-      <button onClick={handleClick} type="submit"
-               className="w-full bg-primary border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary"
-             >Confirm</button>
+    
+    <div className=" items-center sm:grid-cols sm:gap-x-4">
+    <div className="mt-12 ml-12 flex items-center justify-center flex-shrink-0 w-12 h-12 text-xl font-bold rounded-full dark:bg-primary dark:text-white">2</div>
+
+      <div className="bg-white border-4  border-gray-300/100 rounded-xl m-8 pb-4 mt-10 lg:max-w-xl">
+        <h1 className="text-3xl m-2 text-center mt-6">Total Amount</h1>
+
+        <h2 className="my-6 ml-5 mr-5 border-t-2 border-gray-500">
+          <p className="text-center font-bold text-4xl mt-5 ml-5 text-green-500">
+            {accounting.formatMoney(total, "U$S ", 2)}
+          </p>
+        </h2>
+
+        {/* Boton confirmar compra */}
+        <div className=" border-gray-200 mb-4 px-4 sm:px-6">
+          <button
+            onClick={handleClick}
+            type="submit"
+            className="w-full bg-primary border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary"
+          >
+            Confirm Order
+          </button>
         </div>
-      
-      <a href={mp.init_point} className="text-white font-bold">MercadoPago</a>
+      </div>
+
+
+     <div className="flex ml-12 items-center justify-center flex-shrink-0 w-12 h-12 text-xl font-bold rounded-full dark:bg-primary dark:text-white">3</div>
+      <div className=" w-full bg-white border-4 border-gray-300/100 rounded-xl m-8 pb-4 mt-4 lg:max-w-xl h-72">
+        
+      <h2 className="text-3xl text-primary text-center mt-6">Payment</h2>
+      <h2 className="my-6 ml-5 mr-5 border-t-2 border-gray-500"></h2>
+        <img src={logo} alt="" className="w-64 m-auto " />
+        <div className="text-center">
+          <a
+            href={mp.init_point}
+            className="  border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-bold text-black hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50"
+          >
+            Click here!
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

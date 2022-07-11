@@ -10,6 +10,8 @@ export const MERCADO_PAGO = "MERCADO_PAGO";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const RESET_CART = "RESET_CART";
 export const ADD_TO_CART_DETAIL = "ADD_TO_CART_DETAIL";
+export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
+export const USER_UPDATE= "USER_UPDATE"
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -158,3 +160,31 @@ export function verification(payload) {
     } catch (error) {}
   };
 }
+
+export const process_payment =
+  ({ data, body }) =>
+  async () => {
+    axios.post(`http://localhost:3001/mp/process_payment${data}`, body);
+  };
+
+
+export function getUserByEmail(payload) {
+  return async function (dispatch) {
+    var json = await axios.get(
+      `http://localhost:3001/profile?email=${payload}`
+      );
+      return dispatch({
+        type: GET_USER_BY_EMAIL,
+        payload: json.data,
+      });
+  };
+}
+
+// export const userProfileUpdate = (id, data)=>{
+//   return async function(dispatch){
+//     return axios.put(`http://localhost:3001/profile/${id}`, data)
+//     .then(response =>{
+//       dispatch({type: USER_UPDATE, payload: response.data})
+//     }).catch(err => console.log(err))
+//   }
+// }
