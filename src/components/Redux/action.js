@@ -5,13 +5,14 @@ export const GET_BRAND = "GET_BRAND";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const RESET = "RESET";
 export const TOP_SELLERS = "TOP_SELLERS";
-
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const MERCADO_PAGO = "MERCADO_PAGO";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const RESET_CART = "RESET_CART";
 export const ADD_TO_CART_DETAIL = "ADD_TO_CART_DETAIL";
 export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
-export const USER_UPDATE= "USER_UPDATE"
+export const USER_UPDATE= "USER_UPDATE";
+export const GET_ADMIN_ORDER_DETAIL= "GET_ADMIN_ORDER_DETAIL";
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -179,6 +180,26 @@ export function getUserByEmail(payload) {
       });
   };
 }
+
+export const getAllOrders =
+  (email) =>
+  async (dispatch) => {
+    const Orders = await axios.get(`${REACT_APP_BACKEND_URL}/order?email=${email}`);
+    return dispatch({
+      type: GET_ALL_ORDERS,
+      payload: Orders.data,
+    });
+  };
+
+  export const getAdminOrderDetail =
+  (email, id) =>
+  async (dispatch) => {
+    const Order = await axios.get(`${REACT_APP_BACKEND_URL}/order/detail?email=${email}&id=${id}`);
+    return dispatch({
+      type: GET_ADMIN_ORDER_DETAIL,
+      payload: Order.data,
+    });
+  };
 
 // export const userProfileUpdate = (id, data)=>{
 //   return async function(dispatch){

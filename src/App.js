@@ -8,6 +8,8 @@ import { UserRegister } from "./components/UserRegister";
 import ShoppingCart from "./components/ShoppingCart/ShopppingCart";
 import { AuthProvider } from "./context/AuthContext";
 import Reset from "./components/reset/Reset";
+import OrdersAdmin from "./components/OrdersAdmin/OrdersAdmin"
+import OrdersAdminDetail from "./components/OrdersAdmin/OrdersAdminDetail"
 
 import Products from "./components/Products/Products";
 
@@ -34,6 +36,8 @@ function App() {
           <Route path="/reset" component={<Reset />} />
           <Route path="/profile/:id" element={<EditProfile/>} />
           <Route path="/profile" element={<UserProfile/>} />
+          <Route path="/admin/orders" element={<OrdersAdmin/>}/>
+          <Route path="/admin/orders/:id" element={<OrdersAdminDetail/>}/>
         </Routes>
       </AuthProvider>
     </div>
