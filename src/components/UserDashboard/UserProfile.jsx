@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { getUserByEmail } from "../Redux/action";
 import { useEffect } from "react";
 import defaultImg from '../../img/descarga (1).jpg'
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 
 export default function UserProfile() {
@@ -12,14 +12,16 @@ export default function UserProfile() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
   const { user } = useAuth();
+  
+
 
   useEffect(() => {
     if (user) {
       dispatch(getUserByEmail(user.email));
     }
-  }, [dispatch]);
+  }, [dispatch, user]);
 
-  console.log(userInfo, "usuario db");
+  //console.log(userInfo, "usuario db");
 
   return (
     <div>
@@ -179,12 +181,12 @@ export default function UserProfile() {
                           Go back
                         </button> */}
 
-                        <Link to ="/profile/:id">
+                        <Link to = '/user'>
                         <button
                           type="submit"
                           className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-secondary focus:outline-none "
                         >
-                          Edit Profile
+                          Go Back
                         </button>
                         </Link>
                       </div>

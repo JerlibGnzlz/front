@@ -23,7 +23,7 @@ export default function EditProfile() {
     if (user) {
       dispatch(getUserByEmail(user.email));
     }
-  }, [dispatch, id]);
+  }, [dispatch, user, id]);
 
   console.log(userInfo, 'usuario db')
  
