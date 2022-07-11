@@ -55,7 +55,9 @@ function CheckoutPaymentMp({formData}) {
   return (
     
     <div className=" items-center sm:grid-cols sm:gap-x-4">
-      <div className="bg-white border-4  border-gray-300/100 rounded-xl m-8 pb-4 mt-10 lg:max-w-2xl">
+    <div className="mt-12 ml-12 flex items-center justify-center flex-shrink-0 w-12 h-12 text-xl font-bold rounded-full dark:bg-primary dark:text-white">2</div>
+
+      <div className="bg-white border-4  border-gray-300/100 rounded-xl m-8 pb-4 mt-10 lg:max-w-xl">
         <h1 className="text-3xl m-2 text-center mt-6">Total Amount</h1>
 
         <h2 className="my-6 ml-5 mr-5 border-t-2 border-gray-500">
@@ -76,12 +78,14 @@ function CheckoutPaymentMp({formData}) {
         </div>
       </div>
 
-      <div className=" w-full bg-white border-4 border-gray-300/100 rounded-xl m-8 pb-4 mt-4 lg:max-w-2xl">
+
+     <div className="flex ml-12 items-center justify-center flex-shrink-0 w-12 h-12 text-xl font-bold rounded-full dark:bg-primary dark:text-white">3</div>
+      <div className=" w-full bg-white border-4 border-gray-300/100 rounded-xl m-8 pb-4 mt-4 lg:max-w-xl h-72">
         
-      <h2 className="text-3xl  text-primary text-center mt-6">Payment</h2>
+      <h2 className="text-3xl text-primary text-center mt-6">Payment</h2>
       <h2 className="my-6 ml-5 mr-5 border-t-2 border-gray-500"></h2>
-        <img src={logo} alt="" className="w-1/2 m-auto " />
-        <div className="text-center mt-4">
+        <img src={logo} alt="" className="w-64 m-auto " />
+        <div className="text-center">
           <a
             href={mp.init_point}
             className="  border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-bold text-black hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50"
