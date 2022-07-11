@@ -53,7 +53,10 @@ export default function EditProfile() {
     ),
   });
 
-   
+  const divStyle = {
+    backgroundColor: "#0d0d0d",
+    backgroundImage: "linear-gradient(149deg, #eeecec 59%, #404040 83%)",
+  };
 
   return (
     <Formik
@@ -85,9 +88,9 @@ export default function EditProfile() {
           });
       }}
      
-
       >
-
+      
+      
 
     {/* <div> */}
       {({formik, values, handleSubmit, handleChange}) => (
@@ -98,9 +101,9 @@ export default function EditProfile() {
                 <div className="flex-1 flex xl:overflow-hidden">
                   {/* Main content */}
                   <div className="flex-1 max-h-screen xl:overflow-y-auto">
-                    <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
-                      <h1 className="text-3xl font-extrabold text-blue-gray-900">
-                        Account
+                    <div style={divStyle} className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-16 border rounded-md bg-white mt-12 mb-12 border-gray-500">
+                      <h1 className="text-3xl font-extrabold text-blue-gray-900 text-center">
+                        My Account
                       </h1>
 
       
@@ -129,7 +132,7 @@ export default function EditProfile() {
                               autoComplete="off"
                               value={values.names || ''}
                               onChange={handleChange}
-                              className="mt-1 block py-2 w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                              className="mt-1 block py-2  w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
                             />
 
                             <ErrorMessage
