@@ -7,7 +7,7 @@ import { useAuth } from "../context/AuthContext.js";
 
 function NavBar() {
   const { user, logout } = useAuth();
-
+  console.log(user, 'esto es lo del')
   const handleLogout = async () => {
     await logout();
   };
@@ -21,8 +21,9 @@ function NavBar() {
           <img src={logo} alt="logo" className="h-7 w-20 " />
         </div>
       </Link>
-
-      <div>{welcome}</div>
+      
+        <div>{welcome}</div>
+      
       <Link to="/cart">
         <div className="hover:text-white">
           <FontAwesomeIcon icon={faShoppingCart} /> Cart
