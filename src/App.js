@@ -11,7 +11,7 @@ import Reset from "./components/reset/Reset";
 
 import Products from "./components/Products/Products";
 
-//import orderDetails from "./components/OrderDetails/orderDetails";
+import OrderDetails from "./components/OrderDetails/OrderDetails";
 
 // import Checkout from "./components/Checkout/Checkout.jsx";
 import CheckoutAddress from "./components/Checkout/CheckoutAddress";
@@ -34,6 +34,8 @@ function App() {
           <Route path="/reset" component={<Reset />} />
           <Route path="/profile/:id" element={<EditProfile/>} />
           <Route path="/profile" element={<UserProfile/>} />
+          <Route path="/order/:email" element={<OrderDetails/>} />
+
         </Routes>
       </AuthProvider>
     </div>

@@ -12,6 +12,7 @@ export const RESET_CART = "RESET_CART";
 export const ADD_TO_CART_DETAIL = "ADD_TO_CART_DETAIL";
 export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
 export const USER_UPDATE= "USER_UPDATE"
+export const GET_ORDER_DETAIL = "GET_ORDER_DETAIL"
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -188,3 +189,9 @@ export function getUserByEmail(payload) {
 //     }).catch(err => console.log(err))
 //   }
 // }
+
+export const getOrderDetail = (email) => async (dispatch) => {
+  console.log(email, 'email')
+  const response = await axios.get(`http://localhost:3001/order/${email}`,);
+  return dispatch({ type: GET_ORDER_DETAIL, payload: response.data });
+};

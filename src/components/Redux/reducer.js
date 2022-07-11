@@ -11,6 +11,8 @@ import {
   ADD_TO_CART_DETAIL,
   GET_USER_BY_EMAIL,
   USER_UPDATE,
+  GET_ORDER_DETAIL
+  
 
 } from "./action";
 
@@ -24,6 +26,7 @@ const initialState = {
   topSel: [],
   linkmp: [],
   user:{},
+  orderDetail:{},
 };
 
 function rootReducer(state = initialState, action) {
@@ -101,6 +104,13 @@ function rootReducer(state = initialState, action) {
       case USER_UPDATE:
           return{
             ...state
+          }
+      
+       case GET_ORDER_DETAIL: {
+            return {
+              ...state,
+              orderDetail: action.payload,
+            };
           }
 
     default:
