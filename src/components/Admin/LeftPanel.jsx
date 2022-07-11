@@ -69,7 +69,9 @@ function LeftPanel() {
             <h1 className="h1 text-gray-400">Lists</h1>
             <li className="ml-2 pt-2 font-semibold text-white">
               <PeopleRoundedIcon />
-              <button name="user">Users</button>
+              <button name="user" onClick={(e) => handleProducts(e)}>
+                Users
+              </button>
             </li>
             <li className="ml-2 pt-2 font-semibold text-white">
               <StorefrontSharpIcon />
@@ -92,7 +94,6 @@ function LeftPanel() {
                 Stats
               </button>
             </li>
-          
           </div>
 
           <div className="">

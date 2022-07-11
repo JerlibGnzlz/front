@@ -138,6 +138,8 @@ export default function ProductDetail() {
                 <p className="text-3xl font-bold text-gray-900">
                   ${productDetail[0] && productDetail[0].price}
                 </p>
+                <h2>Brand</h2>
+                <p>{productDetail[0]&& productDetail[0].brand.name}</p>
 
                 {/* Product bottom cart */}
                 <div className="">

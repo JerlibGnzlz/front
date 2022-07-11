@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getProduct } from "../../Redux/action";
+import { getProduct,getProductAdmi,updateProduct } from "../../Redux/action";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline } from "@mui/icons-material";
 import { Button } from "@mui/material";
@@ -10,16 +10,18 @@ import { Link } from "react-router-dom";
 // import EditProduct from "./EditProduct";
 
 function ProductsAdmi() {
-  const allProducts = useSelector((state) => state.products);
+  const allProducts = useSelector((state) => state.productAdmi);
   const dispatch = useDispatch();
-  const [data, setData] = useState(allProducts);
+
+  console.log(allProducts,'esto es el estado productsAdmi')
+  
   // console.log(data, "data");
 
-  function handleDelete(id) {
-    setData(data.filter((e) => e.id !== id));
+  function handleDelete(id,e) {
+    dispatch(updateProduct(id, !e.target.checked));
   }
   useEffect(() => {
-    dispatch(getProduct({ genre: undefined }));
+    dispatch(getProductAdmi({ genre: undefined }));
   }, [dispatch]);
 
   const columns = [
@@ -63,16 +65,21 @@ function ProductsAdmi() {
       renderCell: (params) => {
         return (
           <>
-            
-              <Link to={"/admin/products/" + params.row.id}>
-                <button className="productEdit bg-gray-600 px-4 py-2 rounded-lg text-white font-semibold m-5 tracking-wider hover:bg-gray-700 transition duration-500">
-                  Edit{" "}
-                </button>
-              </Link>
-              <label className="switchBtn text-white bg-gray-400 ">
-                <input type="checkbox" />
-                <div className="slide round font-semibold">Filter On</div>
-              </label>
+            <Link to={"/admin/products/" + params.row.id}>
+              <button className="productEdit bg-gray-600 px-4 py-2 rounded-lg text-white font-semibold m-5 tracking-wider hover:bg-gray-700 transition duration-500">
+                Edit{" "}
+              </button>
+            </Link>
+            <label className="switchBtn text-white bg-gray-400 ">
+              <input
+                type="checkbox"
+                onClick={(e) => {
+                  handleDelete(params.row.id, e);
+                }}
+                defaultChecked={params.row.enabled}
+              />
+              <div className="slide round font-semibold">Filter On</div>
+            </label>
           </>
         );
       },
@@ -91,7 +98,7 @@ function ProductsAdmi() {
           <div className="flex justify-end ">
             <Link to="/admin/create">
               <button
-                className="flex bg-gray-600 p-4 mt-2 rounded-lg text-white hover:bg-gray-800 transition duration-500 ease-in-out shadow-xl "
+                className="flex bg-gray-600 p-4 mt-4 rounded-lg text-white hover:bg-gray-800 transition duration-500 ease-in-out shadow-xl "
                 variant="contained"
               >
                 Create Product
@@ -99,7 +106,7 @@ function ProductsAdmi() {
             </Link>
           </div>
 
-          <div className="mt-3 w-full capitalize shadow-xl">
+          <div className="mt-8 w-full capitalize shadow-xl bg-gray-200 border-2 border-gray-400/100 rounded-lg ">
             <div
               style={{ height: 800, width: "100%", mixBlendMode: "multiply" }}
             >

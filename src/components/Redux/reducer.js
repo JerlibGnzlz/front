@@ -9,20 +9,31 @@ import {
   ADD_TO_CART,
   RESET_CART,
   ADD_TO_CART_DETAIL,
-
+  USER_DETAIL_ADMIN,
+  GET_ALL_USERS,
+  UPDATE_PRODUCT,
+  UPDATE_DETAIL,
+  CREATE_PRODUCT,
+  GET_PRODUCT_ADMI,
+  GET_ALL_ORDERS,
+  GET_ADMIN_ORDER_DETAIL,
 } from "./action";
 
 const initialState = {
   products: [],
   detail: [],
-  categories:[],
-  brand:[],
+  categories: [],
+  brand: [],
   cart: {},
-  cartDetail:{},
+  cartDetail: {},
   topSel: [],
   linkmp: [],
- 
-
+  allUsers: [],
+  userDetailAdmin: [],
+  productAdmi: [],
+  user:{},
+  allOrders: [],
+  adminOrderDetail: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -42,13 +53,14 @@ function rootReducer(state = initialState, action) {
     case RESET_CART:
       return {
         ...state,
-        cart:{}
-      }
+        cart: {},
+      };
 
     case GET_PRODUCT: {
       return {
         ...state,
         products: action.payload,
+        productAdmi: action.payload,
       };
     }
 
@@ -65,8 +77,19 @@ function rootReducer(state = initialState, action) {
         brand: action.payload,
       };
     }
-  
+    case GET_ALL_ORDERS: {
+      return {
+        ...state,
+        allOrders: action.payload,
+      };
+    }
 
+    case GET_ADMIN_ORDER_DETAIL: {
+      return {
+        ...state,
+        adminOrderDetail: action.payload,
+      };
+    }
 
     case TOP_SELLERS:
       return {
@@ -76,22 +99,52 @@ function rootReducer(state = initialState, action) {
     case ADD_TO_CART:
       return {
         ...state,
-        cart:action.payload
-      }
+        cart: action.payload,
+      };
     case ADD_TO_CART_DETAIL:
       return {
         ...state,
-        cartDetail:action.payload
-      }
+        cartDetail: action.payload,
+      };
 
+    case MERCADO_PAGO:
+      return {
+        ...state,
+        linkmp: action.payload,
+      };
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        allUsers: action.payload,
+      };
 
-      case MERCADO_PAGO:
-        return {
-          ...state,
-          linkmp: action.payload,
-        };
+    case USER_DETAIL_ADMIN:
+      return {
+        ...state,
+        userDetailAdmin: action.payload,
+      };
+    case UPDATE_PRODUCT:
+      return {
+        ...state,
+        updateProduct: action.payload,
+      };
 
+    case UPDATE_DETAIL:
+      return {
+        ...state,
+        updateDetail: action.payload,
+      };
 
+    case CREATE_PRODUCT:
+      return {
+        ...state,
+      };
+    case GET_PRODUCT_ADMI: {
+      return {
+        ...state,
+        productAdmi: action.payload,
+      };
+    }
 
     default:
       return state;

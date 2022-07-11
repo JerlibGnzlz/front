@@ -19,6 +19,8 @@ import SideBar from "./components/SideBarUser.jsx/SideBar";
 import FormProduct from './components/Admin/Products/formProduct';
 import EditProduct from "./components/Admin/Products/EditProduct";
 import ProductsAdmi from "./components/Admin/Products/ProductsAdmi";
+import ListUser from "./components/Admin/Users/ListUser";
+import OrdersAdmin from "./components/Admin/OrdersAdmin/OrdersAdmin";
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
           <Route path="/admin/products" element={<ProductsAdmi />} />
           <Route path="/admin/create" element={<FormProduct />} />
           <Route path="/admin/products/:id" element={<EditProduct />} />
+          <Route path='/admin/user' element={<ListUser />} />
+          <Route path='/admin/order'element={<OrdersAdmin/>}/>
         </Routes>
       </AuthProvider>
     </div>

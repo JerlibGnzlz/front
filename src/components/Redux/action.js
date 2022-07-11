@@ -5,11 +5,20 @@ export const GET_BRAND = "GET_BRAND";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const RESET = "RESET";
 export const TOP_SELLERS = "TOP_SELLERS";
-
+export const USER_DETAIL_ADMIN = "USER_DETAIL_ADMIN";
 export const MERCADO_PAGO = "MERCADO_PAGO";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const RESET_CART = "RESET_CART";
 export const ADD_TO_CART_DETAIL = "ADD_TO_CART_DETAIL";
+export const GET_ALL_USERS = 'GET_ALL_USERS'
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
+export const UPDATE_DETAIL = "UPDATE_DETAIL";
+export const CREATE_PRODUCT = "CREATE_PRODUCT";
+export const GET_PRODUCT_ADMI = "GET_PRODUCT_ADMI";
+export const GET_ADMIN_ORDER_DETAIL = 'GET_ADMIN_ORDER_DETAIL';
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
+
+
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -35,7 +44,31 @@ export const getProduct =
     });
     // console.log(categoryId,brandId,'esto es el categoryId y el BrandID de  la action')
     return dispatch({ type: GET_PRODUCT, payload: product.data });
-  };
+    };
+
+  export const getProductAdmi =
+    ({
+      id = undefined,
+      price = undefined,
+      categoryId = undefined,
+      brandId = undefined,
+      genre = undefined,
+      search = "",
+    }) =>
+    async (dispatch) => {
+      const product = await axios.get("http://localhost:3001/productAdmin", {
+        params: {
+          id: id,
+          price: price,
+          category: categoryId,
+          brand: brandId,
+          genre: genre,
+          search: search,
+        },
+      });
+      // console.log(categoryId,brandId,'esto es el categoryId y el BrandID de  la action')
+      return dispatch({ type: GET_PRODUCT_ADMI, payload: product.data });
+    };
 
 export const getCategories =
   ({ genre = undefined, brand = undefined }) =>
@@ -158,3 +191,87 @@ export function verification(payload) {
     } catch (error) {}
   };
 }
+export function enableUsers(id) {
+  return async function () {
+    await axios.put(`${REACT_APP_BACKEND_URL}/users/${id}`);
+  };
+}
+
+export function statusAdmi(id) {
+  return async function () {
+    await axios.put(`${REACT_APP_BACKEND_URL}/${id}`);
+  };
+}
+
+export function userDetailAdmin(email) {
+  console.log(email);
+  return async function (dispatch) {
+    var json = await axios.get(`${REACT_APP_BACKEND_URL}/profile?email=${email}`);
+
+    return dispatch({
+      type: USER_DETAIL_ADMIN,
+      payload: json.data,
+    });
+  };
+}
+export function getAllUsers() {
+  return async function (dispatch) {
+    var json = await axios.get(
+      "http://localhost:3001/users?email=abudget4@rediff.com"
+    );
+
+    return dispatch({
+      type: GET_ALL_USERS,
+      payload: json.data,
+    });
+  };
+}
+export function updateProduct(id) {
+  return async function (dispatch) {
+    var json = await axios.delete(`http://localhost:3001/product/${id}`);
+
+    return dispatch({
+      type: UPDATE_PRODUCT,
+      payload: json.data,
+    });
+  };
+}
+
+export function updateDetail(id, data) {
+  console.log(data, "soy data");
+  return async function (dispatch) {
+    var json = await axios.put(`http://localhost:3001/product/${id}`, data);
+
+    return dispatch({
+      type: UPDATE_DETAIL,
+      payload: json.data,
+    });
+  };
+}
+
+export function createProduct(payload) {
+  return async function (dispatch) {
+    var json = await axios.post("http://localhost:3001/product", payload);
+
+    return json;
+  };
+}
+export const getAllOrders = (email) => async (dispatch) => {
+  const Orders = await axios.get(
+    `${REACT_APP_BACKEND_URL}/order?email=${email}`
+  );
+  return dispatch({
+    type: 66,
+    payload: Orders.data,
+  });
+};
+
+export const getAdminOrderDetail = (email, id) => async (dispatch) => {
+  const Order = await axios.get(
+    `${REACT_APP_BACKEND_URL}/order/detail?email=${email}&id=${id}`
+  );
+  return dispatch({
+    type: GET_ADMIN_ORDER_DETAIL,
+    payload: Order.data,
+  });
+};
