@@ -11,6 +11,8 @@ import {
 import logo from "../../img/logo.png";
 import { useAuth } from "../../context/AuthContext";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+
 
 
 function Search() {
@@ -83,12 +85,28 @@ function Search() {
             </button>
           </Link>
         ) : null)}
+      {user &&
+        (userT.isAdmin === true ? (
+          <Link to="/admin">
+            <div className=" px-3 rounded py-1.5 w-30 hover:text-white ">
+              <FontAwesomeIcon icon={faUser} className="mr-3" />
+              Perfil
+            </div>
+          </Link>
+        ) : (
+          <Link to="/profile">
+            <div className=" px-3 rounded py-1.5 w-30 hover:text-white ">
+              <FontAwesomeIcon icon={faUser} className="mr-3" />
+              Perfil
+            </div>
+          </Link>
+        ))}
 
       <button
         onClick={handleLogout}
         className="bg-secondary px-3 rounded py-1.5 hover:text-white "
       >
-        {user ? "Log out" : <Link to="/login">Log in</Link>}
+        {user ? "Cerrar sesión" : <Link to="/login">Iniciar sesión</Link>}
       </button>
     </div>
   );
