@@ -1,5 +1,8 @@
 import React from "react";
 import "./App.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Route, Routes } from "react-router-dom";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Home from "./components/Home/Home.jsx";
@@ -23,6 +26,7 @@ import Contact from "./components/ContactUs/Contact";
 function App() {
   return (
     <div className="App">
+        <ToastContainer />
       <AuthProvider>
         <Routes>
           <Route exact path="/" element={<Home />} />

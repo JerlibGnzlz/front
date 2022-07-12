@@ -16,9 +16,9 @@ const { REACT_APP_BACKEND_URL } = process.env;
 
 
 const options=[
-    {value: 'male', label: 'Male'},
-    {value: 'female', label: 'Female'},
-    {value: 'other', label: 'Other'},
+    {value: 'male', label: 'Masculino'},
+    {value: 'female', label: 'Femenino'},
+    {value: 'i prefer not to say', label: 'Prefiero no decirlo'},
   ]
 
 

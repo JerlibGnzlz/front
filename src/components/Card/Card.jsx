@@ -3,6 +3,8 @@ import { useDispatch,useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import './Card.css'
 import { getProductDetail,addToCart } from "../Redux/action";
+import {toast} from 'react-toastify'
+
 export default function Card({ id, name, price, category, image, brand }) {
   let contador = 0;
   const dispatch = useDispatch();
@@ -36,10 +38,24 @@ export default function Card({ id, name, price, category, image, brand }) {
   // },[productDetail])
 
   function handleClick(e) {
-    contador += 1;
     e.preventDefault();
+    // toast('Producto agregado al carrito!', {
+    //   position: "top-right",
+    //   autoClose: 3000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   });
+    contador += 1;
+    toast.success('¡Producto agregado al carrito!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      draggable: true,
+    })
     contador < 2 && dispatch(getProductDetail(id));
-
   }
 
   return (
