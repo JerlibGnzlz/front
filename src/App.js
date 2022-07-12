@@ -16,17 +16,18 @@ import Products from "./components/Products/Products";
 import Checkout from "./components/Checkout/Checkout.jsx";
 import Admin from "./components/Admin/Admin";
 
-import FormProduct from './components/Admin/Products/formProduct';
+import FormProduct from "./components/Admin/Products/formProduct";
 import EditProduct from "./components/Admin/Products/EditProduct";
 import ProductsAdmi from "./components/Admin/Products/ProductsAdmi";
 import ListUser from "./components/Admin/Users/ListUser";
 import OrdersAdmin from "./components/Admin/OrdersAdmin/OrdersAdmin";
-import Favorites from './components/Favorites/Favorites'
+import Favorites from "./components/Favorites/Favorites";
 // import Checkout from "./components/Checkout/Checkout.jsx";
 import CheckoutAddress from "./components/Checkout/CheckoutAddress";
 import EditProfile from "./components/UserDashboard/EditProfile";
 import UserProfile from "./components/UserDashboard/UserProfile";
-import OrderAdminDetail from './components/Admin/OrdersAdmin/OrdersAdminDetail';
+import OrderAdminDetail from "./components/Admin/OrdersAdmin/OrdersAdminDetail";
+import Historial from "./components/historial/Historial.jsx";
 
 function App() {
   return (
@@ -43,7 +44,6 @@ function App() {
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/reset" element={<Reset />} />
           <Route path="/admin" element={<Admin />} />
-
           <Route path="/admin/products" element={<ProductsAdmi />} />
           <Route path="/admin/create" element={<FormProduct />} />
           <Route path="/admin/products/:id" element={<EditProduct />} />
@@ -54,6 +54,7 @@ function App() {
           <Route path="/profile/user" element={<EditProfile />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/profile/favorites" element={<Favorites />} />
+          <Route path="/historial" element={<Historial />} />
         </Routes>
       </AuthProvider>
     </div>

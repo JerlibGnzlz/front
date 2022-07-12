@@ -1,19 +1,25 @@
 import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import { faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faShoppingCart,
+  faUser,
+  faSun,
+  faMoon,
+} from "@fortawesome/free-solid-svg-icons";
 import logo from "../img/logo.png";
 import { useAuth } from "../context/AuthContext.js";
 import { useDispatch, useSelector } from "react-redux";
 import { userType } from "./Redux/action";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-
+import useDarkMode from "./darkMode";
 
 function NavBar() {
   const { user, logout } = useAuth();
   const dispatch = useDispatch();
   const userT = useSelector((state) => state.verify);
-  console.log(userT,'esto es el UserT')
+  const [colorTheme, setTheme] = useDarkMode();
+
   const handleLogout = async () => {
     await logout();
   };
@@ -22,8 +28,6 @@ function NavBar() {
       dispatch(userType(user.email));
     }
   }, [dispatch, user]);
-
-  
 
   let welcome = user ? "Hola, " + user.email.split("@")[0] : "Hola";
 
@@ -35,22 +39,22 @@ function NavBar() {
         </div>
       </Link>
 
-      <div>{welcome}</div>
+      <div className=" py-1.5">{welcome}</div>
       <Link to="/cart">
-        <div className="hover:text-white">
+        <div className="hover:text-white  py-1.5">
           <FontAwesomeIcon icon={faShoppingCart} /> Carro
         </div>
       </Link>
       {/* Boton Login */}
 
-      {user && (userT.isAdmin===false ? (
-        <Link to='/profile/favorites'>
-
-          <button className="mb-4">
-            <FavoriteIcon />
-          </button>
-        </Link>
-      ) : null)}
+      {user &&
+        (userT.isAdmin === false ? (
+          <Link to="/profile/favorites">
+            <button className="mb-4">
+              <FavoriteIcon />
+            </button>
+          </Link>
+        ) : null)}
 
       {user &&
         (userT.isAdmin === true ? (
@@ -69,6 +73,16 @@ function NavBar() {
           </Link>
         ))}
 
+      <div
+        className=" px-3  py-1.5 w-30  cursor-pointer"
+        onClick={() => setTheme(colorTheme)}
+      >
+        {colorTheme === "light" ? (
+          <FontAwesomeIcon icon={faSun} className="mr-3" />
+        ) : (
+          <FontAwesomeIcon icon={faMoon} className="mr-3" />
+        )}
+      </div>
       <button
         onClick={handleLogout}
         className="bg-secondary px-3 rounded py-1.5 hover:text-white "

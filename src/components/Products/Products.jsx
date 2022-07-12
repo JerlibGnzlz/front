@@ -4,16 +4,25 @@ import Filter from "../Filter/Filter";
 import Card from "../Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getCategories, getProduct, getBrand, process_payment } from "../Redux/action";
-import { useParams, useSearchParams, useLocation, useNavigate} from "react-router-dom";
+import {
+  getCategories,
+  getProduct,
+  getBrand,
+  process_payment,
+} from "../Redux/action";
+import {
+  useParams,
+  useSearchParams,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Paginado from "../Paginado/Paginado";
 import "./Products.css";
 import { useAuth } from "../../context/AuthContext";
 
-
 export default function Products() {
-  const navegate = useNavigate()
-  const { user} = useAuth()
+  const navegate = useNavigate();
+  const { user } = useAuth();
   const Products = useSelector((state) => state.products);
   const cartProduct = useSelector((state) => state.cart);
   const [params] = useSearchParams();
@@ -31,9 +40,8 @@ export default function Products() {
     indexOfFirstProduct,
     indexOfLastProduct
   );
-  
+
   // function getAllProducts() {
-    
 
   //   dispatch(getProduct({ genre: genre }));
   // }
@@ -43,13 +51,18 @@ export default function Products() {
   }
 
   useEffect(() => {
-    console.log(user)
-    if (backInfo && user){
-      const product = JSON.parse(localStorage.getItem('cart'))
-      if(product){
-        dispatch(process_payment({data: backInfo, body:{product: product, user:user.email }}))
+    console.log(user);
+    if (backInfo && user) {
+      const product = JSON.parse(localStorage.getItem("cart"));
+      if (product) {
+        dispatch(
+          process_payment({
+            data: backInfo,
+            body: { product: product, user: user.email },
+          })
+        );
         paymentStatus === "approved" && localStorage.removeItem("cart");
-        navegate("/products")
+        navegate("/products");
       }
     }
     dispatch(getProduct({ genre: genre }));
@@ -105,7 +118,7 @@ export default function Products() {
   // console.log(objCart2, "obj")
 
   return (
-    <div>
+    <div className="dark:bg-black dark:text-white">
       <NavBar />
       <div className="productsCards">
         <h1>Productos</h1>

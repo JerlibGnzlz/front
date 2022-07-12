@@ -211,7 +211,7 @@ export default function Filter({ paginado }) {
             </button>
           </div>
 
-          <div className="">
+          <div className="dark:text-white">
             <button
               className="hover:bg-blue-200 active:bg-violet-200 focus:bg-red-500 rounded-sm flex inline capitalize ml-2 text-lg"
               name="accesories"

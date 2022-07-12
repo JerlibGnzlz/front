@@ -1,23 +1,21 @@
 import { React } from "react";
 import Cart from "./Cart";
-import { useEffect,useState} from "react";
-import "./Carts.css"
+import { useEffect, useState } from "react";
+import "./Carts.css";
 import Counter from "./Counter";
-
 
 function Carts() {
   let cart;
-  
+
   cart = localStorage.getItem("cart");
-  
+
   const [product, setProduct] = useState(JSON.parse(cart));
 
-useEffect(() => {
-    const cart2= localStorage.getItem("cart");
-   // const product2 = JSON.parse(cart2);
+  useEffect(() => {
+    const cart2 = localStorage.getItem("cart");
+    // const product2 = JSON.parse(cart2);
+  }, [cart]);
 
-}, [cart])
-  
   function handleDelete(id) {
     // console.log(id,'soy el id')
     // e.preventDefault();
@@ -25,13 +23,16 @@ useEffect(() => {
     const filter = product.filter((f) => f.id !== id);
     localStorage.removeItem("cart");
     localStorage.setItem("cart", JSON.stringify(filter));
-    setProduct(filter)
+    setProduct(filter);
     // console.log(product,'soy el produc actualizado')
 
     // const pro = localStorage.getItem(cart);
   }
-  console.log(product.map(e=>e.stock),"estoo es el stock")
-  
+  console.log(
+    product.map((e) => e.stock),
+    "estoo es el stock"
+  );
+
   let stock = 5;
 
   const [count, setCount] = useState(1);
@@ -39,7 +40,7 @@ useEffect(() => {
   // let contador2 = product.filter((e) => e.id === id);
   // console.log(contador2[0].quantity, "con2");
 
-  function counter(e,id) {
+  function counter(e, id) {
     e.preventDefault();
     const { name } = e.target;
 
@@ -70,15 +71,12 @@ useEffect(() => {
     }
   }
 
-  
   return (
     <>
-      <div>
+      <div className="dark:bg-black dark:text-white">
         {product?.length
           ? product.map((e) => (
-            
-            <Cart
-                
+              <Cart
                 counter={counter}
                 product={product}
                 handleDelete={handleDelete}

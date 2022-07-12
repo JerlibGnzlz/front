@@ -21,10 +21,12 @@ import {
   USER_UPDATE,
   FAVORITES,
   USER_TYPE,
+  USER_HISTORY,
 } from "./action";
 
 const initialState = {
   products: [],
+  historyPay: [],
   detail: [],
   categories: [],
   brand: [],
@@ -35,13 +37,13 @@ const initialState = {
   allUsers: [],
   userDetailAdmin: [],
   productAdmi: [],
-  user:{},
+  user: {},
   allOrders: [],
   adminOrderDetail: [],
   updateProduct: [],
   updateDetail: [],
   favorites: [],
-  verify:{},
+  verify: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -174,6 +176,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         verify: action.payload,
+      };
+
+    case USER_HISTORY:
+      /* console.log(action.payload); */
+      return {
+        ...state,
+        historyPay: action.payload,
       };
 
     default:

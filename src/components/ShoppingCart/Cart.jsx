@@ -3,12 +3,20 @@ import { React } from "react";
 //import { useDispatch }  from "react-redux";
 //import { deleteCart } from "../Redux/action";
 
-function Cart({ name, brandName, id, image, price,handleDelete,product,counter }) {
+function Cart({
+  name,
+  brandName,
+  id,
+  image,
+  price,
+  handleDelete,
+  product,
+  counter,
+}) {
   // const dispatch = useDispatch();
- //let cart;
-  
+  //let cart;
+
   //cart = localStorage.getItem("cart");
-  
 
   // let stock = 5;
 
@@ -58,11 +66,11 @@ function Cart({ name, brandName, id, image, price,handleDelete,product,counter }
   // }
 
   return (
-    <div>
+    <div className="dark:bg-gray-300 dark:text-black">
       <>
-        <div className="m-1 w-full grid gap-5 grid-cols-5 border-t-2 border-gray-300">
+        <div className="m-1 w-full grid gap-5 grid-cols-5 border-t-2 border-gray-300 dark:border-white">
           <img
-            className="pict object-contain w-48 h-36 p-2 "
+            className="pict object-contain w-48 h-36 p-2 dark:bg-white"
             src={image}
             alt="Pic Not Found"
           />
@@ -74,7 +82,7 @@ function Cart({ name, brandName, id, image, price,handleDelete,product,counter }
             <button
               className="text-lg font-semibold mx-1 box-border h-2 w-2 p-4 border-2 rounded-lg inline-flex justify-center items-center border-gray-400"
               name="menos"
-              onClick={(e) => counter(e,id)}
+              onClick={(e) => counter(e, id)}
             >
               -
             </button>
@@ -84,17 +92,17 @@ function Cart({ name, brandName, id, image, price,handleDelete,product,counter }
             <button
               className="text-lg font-semibold mx-1 box-border h-2 w-2 p-4 border-2 rounded-lg inline-flex justify-center items-center border-gray-400"
               name="mas"
-              onClick={(e) => counter(e,id)}
+              onClick={(e) => counter(e, id)}
             >
               +
             </button>
           </div>
-          <div className="my-auto font-semibold text-lg">
+          <div className="my-auto font-semibold text-lg ">
             <p>Precio: $ {parseFloat(price).toFixed(3)}</p>
-            <p>Precio Total: $ {(price*contador2[0].quantity).toFixed(3)}</p>
+            <p>Precio Total: $ {(price * contador2[0].quantity).toFixed(3)}</p>
           </div>
 
-          <div className="inline-flex justify-end">
+          <div className="inline-flex justify-end dark:bg-gray-300">
             <button
               onClick={() => handleDelete(id)}
               className=" box-content h-4 w-4 p-1 text-xl font-light "

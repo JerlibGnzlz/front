@@ -10,17 +10,18 @@ export const MERCADO_PAGO = "MERCADO_PAGO";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const RESET_CART = "RESET_CART";
 export const ADD_TO_CART_DETAIL = "ADD_TO_CART_DETAIL";
-export const GET_ALL_USERS = 'GET_ALL_USERS'
+export const GET_ALL_USERS = "GET_ALL_USERS";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const UPDATE_DETAIL = "UPDATE_DETAIL";
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const GET_PRODUCT_ADMI = "GET_PRODUCT_ADMI";
-export const GET_ADMIN_ORDER_DETAIL = 'GET_ADMIN_ORDER_DETAIL';
+export const GET_ADMIN_ORDER_DETAIL = "GET_ADMIN_ORDER_DETAIL";
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const FAVORITES = "FAVORITES";
 export const USER_TYPE = "USER_TYPE";
 export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
-export const USER_UPDATE= "USER_UPDATE"
+export const USER_UPDATE = "USER_UPDATE";
+export const USER_HISTORY = "USER_HISTORY";
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -46,31 +47,31 @@ export const getProduct =
     });
     // console.log(categoryId,brandId,'esto es el categoryId y el BrandID de  la action')
     return dispatch({ type: GET_PRODUCT, payload: product.data });
-    };
+  };
 
-  export const getProductAdmi =
-    ({
-      id = undefined,
-      price = undefined,
-      categoryId = undefined,
-      brandId = undefined,
-      genre = undefined,
-      search = "",
-    }) =>
-    async (dispatch) => {
-      const product = await axios.get("http://localhost:3001/productAdmin", {
-        params: {
-          id: id,
-          price: price,
-          category: categoryId,
-          brand: brandId,
-          genre: genre,
-          search: search,
-        },
-      });
-      // console.log(categoryId,brandId,'esto es el categoryId y el BrandID de  la action')
-      return dispatch({ type: GET_PRODUCT_ADMI, payload: product.data });
-    };
+export const getProductAdmi =
+  ({
+    id = undefined,
+    price = undefined,
+    categoryId = undefined,
+    brandId = undefined,
+    genre = undefined,
+    search = "",
+  }) =>
+  async (dispatch) => {
+    const product = await axios.get("http://localhost:3001/productAdmin", {
+      params: {
+        id: id,
+        price: price,
+        category: categoryId,
+        brand: brandId,
+        genre: genre,
+        search: search,
+      },
+    });
+    // console.log(categoryId,brandId,'esto es el categoryId y el BrandID de  la action')
+    return dispatch({ type: GET_PRODUCT_ADMI, payload: product.data });
+  };
 
 export const getCategories =
   ({ genre = undefined, brand = undefined }) =>
@@ -208,7 +209,9 @@ export function statusAdmi(id) {
 export function userDetailAdmin(email) {
   console.log(email);
   return async function (dispatch) {
-    var json = await axios.get(`${REACT_APP_BACKEND_URL}/profile?email=${email}`);
+    var json = await axios.get(
+      `${REACT_APP_BACKEND_URL}/profile?email=${email}`
+    );
 
     return dispatch({
       type: USER_DETAIL_ADMIN,
@@ -272,7 +275,7 @@ export const getAdminOrderDetail = (email, id) => async (dispatch) => {
   const Order = await axios.get(
     `${REACT_APP_BACKEND_URL}/order/detail?email=${email}&id=${id}`
   );
-  console.log(Order.data,'este es el order')
+  console.log(Order.data, "este es el order");
   return dispatch({
     type: GET_ADMIN_ORDER_DETAIL,
     payload: Order.data,
@@ -285,16 +288,15 @@ export const process_payment =
     axios.post(`http://localhost:3001/mp/process_payment${data}`, body);
   };
 
-
 export function getUserByEmail(payload) {
   return async function (dispatch) {
     var json = await axios.get(
       `http://localhost:3001/profile?email=${payload}`
-      );
-      return dispatch({
-        type: GET_USER_BY_EMAIL,
-        payload: json.data,
-      });
+    );
+    return dispatch({
+      type: GET_USER_BY_EMAIL,
+      payload: json.data,
+    });
   };
 }
 
@@ -313,19 +315,27 @@ export const removeFavorites =
   ({ email, id }) =>
   async (dispatch) => {
     axios.delete(`${REACT_APP_BACKEND_URL}/favorites/${email}?id=${id}`);
-    };
-  
-    export function userType(email) {
-      return async function (dispatch) {
-        var json = await axios.get(
-          `http://localhost:3001/verify?email=${email}`
-        );
-        return dispatch({
-          type: USER_TYPE,
-          payload: json.data,
-        });
-      };
-    }
+  };
+
+export function userType(email) {
+  return async function (dispatch) {
+    var json = await axios.get(`http://localhost:3001/verify?email=${email}`);
+    return dispatch({
+      type: USER_TYPE,
+      payload: json.data,
+    });
+  };
+}
+
+export function userHistoryPay(email) {
+  return async function (dispatch) {
+    var json = await axios.get(`http://localhost:3001/order/${email}`);
+    return dispatch({
+      type: USER_HISTORY,
+      payload: json.data,
+    });
+  };
+}
 
 // export const userProfileUpdate = (id, data)=>{
 //   return async function(dispatch){
