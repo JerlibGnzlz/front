@@ -1,33 +1,57 @@
 import Navbar from "../NavBar";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductDetail, reset, addToCartDetail,resetCart } from "../Redux/action";
-import { useEffect} from "react";
-import { useParams,useNavigate} from "react-router-dom";
+import {
+  getProductDetail,
+  reset,
+  addToCartDetail,
+  resetCart,
+  getComments,
+  permisonUser,
+  postComments,
+  editComment,
+  deleteComment,
+} from "../Redux/action";
+import Rating from "@mui/material/Rating";
+import CancelIcon from "@mui/icons-material/Cancel";
+import { useEffect,useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import "./Detail.css";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useAuth();
   const productDetail = useSelector((state) => state.detail);
   const cartProductDetail = useSelector((state) => state.cartDetail);
+  const comments = useSelector((state) => state.comments);
+  const permison = useSelector((state) => state.permison);
   // console.log(cartProductDetail,'esto es el cartProductDetail del detalle')
   const { id } = useParams();
-  
+  const [edit, setEdit] = useState(false);
+  const [postComment, setPostComment] = useState({
+    rating: "",
+    review: "",
+  });
 
   // console.log(productDetail, "prodDetail");
   useEffect(() => {
     dispatch(getProductDetail(id));
   }, [dispatch, id]);
 
-  useEffect(() => { 
+  useEffect(() => {
     dispatch(resetCart());
-  },[dispatch])
+  }, [dispatch]);
 
   useEffect(() => {
     const localStorageCart = localStorage.getItem("cart");
     if (Array.isArray(JSON.parse(localStorageCart))) {
       const localConverted = JSON.parse(localStorageCart);
-      if (!localConverted?.find((f) => f?.name === cartProductDetail?.name)&&cartProductDetail!==null&&cartProductDetail.hasOwnProperty("name")) {
+      if (
+        !localConverted?.find((f) => f?.name === cartProductDetail?.name) &&
+        cartProductDetail !== null &&
+        cartProductDetail.hasOwnProperty("name")
+      ) {
         localStorage.setItem(
           "cart",
           JSON.stringify([...localConverted, cartProductDetail])
@@ -37,10 +61,18 @@ export default function ProductDetail() {
     } else {
       const localCart = JSON.parse(localStorageCart);
       // console.log(localCart,'ESTO ES EL LOCALCART')
-      if (localCart!==null&&localCart.hasOwnProperty('name') && cartProductDetail !== null && cartProductDetail?.name!==localCart.name) {
+      if (
+        localCart !== null &&
+        localCart.hasOwnProperty("name") &&
+        cartProductDetail !== null &&
+        cartProductDetail?.name !== localCart.name
+      ) {
         // console.log(localCart, "soy el localCart del detalle");
-        localStorage.setItem("cart", JSON.stringify([localCart, cartProductDetail]));
-      } else if (cartProductDetail.hasOwnProperty('name')) {
+        localStorage.setItem(
+          "cart",
+          JSON.stringify([localCart, cartProductDetail])
+        );
+      } else if (cartProductDetail.hasOwnProperty("name")) {
         // console.log(cartProductDetail,'soy el cartProoduct' )
         localStorage.setItem("cart", JSON.stringify(cartProductDetail));
       }
@@ -49,6 +81,23 @@ export default function ProductDetail() {
 
   // const cart2=localStorage.getItem("cart")
   // const objCart2=JSON.parse(cart2)
+
+  const handleChange = (e) => {
+    setPostComment({
+      ...postComment,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSumit = (e) => {
+    e.preventDefault();
+    dispatch(postComments(postComment, user.email, id));
+    setTimeout(() => {
+      dispatch(getComments(id));
+      dispatch(permisonUser(user.email, id));
+      dispatch(getProductDetail(id));
+    }, 100);
+  };
 
   const localStorageCart = localStorage.getItem("cart");
   //const localStorageObj = JSON.parse(localStorageCart);
@@ -64,11 +113,50 @@ export default function ProductDetail() {
     // }
   }
   function backOnClicke(e) {
-    e.preventDefault()
-    dispatch(reset())
-    navigate('/products')
+    e.preventDefault();
+    dispatch(reset());
+    navigate("/products");
   }
 
+  function handleDelete(e, orderId) {
+    e.preventDefault();
+    dispatch(deleteComment(orderId, id));
+    setTimeout(() => {
+      dispatch(getComments(id));
+      dispatch(permisonUser(user.email, id));
+      dispatch(getProductDetail(id));
+      setEdit(false);
+    }, 100);
+  }
+
+  function handleComments(e) {
+    if (user) {
+      e.preventDefault();
+      dispatch(getComments(id));
+      dispatch(permisonUser(user.email, id));
+    } else {
+      navigate("/login");
+    }
+  }
+  function handleEdit(e, rating, review, id) {
+    setPostComment({
+      rating: rating,
+      review: review,
+      orderId: id,
+    });
+    setEdit(true);
+  }
+
+  function handleEdited(e) {
+    e.preventDefault();
+    dispatch(editComment(postComment, user.email, id));
+    setTimeout(() => {
+      dispatch(getComments(id));
+      dispatch(permisonUser(user.email, id));
+      dispatch(getProductDetail(id));
+      setEdit(false);
+    }, 100);
+  }
 
   return (
     <>
@@ -167,16 +255,102 @@ export default function ProductDetail() {
               </div>
             </div>
           </div>
+          {comments ? (
+            permison ? (
+              <form onSubmit={(e) => handleSumit(e)}>
+                <div>
+                  <Rating
+                    name="rating"
+                    value={parseInt(postComment.rating)}
+                    onChange={(e) => handleChange(e)}
+                  />
+                </div>
+                <div>
+                  <label></label>
+                  <input
+                    type="text"
+                    name="review"
+                    value={postComment.review}
+                    onChange={(e) => handleChange(e)}
+                  />
+                </div>
+                <button type="submit">
+                  <span>comment</span>
+                </button>
+              </form>
+            ) : null
+          ) : null}
+          {edit ? (
+            <form onSubmit={(e) => handleEdited(e)}>
+              <div>
+                <Rating
+                  name="rating"
+                  value={parseInt(postComment.rating)}
+                  onChange={(e) => handleChange(e)}
+                />
+              </div>
+              <div>
+                <label></label>
+                <input
+                  type="text"
+                  name="review"
+                  value={postComment.review}
+                  onChange={(e) => handleChange(e)}
+                />
+              </div>
+              <button type="submit">
+                <span>comment</span>
+              </button>
+            </form>
+          ) : null}
+          {comments ? (
+            comments[0] ? (
+              <div>
+                Comments
+                {comments.map((c, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={
+                        c.user.email === user?.email && edit
+                          ? "disable"
+                          : "anable"
+                      }
+                    >
+                      review at {c.user.email.split("@")[0]}
+                      <Rating name="read-only" value={c.rating} readOnly />
+                      <div>{c.review}</div>
+                      {c.user.email === user?.email ? (
+                        <div>
+                          <button
+                            onClick={(e) =>
+                              handleEdit(e, c.rating, c.review, c.id)
+                            }
+                          >
+                            Edit Comment
+                          </button>
+                          <button onClick={(e) => handleDelete(e, c.id)}>
+                            <CancelIcon />
+                          </button>
+                        </div>
+                      ) : null}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div>there are no comments for this product</div>
+            )
+          ) : null}
 
           {/* Bottom Back */}
-         
-            <button
-              className="bg-black w-32 h-12 rounded-lg shadow-lg border-2 border-gray-600 ml-5 mt-5 text-white hover:bg-gray-700 duration-500"
-              onClick={(e) => backOnClicke(e)}
-            >
-              Volver
-            </button>
-          
+
+          <button
+            className="bg-black w-32 h-12 rounded-lg shadow-lg border-2 border-gray-600 ml-5 mt-5 text-white hover:bg-gray-700 duration-500"
+            onClick={(e) => backOnClicke(e)}
+          >
+            Volver
+          </button>
         </div>
       }
     </>

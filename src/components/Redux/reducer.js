@@ -22,6 +22,9 @@ import {
   FAVORITES,
   USER_TYPE,
   USER_HISTORY,
+  GET_COMMENTS,
+  PERMISON,
+  RESET_ALL_COMMENTS,
 } from "./action";
 
 const initialState = {
@@ -43,7 +46,9 @@ const initialState = {
   updateDetail: [],
   favorites: [],
   verify: {},
-  historyPay:[],
+  historyPay: [],
+  permison: false,
+  comments: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -98,6 +103,28 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         adminOrderDetail: action.payload,
+      };
+    }
+
+    case GET_COMMENTS: {
+      return {
+        ...state,
+        comments: action.payload,
+      };
+    }
+
+    case PERMISON: {
+      return {
+        ...state,
+        permison: action.payload,
+      };
+    }
+
+    case RESET_ALL_COMMENTS: {
+      return {
+        ...state,
+        permison: false,
+        comments: false,
       };
     }
 

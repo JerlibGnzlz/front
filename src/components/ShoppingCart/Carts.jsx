@@ -30,7 +30,7 @@ useEffect(() => {
 
     // const pro = localStorage.getItem(cart);
   }
-  console.log(product.map(e=>e.stock),"estoo es el stock")
+  
   
   let stock = 5;
 
@@ -75,7 +75,7 @@ useEffect(() => {
     <>
       <div>
         {product?.length
-          ? product.map((e) => (
+          ? product?.map((e) => (
             
             <Cart
                 
