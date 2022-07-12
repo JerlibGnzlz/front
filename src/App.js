@@ -27,6 +27,7 @@ import CheckoutAddress from "./components/Checkout/CheckoutAddress";
 import EditProfile from "./components/UserDashboard/EditProfile";
 import UserProfile from "./components/UserDashboard/UserProfile";
 import OrderAdminDetail from './components/Admin/OrdersAdmin/OrdersAdminDetail';
+import Historial from "./components/Historial";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path="/profile/user" element={<EditProfile />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/profile/favorites" element={<Favorites />} />
+          <Route path='/profile/history' element={<Historial/>}/>
         </Routes>
       </AuthProvider>
     </div>

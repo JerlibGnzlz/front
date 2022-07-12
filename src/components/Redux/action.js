@@ -21,7 +21,7 @@ export const FAVORITES = "FAVORITES";
 export const USER_TYPE = "USER_TYPE";
 export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
 export const USER_UPDATE= "USER_UPDATE"
-
+export const USER_HISTORY = "USER_HISTORY";
 const { REACT_APP_BACKEND_URL } = process.env;
 
 export const getProduct =
@@ -322,6 +322,16 @@ export const removeFavorites =
         );
         return dispatch({
           type: USER_TYPE,
+          payload: json.data,
+        });
+      };
+}
+    
+    export function userHistoryPay(email) {
+      return async function (dispatch) {
+        var json = await axios.get(`http://localhost:3001/order/${email}`);
+        return dispatch({
+          type: USER_HISTORY,
           payload: json.data,
         });
       };

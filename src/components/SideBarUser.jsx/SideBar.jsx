@@ -65,13 +65,13 @@ function SideBar() {
               <button name="contact" onClick={(e) => handleNavigate(e)}>
                 Contactanos
               </button>
+            </li>
               <li className=" pt-8 font-semibold text-white">
                 <ExitToAppRoundedIcon /> 
                 <button name="log" onClick={(e) => handleNavigate(e)}>
                   Salir
                 </button>
               </li>
-            </li>
           </ul>
         </div>
       </div>
