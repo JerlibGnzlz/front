@@ -341,7 +341,7 @@ export function userHistoryPay(email) {
 }
 export const deleteComment = (id, productId) => async (dispatch) => {
   await axios.delete(
-    `${REACT_APP_BACKEND_URL}/comments/delete/${id}/${productId})`
+    `${REACT_APP_BACKEND_URL}/comments/delete/${id}/${productId}`
   );
 };
 

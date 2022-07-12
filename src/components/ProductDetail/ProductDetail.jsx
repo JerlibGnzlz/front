@@ -224,15 +224,9 @@ export default function ProductDetail() {
                 <h3 className=" mt-2 text-xl font-bold text-gray-900">
                   Puntuación
                 </h3>
-                <div className="flex ">
-                  {Array(4)
-                    .fill()
-                    .map((_, i) => (
-                      <p key={i} className="text-2xl">
-                        &#9733;
-                      </p>
-                    ))}
-                </div>
+                {
+                  productDetail[0] ? <Rating value={productDetail[0].rating} readOnly /> : null
+                }
               </div>
 
               {/* Product price */}
@@ -241,6 +235,12 @@ export default function ProductDetail() {
                 <p className="text-2xl font-bold text-gray-900">
                   Precio: ${productDetail[0] && productDetail[0].price}
                 </p>
+                <button
+                    type="submit"
+                    className="mt-10 w-full bg-primary border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onClick={(e) => handleComments(e)}>
+                    ver comentarios
+                </button>
 
                 {/* Product bottom cart */}
                 <div className="">
@@ -275,7 +275,7 @@ export default function ProductDetail() {
                   />
                 </div>
                 <button type="submit">
-                  <span>comment</span>
+                  <span>Comentar</span>
                 </button>
               </form>
             ) : null
@@ -299,14 +299,14 @@ export default function ProductDetail() {
                 />
               </div>
               <button type="submit">
-                <span>comment</span>
+                <span>Comentar</span>
               </button>
             </form>
           ) : null}
           {comments ? (
             comments[0] ? (
               <div>
-                Comments
+                Comentarios
                 {comments.map((c, index) => {
                   return (
                     <div
@@ -317,7 +317,7 @@ export default function ProductDetail() {
                           : "anable"
                       }
                     >
-                      review at {c.user.email.split("@")[0]}
+                      comentario de {c.user.email.split("@")[0]}
                       <Rating name="read-only" value={c.rating} readOnly />
                       <div>{c.review}</div>
                       {c.user.email === user?.email ? (
@@ -327,7 +327,7 @@ export default function ProductDetail() {
                               handleEdit(e, c.rating, c.review, c.id)
                             }
                           >
-                            Edit Comment
+                            Editar comentario
                           </button>
                           <button onClick={(e) => handleDelete(e, c.id)}>
                             <CancelIcon />
@@ -339,7 +339,7 @@ export default function ProductDetail() {
                 })}
               </div>
             ) : (
-              <div>there are no comments for this product</div>
+              <div>no existen comentarios en este producto</div>
             )
           ) : null}
 
