@@ -34,13 +34,13 @@ function SideBar() {
   }
   return (
     <>
-      <div className="abosolute">
+      <div className="abosolute w-56">
         <div>
           <Link to="/products">
-            <img className="bg-black w-48 p-4" src={logo} alt="Pic not found" />
+            <img className="bg-black w-56 p-4" src={logo} alt="Pic not found" />
           </Link>
         </div>
-        <div className="flex-1 w-48 bg-gray-800 h-screen">
+        <div className="flex-1 w-56 bg-gray-800 h-screen">
           <ul className="text-white font-semibold ml-2">
             <li className="pt-8">
               <AccountCircleIcon />{" "}
