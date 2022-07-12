@@ -17,6 +17,8 @@ import Products from "./components/Products/Products";
 import CheckoutAddress from "./components/Checkout/CheckoutAddress";
 import EditProfile from "./components/UserDashboard/EditProfile";
 import UserProfile from "./components/UserDashboard/UserProfile";
+import Contact from "./components/ContactUs/Contact";
+
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
           <Route path="/reset" component={<Reset />} />
           <Route path="/profile/:id" element={<EditProfile/>} />
           <Route path="/profile" element={<UserProfile/>} />
+          <Route path="/contact" element={<Contact/>} />
+          
         </Routes>
       </AuthProvider>
     </div>
