@@ -8,20 +8,26 @@ function Historial() {
   const history = useSelector((state) => state.historyPay);
   const { user } = useAuth();
 
-  /* let order = history.orders[0].orderItems.map((e) => e);
-  console.log(order); */
-  let order = history.orders[0].orderItems.map((e) => e);
+  let order =
+    Object.entries(history).length > 0
+      ? history.orders[0].orderItems.map((e) => e)
+      : undefined;
 
   useEffect(() => {
     if (user) {
-      dispatch(userHistoryPay(user.email));
+      dispatch(userHistoryPay(user?.email));
+      console.log("dispare");
     }
-  }, [dispatch, user.email, user]);
+  }, [dispatch, user?.email, user]);
+
+  let prueba = Object.entries(history).length > 0 ? "algo" : "vacio";
+  console.log(order);
+  console.log(prueba);
 
   return (
     <div className="flex flex-col w-9/12 h-auto p-4 items-center ">
       <h1>Historial de Compra </h1>
-      {order.map((e) => {
+      {order?.map((e) => {
         return (
           <div
             key={e.id}

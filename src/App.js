@@ -50,7 +50,7 @@ function App() {
           <Route path="/admin/user" element={<ListUser />} />
           <Route path="/admin/order" element={<OrdersAdmin />} />
           <Route path="/admin/order/:id" element={<OrderAdminDetail />} />
-          <Route path="/reset" component={<Reset />} />
+          <Route path="/reset" element={<Reset />} />
           <Route path="/profile/user" element={<EditProfile />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/profile/favorites" element={<Favorites />} />
