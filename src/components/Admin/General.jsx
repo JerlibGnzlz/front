@@ -82,7 +82,7 @@ function General() {
     await logout();
   };
 
-  let welcome = user ? "Hello, " + user.email : "Hello, Guest";
+  let welcome = user ? "Hola, " + user.email : "Hola!!";
   return (
     <>
       <h1 className="flex justify-center text-3xl font-semibold tracking-wider mt-10	">
@@ -91,7 +91,7 @@ function General() {
       <div className="flex justify-around m-3 font-500 text-2xl mt-10">
         <div className="bg-gray-200 shadow-lg rounded-lg p-4 border-2 border-gray-400">
           <div>
-            <span className="text-xl">Revanue</span>
+            <span className="text-xl">Ingresos</span>
           </div>
           <div>
             <span>$2,423 </span>
@@ -99,11 +99,11 @@ function General() {
               1.5+ <ArrowUpwardIcon />
             </span>
           </div>
-          <p className="text-xl">Compare to last Month</p>
+          <p className="text-xl">Comparado con el último mes</p>
         </div>
         <div className="bg-gray-200 shadow-lg rounded-lg p-4 border-2 border-gray-400">
           <div>
-            <span className="text-xl">Cost</span>
+            <span className="text-xl">Costos</span>
           </div>
           <div>
             <span>$1,423 </span>
@@ -111,11 +111,11 @@ function General() {
               1.8+ <ArrowUpwardIcon />
             </span>
           </div>
-          <p className="text-xl">Compare to last Month</p>
+          <p className="text-xl">Comparado con el último mes</p>
         </div>
         <div className="bg-gray-200 shadow-lg rounded-lg p-4 border-2 border-gray-400">
           <div>
-            <span className="text-xl">Sales</span>
+            <span className="text-xl">Ventas</span>
           </div>
           <div>
             <span>$4,423 </span>
@@ -123,11 +123,11 @@ function General() {
               -1.4 <ArrowDownwardIcon />
             </span>
           </div>
-          <p className="text-xl"> Compare to last Week</p>
+          <p className="text-xl"> Comparado con la última semana</p>
         </div>
       </div>
       <div className="bg-gray-200 shadow-lg rounded-lg p-4 m-10 mt-32 w-7/12 h-2/4 mx-auto border-2 border-gray-400">
-        <h1 className="text-2xl font-semibold my-5 mb-16">Sale Analytics</h1>
+        <h1 className="text-2xl font-semibold my-5 mb-16">Análisis de Ventas</h1>
         <ResponsiveContainer width="100%" aspect={4 / 1}>
           <LineChart data={data}>
             <XAxis dataKey="name" stroke="#888888" />

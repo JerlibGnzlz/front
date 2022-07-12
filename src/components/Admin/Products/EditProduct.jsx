@@ -40,7 +40,7 @@ export default function ProductDetail() {
     e.preventDefault();
     dispatch(reset());
     dispatch(updateDetail(id, input));
-    navigate("/admi/products");
+    navigate("/admin/products");
   }
 
   function penDescription(e) {
@@ -108,7 +108,7 @@ export default function ProductDetail() {
               <div className=" mt-2 py-10 lg:pt-6 lg:pb-6 lg:col-start-1 lg:col-span-2">
                 <div>
                   <h3 className="text-xl font-bold text-gray-900">
-                    Description
+                    Descripción
                   </h3>
                   <div className="space-y-6">
                     <button
@@ -138,7 +138,7 @@ export default function ProductDetail() {
                   </div>
                 </div>
                 <div className="mt-2">
-                  <h2 className="text-xl font-bold text-gray-900">Genre</h2>
+                  <h2 className="text-xl font-bold text-gray-900">Géneros</h2>
 
                   <div className="space-y-6">
                     <p className="text-xl text-gray-600 capitalize">
@@ -150,16 +150,18 @@ export default function ProductDetail() {
                         name="genre"
                         onChange={(e) => handleChange(e)}
                       >
-                        <option value={"women"}>Women</option>
-                        <option value={"men"}>Men</option>
-                        <option value={"neutral"}>Neutral</option>
-                        <option value={"kids"}>Kids</option>
+                        <option value={"women"}>Mujer</option>
+                        <option value={"men"}>Hombre</option>
+                        <option value={"neutral"}>Sin Género</option>
+                        <option value={"kids"}>Niño</option>
                       </select>
                     ) : null}
                   </div>
                 </div>
                 <div className="mt-2">
-                  <h2 className="text-xl font-bold text-gray-900">Category</h2>
+                  <h2 className="text-xl font-bold text-gray-900">
+                    Categorías
+                  </h2>
 
                   <div className="space-y-6">
                     <p className="text-xl text-gray-600 capitalize">
@@ -181,7 +183,7 @@ export default function ProductDetail() {
                 </div>
 
                 <div className="mt-2">
-                  <h2 className="text-xl font-bold text-gray-900">Brand</h2>
+                  <h2 className="text-xl font-bold text-gray-900">Marca</h2>
 
                   <div className="space-y-6">
                     <p className="text-xl text-gray-600 capitalize">
@@ -204,7 +206,7 @@ export default function ProductDetail() {
 
                 {/* Product Score */}
                 {/* Sustituir el 4 por productDetail[0].rating */}
-                <h3 className=" mt-2 text-xl font-bold text-gray-900">Stock</h3>
+                <h3 className=" mt-2 text-xl font-bold text-gray-900"></h3>
                 <div className="flex flex-col">
                   <p className="text-2xl">
                     {productDetail[0] && productDetail[0].stock}
@@ -227,7 +229,7 @@ export default function ProductDetail() {
 
               {/* Product price */}
               <div className="mt-4 lg:mt-0 lg:row-span-3">
-                <h2 className="sr-only">Product information</h2>
+                <h2 className="sr-only">Información del Producto</h2>
                 <p className="text-3xl font-bold text-gray-900">
                   ${productDetail[0] && productDetail[0].price}
                 </p>
@@ -250,7 +252,7 @@ export default function ProductDetail() {
                       handleSubmit(e);
                     }}
                   >
-                    Save Product
+                    Guardar Producto
                   </button>
                 </div>
               </div>
@@ -258,14 +260,12 @@ export default function ProductDetail() {
           </div>
 
           {/* Bottom Back */}
-          <div className="w-full h-16 fixed bottom-0 mt-28 bg-primary">
-            <button
-              onClick={(e) => backOnClicke(e)}
-              className="text-center mt-5 text-white hover:text-tertiary"
-            >
-              Go Back
-            </button>
-          </div>
+          <button
+            className="bg-black w-32 h-12 rounded-lg shadow-lg border-2 border-gray-600 ml-5 mt-5 text-white hover:bg-gray-700 duration-500"
+            onClick={(e) => backOnClicke(e)}
+          >
+            Volver
+          </button>
         </div>
       }
     </>

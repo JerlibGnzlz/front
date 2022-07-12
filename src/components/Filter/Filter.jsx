@@ -160,7 +160,7 @@ export default function Filter({ paginado }) {
   return (
     <div>
       <div className="category flex flex-col">
-        <h1 className="text-3xl font-semibold">Genres</h1>
+        <h1 className="text-3xl font-semibold">Géneros</h1>
         <div className="ml-2 ">
           <div className="item-left  ">
             <button
@@ -168,7 +168,7 @@ export default function Filter({ paginado }) {
               name="all"
               onClick={(e) => handleReset(e)}
             >
-              All Products
+              Todos los Productos
             </button>
           </div>
 
@@ -178,9 +178,10 @@ export default function Filter({ paginado }) {
               name="women"
               onClick={(e) => handleReset(e)}
             >
-              Women
+              Mujer
             </button>
           </div>
+
 
           <div className="">
             <button
@@ -188,7 +189,16 @@ export default function Filter({ paginado }) {
               name="men"
               onClick={(e) => handleReset(e)}
             >
-              Men
+              Hombre
+            </button>
+          </div>
+          <div className="">
+            <button
+              className="text-lg"
+              name="no gender"
+              onClick={(e) => handleReset(e)}
+            >
+              Sin Género
             </button>
           </div>
 
@@ -198,7 +208,7 @@ export default function Filter({ paginado }) {
               name="kids"
               onClick={(e) => handleReset(e)}
             >
-              Kids
+              Niños
             </button>
           </div>
 
@@ -208,25 +218,25 @@ export default function Filter({ paginado }) {
               name="accesories"
               onClick={(e) => handleReset(e)}
             >
-              Accesories
+              Accesorios
             </button>
           </div>
         </div>
       </div>
       <div className="price mt-4 ">
-        <h1 className="text-3xl font-semibold">Price</h1>
+        <h1 className="text-3xl font-semibold">Precio</h1>
 
         <select
           onChange={(e) => handleOrderPrice(e)}
           className="border-solid border-2 border-black mt-4 rounded-lg capitalize font-semibold"
         >
-          <option value="">select price</option>
-          <option value="ASC">Lower price</option>
-          <option value="DESC">Higher price</option>
+          <option value="">Selecciona Precio</option>
+          <option value="ASC">Menor Precio</option>
+          <option value="DESC">Mayor Precio</option>
         </select>
       </div>
       <div className="brands mt-6 ">
-        <h1 className="text-3xl font-semibold">Brands</h1>
+        <h1 className="text-3xl font-semibold">Marcas</h1>
 
         {brands?.map((b) => {
           return (
@@ -245,7 +255,7 @@ export default function Filter({ paginado }) {
       </div>
 
       <div className="categories mt-6 ">
-        <h1 className="text-3xl font-semibold">Categories</h1>
+        <h1 className="text-3xl font-semibold">Categorías</h1>
         {categories?.map((c) => {
           return (
             <div key={c.id}>

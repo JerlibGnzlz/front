@@ -1,10 +1,11 @@
 import React from "react";
 import eslogan from "./imagenes/eslogan.png";
-import linea from "./imagenes/lineaDeportiva.png";
-import envios from "./imagenes/envios.png";
+import linea from "./imagenes/lineadeportiva1.png";
+import envios from "./imagenes/envios1.png";
 import mujer from "./imagenes/mujer.png";
 import hombre from "./imagenes/hombre.png";
 import niños from "./imagenes/niños.png";
+import unisex from "./imagenes/unisex.jpg";
 import accesorios from "./imagenes/accesorios.png";
 import testimonial1 from "./imagenes/testimoniales1.png";
 import testimonial2 from "./imagenes/testimonial2.png";
@@ -37,46 +38,47 @@ export default function Home() {
         </ul>
       </div>
       <div className="all">
-        <h4 className="names">Women Clothes</h4>
-        <h4 className="names">Men Clothes</h4>
-        <h4 className="names">Kids Clothes</h4>
-        <h4 className="names">Accessories</h4>
-        <img src={mujer} alt="mujer" />
+        <h4 className="names">Hombres</h4>
+        <h4 className="names">Mujeres</h4>
+        <h4 className="names">Niños</h4>
+        <h4 className="names">Sin género</h4>
         <img src={hombre} alt="hombre" />
+        <img src={mujer} alt="mujer" />
         <img src={niños} alt="niños" />
-        <img src={accesorios} alt="accesorios" />
+        <img
+          className="w-[20rem] h-[22.8rem] ml-8 "
+          src={unisex}
+          alt="sin género"
+        />
 
         <button className="boton">
-          <Link to="/products/women">See more</Link>
+          <Link to="/products/women">Ver más</Link>
         </button>
         <button className="boton">
-          <Link to="/products/men">See more</Link>
+          <Link to="/products/men">Ver más</Link>
         </button>
         <button className="boton">
-          <Link to="/products/kids">See more</Link>
+          <Link to="/products/kids">Ver más</Link>
         </button>
         <button className="boton">
-          <Link to="/products/accesories">See more</Link>
+          <Link to="/products/no-gender">Ver más</Link>
         </button>
       </div>
 
-      <h4 className="Top">Top Sellers</h4>
+      <h4 className="Top">Productos más vendidos</h4>
 
       <TopSellers />
 
-      <h2 className="opinions">Our Costumers Speak</h2>
-      <h3 className="under-text">
-        We have been working with costumers around the world
-      </h3>
+      <h2 className="opinions">Nuestros clientes </h2>
+      <h3 className="under-text">Hemos venido a clientes de todo el país.</h3>
 
       <div className="testimonials">
         <blockquote>
           <div className="frame">
-            <h5>The best clothes</h5>
+            <h5>La mejor calidad</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perferendis a natus laboriosam vitae eos. In optio, perspiciatis
-              deleniti nemo{" "}
+              He comprado en varias oportunidades y es de hermosa calidad, son
+              mi tienda favorita!!{" "}
             </p>
           </div>
           <img className="Photo" src={testimonial1} alt="testimonial" />
@@ -84,29 +86,27 @@ export default function Home() {
         </blockquote>
         <blockquote>
           <div className="frame">
-            <h5>On-time delivery</h5>
+            <h5>Siempre cumpliendo</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perferendis a natus laboriosam vitae eos. In optio, perspiciatis
-              deleniti nemo{" "}
+              Cada compra que he realizado ha llegado siempre el dia del envio
+              correctamente, muy buenos precios y calidad.{" "}
             </p>
           </div>
           <img className="Photo" src={testimonial2} alt="testimonial" />
 
-          <cite>Esther Hawkins</cite>
+          <cite>Esther Vegas</cite>
         </blockquote>
         <blockquote>
           <div className="frame">
-            <h5>I could buy easily</h5>
+            <h5>Gran variedad</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perferendis a natus laboriosam vitae eos. In optio, perspiciatis
-              deleniti nemo{" "}
+              Siempre tienen todo lo que necesito para mi y mi familia, sin duda
+              los elijo siempre!{" "}
             </p>
           </div>
 
           <img className="Photo" src={testimonial3} alt="testimonial" />
-          <cite>Devon Lane</cite>
+          <cite>Daniel Lane</cite>
         </blockquote>
       </div>
 
@@ -115,10 +115,10 @@ export default function Home() {
         <h3>4.5K+</h3>
         <h3>3K+</h3>
         <h3>25+</h3>
-        <h4>Happy Costumers</h4>
-        <h4>Deliveries</h4>
-        <h4>Rewiews</h4>
-        <h4>Awards Won</h4>
+        <h4>Clientes felices</h4>
+        <h4>Envios</h4>
+        <h4>Vistas</h4>
+        <h4>Seguidores</h4>
         <b></b>
         <b></b>
         <b></b>

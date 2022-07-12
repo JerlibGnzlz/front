@@ -19,7 +19,7 @@ export default function FormProduct() {
     price: 0,
   });
 
-  const genre = ["men", "women", "accesories", "kids"];
+  const genre = ["Hombre", "Mujer", "Accesorios", "Niños","Sin Género"];
 
   //VALIDACIONES
   function handleSubmit(e) {
@@ -83,31 +83,31 @@ export default function FormProduct() {
       <div className="relative ">
         <LeftPanel />
       </div>
-      <div className="bg-gray-200 w-screen h-screen my-14 mx-16 shadow-xl px-4 py-5 sm:rounded-lg sm:p-6 border-2 border-gray-400">
+      <div className="bg-gray-200 w-screen h-screen my-12 mx-16 shadow-xl px-4 py-5 sm:rounded-lg sm:p-6 border-2 border-gray-400">
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <h2 className="text-2xl font-semibold leading-6 text-gray-900">
-              Create Product
+              Crear Producto
             </h2>
           </div>
           <NavLink to="/admin/products">
             <button className=" border-2 bgflex bg-gray-600 p-2 w-24 rounded-lg text-white hover:bg-gray-800 transition duration-500 ease-in-out shadow-xl border-gray-300">
-              Back
+              Atras
             </button>
           </NavLink>
           <div className="mt-5 md:mt-0 md:col-span-2">
             <form
-              className="space-y-6"
+              className="space-y-3"
               action="#"
               method="POST"
               onSubmit={(e) => handleSubmit(e)}
             >
               <div className="col-span-3 sm:col-span-2">
-                <label>Name:</label>
+                <label className="font-bold text-lg">Nombre:</label>
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input
                     className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                    placeholder="Name product"
+                    placeholder="Nombre del Producto"
                     type="text"
                     // placeholder='Name'
                     value={input.name}
@@ -120,33 +120,33 @@ export default function FormProduct() {
               <div>
                 <label
                   for="about"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block font-bold text-lg"
                 >
-                  Description:
+                  Descripción:
                 </label>
                 <div className="mt-1">
                   <textarea
                     rows="3"
                     className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
                     type="text"
-                    placeholder="Description"
+                    placeholder="Descripción"
                     value={input.description}
                     name="description"
                     onChange={(e) => handleChange(e)}
                   ></textarea>
                 </div>
                 <p className="mt-2 text-sm text-gray-500">
-                  Brief description for your product.
+                  Breve descripción del Producto.
                 </p>
               </div>
 
               <div className="col-span-3 sm:col-span-2">
-                <label className="block text-m font-medium text-gray-700">
-                  Genre:
+                <label className="block font-bold text-lg">
+                  Género:
                 </label>
 
                 {genre.map((g) => (
-                  <div className="mt-1 flex rounded-md shadow-sm">
+                  <div className="mt-1 ml-2 w-48 border border-gray-400  flex rounded-md shadow-sm hover:bg-gray-800 duration-500 hover:text-white hover:border-black focus:bg-gray-700">
                     <button className="capitalize" type="button" onClick={(e) => handleCheck(g)}>
                       {g}
                     </button>
@@ -154,8 +154,8 @@ export default function FormProduct() {
                 ))}
 
                 <div className="my-3">
-                  <label className="block text-m font-medium text-gray-700">
-                    Category:
+                  <label className="block font-bold text-lg">
+                    Categorías:
                   </label>
                   <select
                     className="capitalize"
@@ -170,8 +170,8 @@ export default function FormProduct() {
                 </div>
 
                 <div className="my-3">
-                  <label className="block text-m font-medium text-gray-700">
-                    Brand:
+                  <label className="block font-bold text-lg">
+                    Marca:
                   </label>
                   <select className="capitalize" name="brandId" onChange={(e) => handleSelectBrand(e)}>
                     {allBrand?.length &&
@@ -188,7 +188,7 @@ export default function FormProduct() {
                 ))}
 
                 <div className="flex flex-col">
-                  <label>Stock:</label>
+                  <label className="font-bold text-lg">Stock:</label>
                   <input
                     className="w-16"
                     type="number"
@@ -199,8 +199,8 @@ export default function FormProduct() {
                   />
                 </div>
                 <div className="my-3">
-                  <label className="block text-m font-medium text-gray-700">
-                    Price:
+                  <label className="block font-bold text-lg">
+                    Precio:
                   </label>
                   <input
                     className="nombre"
@@ -213,14 +213,14 @@ export default function FormProduct() {
                 </div>
 
                 <div>
-                  <label className="block text-m font-medium text-gray-700">
+                  <label className="block font-bold text-lg">
                     Imagen:
                   </label>
 
-                  <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                  <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                     <div class="space-y-1 text-center">
                       <svg
-                        class="mx-auto h-12 w-12 text-gray-400"
+                        className="mx-auto h-12 w-12 text-gray-400"
                         stroke="currentColor"
                         fill="none"
                         viewBox="0 0 48 48"
@@ -233,24 +233,24 @@ export default function FormProduct() {
                           stroke-linejoin="round"
                         />
                       </svg>
-                      <div class="flex text-m text-gray-600">
+                      <div className="flex text-m text-gray-600">
                         <label
                           for="file-upload"
                           className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                         >
-                          <span>Upload a file</span>
+                          <span>Agregar una Imagen</span>
                           <input
                             // type="file"
-                            class="sr-only"
+                            className="sr-only"
                             type="text"
                             value={input.image}
                             name="image"
                             onChange={(e) => handleChange(e)}
                           />
                         </label>
-                        <p class="pl-1">or drag and drop</p>
+                        <p className="pl-1">Arrastra y Tira</p>
                       </div>
-                      <p class="text-xs text-gray-500">
+                      <p className="text-xs text-gray-500">
                         PNG, JPG, GIF up to 10MB
                       </p>
                     </div>
@@ -258,10 +258,10 @@ export default function FormProduct() {
                 </div>
                 <div className="volver">
                   <button
-                    className="border-2 bgflex bg-gray-600 p-1 mt-3 w-32 rounded-lg text-white hover:bg-gray-800 transition duration-500 ease-in-out shadow-xl border-gray-300"
+                    className="+border-2 bgflex bg-gray-600 p-1 mt-6 w-32 rounded-lg text-white hover:bg-gray-800 transition duration-500 ease-in-out shadow-xl border-gray-300"
                     type="submit"
                   >
-                    Create Product
+                    Crear Producto
                   </button>
                 </div>
               </div>

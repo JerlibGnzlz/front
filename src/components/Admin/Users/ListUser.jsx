@@ -184,11 +184,11 @@ function ListUser() {
             alt="avatar"
             className="w-40 h-40 rounded-full"
           />
-          <span className="mb-2 mt-2">Name: {userDetail.names}</span>
-          <span className="mb-2">Last Name: {userDetail.lastNames}</span>
+          <span className="mb-2 mt-2">Nombre: {userDetail.names}</span>
+          <span className="mb-2">Apellido: {userDetail.lastNames}</span>
           <span className="mb-2">Email: {userDetail.email}</span>
-          <span className="mb-2">Birthdate: {userDetail.birthDate}</span>
-          <span>Phone Number: {userDetail.phone}</span>
+          <span className="mb-2">Fecha de Nacimiento: {userDetail.birthDate}</span>
+          <span>Número de Teléfono: {userDetail.phone}</span>
         </div>
       </Modal>
     </div>

@@ -17,8 +17,10 @@ export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const GET_PRODUCT_ADMI = "GET_PRODUCT_ADMI";
 export const GET_ADMIN_ORDER_DETAIL = 'GET_ADMIN_ORDER_DETAIL';
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
-
-
+export const FAVORITES = "FAVORITES";
+export const USER_TYPE = "USER_TYPE";
+export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
+export const USER_UPDATE= "USER_UPDATE"
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -261,7 +263,7 @@ export const getAllOrders = (email) => async (dispatch) => {
     `${REACT_APP_BACKEND_URL}/order?email=${email}`
   );
   return dispatch({
-    type: 66,
+    type: GET_ALL_ORDERS,
     payload: Orders.data,
   });
 };
@@ -270,8 +272,66 @@ export const getAdminOrderDetail = (email, id) => async (dispatch) => {
   const Order = await axios.get(
     `${REACT_APP_BACKEND_URL}/order/detail?email=${email}&id=${id}`
   );
+  console.log(Order.data,'este es el order')
   return dispatch({
     type: GET_ADMIN_ORDER_DETAIL,
     payload: Order.data,
   });
 };
+
+export const process_payment =
+  ({ data, body }) =>
+  async () => {
+    axios.post(`http://localhost:3001/mp/process_payment${data}`, body);
+  };
+
+
+export function getUserByEmail(payload) {
+  return async function (dispatch) {
+    var json = await axios.get(
+      `http://localhost:3001/profile?email=${payload}`
+      );
+      return dispatch({
+        type: GET_USER_BY_EMAIL,
+        payload: json.data,
+      });
+  };
+}
+
+export const getFavorites = (email) => async (dispatch) => {
+  const fav = await axios.get(`${REACT_APP_BACKEND_URL}/favorites/${email}`);
+  return dispatch({ type: FAVORITES, payload: fav.data });
+};
+
+export const addFavorites =
+  ({ email, id }) =>
+  async (dispatch) => {
+    axios.post(`${REACT_APP_BACKEND_URL}/favorites/${email}?id=${id}`);
+  };
+
+export const removeFavorites =
+  ({ email, id }) =>
+  async (dispatch) => {
+    axios.delete(`${REACT_APP_BACKEND_URL}/favorites/${email}?id=${id}`);
+    };
+  
+    export function userType(email) {
+      return async function (dispatch) {
+        var json = await axios.get(
+          `http://localhost:3001/verify?email=${email}`
+        );
+        return dispatch({
+          type: USER_TYPE,
+          payload: json.data,
+        });
+      };
+    }
+
+// export const userProfileUpdate = (id, data)=>{
+//   return async function(dispatch){
+//     return axios.put(`http://localhost:3001/profile/${id}`, data)
+//     .then(response =>{
+//       dispatch({type: USER_UPDATE, payload: response.data})
+//     }).catch(err => console.log(err))
+//   }
+// }

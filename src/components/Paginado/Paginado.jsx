@@ -16,7 +16,7 @@ export default function Paginado({ productPerPage, Products, paginado, currentPa
           {currentPage!==1? <button
           onClick={() => paginado(currentPage>1?currentPage-1:currentPage)}
           className="py-2 px-3 ml-0 leading-tight text-gray-500 bg-gray-800 rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >prev</button>:null}
+          >Ant.</button>:null}
         </li>
         {pageNumbers &&
           pageNumbers.map((number) => {
@@ -39,7 +39,7 @@ export default function Paginado({ productPerPage, Products, paginado, currentPa
              onClick={(e) => paginado(currentPage<last?currentPage+1:currentPage)}
             className="py-2 px-3 leading-tight text-gray-500 bg-gray-800 rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
-            next
+            Sig.
           </button>:null}
         </li>
       </ul>

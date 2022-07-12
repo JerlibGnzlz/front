@@ -97,10 +97,10 @@ export default function ProductDetail() {
               <div className=" mt-2 py-10 lg:pt-6 lg:pb-6 lg:col-start-1 lg:col-span-2">
                 <div>
                   <h3 className="text-xl font-bold text-gray-900">
-                    Description
+                    Descripción
                   </h3>
                   <div className="space-y-6">
-                    <p className="text-xl text-gray-900">
+                    <p className="text-lg text-gray-900">
                       {productDetail[0] &&
                         productDetail[0].description.charAt(0).toUpperCase() +
                           productDetail[0].description.slice(1)}
@@ -109,18 +109,33 @@ export default function ProductDetail() {
                 </div>
 
                 <div className="mt-2">
-                  <h2 className="text-xl font-bold text-gray-900">Category</h2>
-
-                  <div className="space-y-6">
-                    <p className="text-xl text-gray-600 capitalize">
+                  <h2 className="text-xl font-bold text-gray-900">Géneros</h2>
+                  <div className="space-y-1">
+                    <p className="text-lg text-gray-600 capitalize">
                       {productDetail[0] && productDetail[0].genre}
                     </p>
+
+                    <div className="capitalize">
+                      <h2 className="text-xl font-bold">Marcas</h2>
+                      <p className="text-xl">
+                        {productDetail[0] && productDetail[0].brand.name}
+                      </p>
+                    </div>
+
+                    <div className="capitalize">
+                      <h2 className="text-xl font-bold">Stock</h2>
+                      <p className="text-xl">
+                        {productDetail[0] && productDetail[0].stock}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
                 {/* Product Score */}
                 {/* Sustituir el 4 por productDetail[0].rating */}
-                <h3 className=" mt-2 text-xl font-bold text-gray-900">Score</h3>
+                <h3 className=" mt-2 text-xl font-bold text-gray-900">
+                  Puntuación
+                </h3>
                 <div className="flex ">
                   {Array(4)
                     .fill()
@@ -134,21 +149,19 @@ export default function ProductDetail() {
 
               {/* Product price */}
               <div className="mt-4 lg:mt-0 lg:row-span-3">
-                <h2 className="sr-only">Product information</h2>
-                <p className="text-3xl font-bold text-gray-900">
-                  ${productDetail[0] && productDetail[0].price}
+                <h2 className="sr-only">Información del Producto</h2>
+                <p className="text-2xl font-bold text-gray-900">
+                  Precio: ${productDetail[0] && productDetail[0].price}
                 </p>
-                <h2>Brand</h2>
-                <p>{productDetail[0]&& productDetail[0].brand.name}</p>
 
                 {/* Product bottom cart */}
                 <div className="">
                   <button
                     type="submit"
-                    className="mt-10 w-full bg-primary border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="mt-10 w-full bg-primary border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     onClick={(e) => handleAddToCart(e)}
                   >
-                    Add to cart
+                    Añadir al carro
                   </button>
                 </div>
               </div>
@@ -156,16 +169,14 @@ export default function ProductDetail() {
           </div>
 
           {/* Bottom Back */}
-          <div className="w-full h-16 fixed bottom-0 mt-28 bg-primary">
-            
-              <button
-                onClick={(e) => backOnClicke(e)}
-                className="text-center mt-5 text-white hover:text-tertiary"
-              >
-                Go Back
-              </button>
-           
-          </div>
+         
+            <button
+              className="bg-black w-32 h-12 rounded-lg shadow-lg border-2 border-gray-600 ml-5 mt-5 text-white hover:bg-gray-700 duration-500"
+              onClick={(e) => backOnClicke(e)}
+            >
+              Volver
+            </button>
+          
         </div>
       }
     </>

@@ -57,57 +57,57 @@ function LeftPanel() {
       <div className="flex-1 w-56 bg-gray-800 h-screen ">
         <ul className="flex flex-col space-y-8 my-auto ml-1">
           <div>
-            <h1 className="h1 text-gray-400 mt-2">main</h1>
+            <h1 className="h1 text-gray-400 mt-2">Principal</h1>
             <li className="ml-2 pt-2 font-semibold text-white">
               <DashboardIcon />
               <button name="dash" onClick={(e) => handleProducts(e)}>
-                DashBoard
+                Principal
               </button>
             </li>
           </div>
           <div>
-            <h1 className="h1 text-gray-400">Lists</h1>
+            <h1 className="h1 text-gray-400">Lista</h1>
             <li className="ml-2 pt-2 font-semibold text-white">
               <PeopleRoundedIcon />
               <button name="user" onClick={(e) => handleProducts(e)}>
-                Users
+                Usuarios
               </button>
             </li>
             <li className="ml-2 pt-2 font-semibold text-white">
               <StorefrontSharpIcon />
               <button name="prod" onClick={(e) => handleProducts(e)}>
-                Products
+                Productos
               </button>
             </li>
             <li className="ml-2 pt-2 font-semibold text-white">
               <CreditCardRoundedIcon />
               <button name="ord" onClick={(e) => handleProducts(e)}>
-                Orders
+                Ordenes
               </button>
             </li>
           </div>
           <div>
-            <h1 className="h1 text-gray-400">useful</h1>
+            <h1 className="h1 text-gray-400">Utilidades</h1>
             <li className="ml-2 pt-2 font-semibold text-white">
               <EqualizerSharpIcon />
               <button name="stats" onClick={(e) => handleProducts(e)}>
-                Stats
+                Estadísticas
               </button>
             </li>
           </div>
 
           <div className="">
-            <h1 className="h1 text-gray-400">user</h1>
+            <h1 className="h1 text-gray-400">Usuario</h1>
             <li className="ml-2 pt-2 font-semibold text-white">
               <PersonIcon />
               <button name="profile" onClick={(e) => handleProducts(e)}>
-                Profile
+                Perfiles
               </button>
             </li>
             <li className="ml-2 pt-2 font-semibold text-white">
               <ExitToAppRoundedIcon />
               <button name="log" onClick={(e) => handleProducts(e)}>
-                LogOut
+                Salir
               </button>
             </li>
           </div>

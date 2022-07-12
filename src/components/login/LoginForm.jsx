@@ -55,7 +55,7 @@ function LoginForm() {
   const googleLogin = async () => {
     await loginWithGoogle();
 
-    navigate("/");
+    //navigate("/");
   };
 
   useEffect(() => {
@@ -86,10 +86,10 @@ function LoginForm() {
         </Link>
         <form onSubmit={handleSubmit}>
           <div className="mb-6 text-4xl font-bold  ">
-            <label>Login</label>
+            <label>Iniciar Sesión</label>
           </div>
           <div className="mb-8 text-md">
-            <p>Welcome!</p>
+            <p>Bienvenido!</p>
           </div>
           <div className="mb-3 flex justify-center ">
             <div className="bg-tertiary w-6 rounded-l flex justify-center items-center  pl-3">
@@ -118,13 +118,13 @@ function LoginForm() {
           </div>
           <div className="mb-6">
             <Link to="/reset">
-              <p className="text-xs">Forgot your password?</p>
+              <p className="text-xs">Olvidaste tu contraseña?</p>
             </Link>
           </div>
 
           <div className="mb-6 mt-1">
             <Link to="/register">
-              <p className="text-xs">Forgot to register? do it here</p>
+              <p className="text-xs">Olvidaste de Registrarte? Hazlo aquí</p>
             </Link>
           </div>
 
@@ -136,7 +136,7 @@ function LoginForm() {
             />
           </div>
         </form>
-        <button onClick={googleLogin}>Login With Google</button>
+        <button onClick={googleLogin}>Iniciar sesión con Google</button>
       </div>
     </div>
   );

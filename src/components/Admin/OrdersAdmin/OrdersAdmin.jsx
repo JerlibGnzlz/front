@@ -13,7 +13,7 @@ export default function OrdersAdmin() {
   const orders = useSelector((state) => state.allOrders);
   const [data, setData] = useState(orders);
   const dispatch = useDispatch();
- 
+  console.log(orders,'estas son las ordenes')
   useEffect(() => {
     if(user){
       dispatch(getAllOrders(user.email))
@@ -99,9 +99,9 @@ export default function OrdersAdmin() {
       width: 120,
       renderCell: (params) => {
         return (
-              <Link to={"/admin/orders/" + params.row.id}>
+              <Link to={"/admin/order/" + params.row.id}>
                 <button className="productEdit bg-gray-600 px-4 py-2 rounded-lg text-white font-semibold m-5 tracking-wider hover:bg-gray-700 transition duration-500">
-                  Detail{" "}
+                  Detalle{" "}
                 </button>
               </Link>
         );

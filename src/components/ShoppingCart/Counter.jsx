@@ -29,9 +29,9 @@ function Counter({ product }) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "you must get logged to continue!",
-        html: `<a href="/login">You have to get logged to continue!Click here to Login</a>`,
-        footer: `<a href="/register">Not register yet!Please Click here </a>`,
+        text: "Debes estar Logeado!",
+        html: `<a href="/login">Tienes que estar logeado para continuar!Click aquí</a>`,
+        footer: `<a href="/register">Sin registrarse aun!Por favor click aquí </a>`,
       });
     }
   }
@@ -40,21 +40,21 @@ function Counter({ product }) {
   return (
     <div className="rounded-2xl bg-white box-border w-9/12 h-auto mx-auto pb-8 shadow-2xl ">
       <div className="bg-white border-2 border-gray-300/100 rounded-xl m-8 pb-4 ">
-        <h1 className="text-3xl m-2 ">Order Summary</h1>
+        <h1 className="text-3xl m-2 ">Total a Pagar</h1>
         <h2 className="my-10 ml-5 ">
           SubTotal{" "}
           <p className="text-xl mt-5 ml-5">
-            {accounting.formatMoney(subTotal, "U$S ", 2)}
+            {accounting.formatMoney(subTotal, "$ ", 3)}
           </p>
         </h2>
         <h2 className="my-10 ml-5 ">
-          Shipping:{" "}
-          <p className="text-green-600 mt-5 ml-5 font-bold">Free Shipping</p>
+          Envío:{" "}
+          <p className="text-green-600 mt-5 ml-5 font-bold">Envío Gratis</p>
         </h2>
         <h2 className="my-10 ml-5 mr-5 border-t-2 border-gray-500">
           Total
           <p className="text-xl mt-5 ml-5">
-            {accounting.formatMoney(subTotal, "U$S ", 2)}
+            {accounting.formatMoney(subTotal, "$ ", 3)}
           </p>
         </h2>
       </div>
@@ -62,9 +62,9 @@ function Counter({ product }) {
       <div className="flex justify-center">
         <button
           onClick={()=>handleCheckOut()}
-          className="button-primary mx-8  box-border w-96 py-3"
+          className="button-primary mx-8 text-lg  box-border w-96 py-3"
         >
-          CheckOut
+          Comprar Ahora
         </button>
       </div>
     </div>

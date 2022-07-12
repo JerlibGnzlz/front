@@ -17,6 +17,10 @@ import {
   GET_PRODUCT_ADMI,
   GET_ALL_ORDERS,
   GET_ADMIN_ORDER_DETAIL,
+  GET_USER_BY_EMAIL,
+  USER_UPDATE,
+  FAVORITES,
+  USER_TYPE,
 } from "./action";
 
 const initialState = {
@@ -34,6 +38,10 @@ const initialState = {
   user:{},
   allOrders: [],
   adminOrderDetail: [],
+  updateProduct: [],
+  updateDetail: [],
+  favorites: [],
+  verify:{},
 };
 
 function rootReducer(state = initialState, action) {
@@ -91,6 +99,12 @@ function rootReducer(state = initialState, action) {
       };
     }
 
+    case FAVORITES:
+      return {
+        ...state,
+        favorites: action.payload,
+      };
+
     case TOP_SELLERS:
       return {
         ...state,
@@ -145,6 +159,22 @@ function rootReducer(state = initialState, action) {
         productAdmi: action.payload,
       };
     }
+    case GET_USER_BY_EMAIL:
+      return {
+        ...state,
+        user: action.payload,
+      };
+
+    case USER_UPDATE:
+      return {
+        ...state,
+      };
+
+    case USER_TYPE:
+      return {
+        ...state,
+        verify: action.payload,
+      };
 
     default:
       return state;

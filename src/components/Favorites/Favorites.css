@@ -1,0 +1,10 @@
+.container-favorites{
+
+    /* display: flex ;
+    flex-wrap: wrap; */
+    display: grid;
+    padding-left: 50px;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 30px;
+    
+}

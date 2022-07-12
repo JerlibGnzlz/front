@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAdminOrderDetail } from "../../Redux/action";
 import { useEffect} from "react";
 import { useParams,useNavigate} from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 import "./OrdersAdminDetail.css";
 import {Grid} from "@mui/material"
 
@@ -24,31 +24,31 @@ export default function OrdersAdminDetail() {
   console.log(Order)
   return (
     <Grid container spacing={3}>
-    <Grid item xs> User Info
-        <div>User Id: {Order[0]?.userId}</div>
-        <div>User Email: {Order[0]?.user.email}</div>
-        <div>Name: {Order[0]?.user.names} Surname: {Order[0]?.user.lastNames}</div>
-        <div>Phone: {Order[0]?.user.phone} Birth date: {Order[0]?.user.birthDate}</div>
+    <Grid item xs> Información del Usuario
+        <div>Id Usuario: {Order[0]?.userId}</div>
+        <div>Email Usuario: {Order[0]?.user.email}</div>
+        <div>Nombre: {Order[0]?.user.names} Surname: {Order[0]?.user.lastNames}</div>
+        <div>Número de Teléfono: {Order[0]?.user.phone} Fecha de Nacimiento: {Order[0]?.user.birthDate}</div>
     </Grid>
-    <Grid item xs={6}> Product Info
+    <Grid item xs={6}> Información del Producto
         {
             Order[0]?.orderItems.map(o => {
                 return(
                     <ul key={o.id} className="product-detail">
-                        <li>Name: {o.product.name}</li>
-                        <li>Quantity: {o.quantity}</li>
-                        <li>Brand: {o.product.brand.name}</li>
-                        <li>Price: {o.product.price} USD</li>
+                        <li>Nombre: {o.product.name}</li>
+                        <li>Cantidad: {o.quantity}</li>
+                        <li>Marca: {o.product.brand.name}</li>
+                        <li>Precio: {o.product.price} AR$</li>
                     </ul>
                 )
             })
         }
-        <div>Total: {parseFloat(Order[0]?.total).toFixed(2)} USD</div>
+        <div>Total: {parseFloat(Order[0]?.total).toFixed(2)} AR$</div>
     </Grid>
-    <Grid item xs> Order Info
+    <Grid item xs> Información de la Orden
         <div>Id: {Order[0]?.id}</div>
-        <div>State: {Order[0]?.state}</div>
-        <div>Date: {Order[0]?.date}</div>
+        <div>Estado: {Order[0]?.state}</div>
+        <div>Fecha: {Order[0]?.date}</div>
     </Grid>
     </Grid>
   );

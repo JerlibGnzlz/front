@@ -30,7 +30,7 @@ useEffect(() => {
 
     // const pro = localStorage.getItem(cart);
   }
-
+  console.log(product.map(e=>e.stock),"estoo es el stock")
   
   let stock = 5;
 
@@ -82,6 +82,7 @@ useEffect(() => {
                 counter={counter}
                 product={product}
                 handleDelete={handleDelete}
+                stock={e.stock}
                 price={e.price}
                 id={e.id}
                 key={e.id}
@@ -90,7 +91,7 @@ useEffect(() => {
                 brandName={e.brand?.name}
               />
             ))
-          : "Your Cart is empty"}
+          : "Tu carrito está vacío"}
       </div>
       <Counter product={product} />
     </>

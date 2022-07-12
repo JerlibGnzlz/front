@@ -22,7 +22,7 @@ flex:4;
 .switchBtn {
         position: relative;
         display: inline-block;
-        width: 110px;
+        width: 240px;
         height: 34px;
         
     }
@@ -44,7 +44,7 @@ flex:4;
         position: absolute;
         content: "";
         height: 26px;
-        width: 26px;
+        width: 36px;
         left: 78px;
         bottom: 4px;
         background-color: white;
