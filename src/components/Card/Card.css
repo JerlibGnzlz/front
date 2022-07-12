@@ -3,11 +3,9 @@
 @tailwind utilities;
 
 @layer components {
-
-  .img{
+  .img {
     filter: brightness(1.1);
     mix-blend-mode: multiply;
-    
   }
   .card {
     transition: all 0.5s;
@@ -15,7 +13,7 @@
     justify-center;
   }
   .badge {
-    @apply px-1 py-1 rounded-full text-sm bg-gray-100 capitalize font-semibold ;
+    @apply px-1 py-1 rounded-full text-sm bg-gray-100 capitalize font-semibold;
   }
 
   .Product-title {
@@ -35,7 +33,7 @@
       text-xs
       tracking-wider transition;
   }
-  .fav-button{
+  .fav-button {
     @apply bg-black hover:bg-gray-700
     hover:text-gray-200
     px-1 rounded-md
@@ -44,8 +42,6 @@
     tracking-wider transition;
   }
 }
-
-
 
 .card:hover {
   box-shadow: 0px 12px 16px rgb(0, 0, 0.2);

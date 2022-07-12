@@ -20,16 +20,16 @@ export default function Filter({ paginado }) {
 
   function handleOrderPrice(e) {
     // if (genres === genre && genre) {
-      setGenres(genre);
-      setPrice(e.target.value);
-      dispatch(
-        getProduct({
-          genre: genre,
-          price: e.target.value,
-          categoryId: category,
-          brandId: brand,
-        })
-      );
+    setGenres(genre);
+    setPrice(e.target.value);
+    dispatch(
+      getProduct({
+        genre: genre,
+        price: e.target.value,
+        categoryId: category,
+        brandId: brand,
+      })
+    );
     // } else {
     //   setBrand(undefined);
     //   setCategory(undefined);
@@ -44,26 +44,26 @@ export default function Filter({ paginado }) {
   function handleCheck(e) {
     // console.log(e.target.value === category, "esto es loo que llega");
     // if (genres === genre && genre) {
-      setGenres(genre);
-      setCategory(e.target.value);
-      dispatch(
-        getProduct({
-          genre: genre,
-          categoryId: e.target.value,
-          brandId: brand,
-          price: price,
-        })
-      );
-      dispatch(getBrand({ genre: genre, category: e.target.value }));
-    //} 
-  //else {
-  //     setBrand(undefined);
-  //     setCategory(e.target.value);
-  //     setPrice(undefined);
-  //     setGenres(genre);
-  //     dispatch(getProduct({ genre: genre, categoryId: e.target.value }));
-  //     dispatch(getBrand({ genre: genre, category: e.target.value }));
-  //   }
+    setGenres(genre);
+    setCategory(e.target.value);
+    dispatch(
+      getProduct({
+        genre: genre,
+        categoryId: e.target.value,
+        brandId: brand,
+        price: price,
+      })
+    );
+    dispatch(getBrand({ genre: genre, category: e.target.value }));
+    //}
+    //else {
+    //     setBrand(undefined);
+    //     setCategory(e.target.value);
+    //     setPrice(undefined);
+    //     setGenres(genre);
+    //     dispatch(getProduct({ genre: genre, categoryId: e.target.value }));
+    //     dispatch(getBrand({ genre: genre, category: e.target.value }));
+    //   }
 
     paginado(1);
   }
@@ -78,8 +78,8 @@ export default function Filter({ paginado }) {
         navigate("/products/women");
         paginado(1);
         dispatch(getProduct({ search: "", genre: genre }));
-        dispatch(getBrand({genre:genre}))
-        dispatch(getCategories({genre:genre}))
+        dispatch(getBrand({ genre: genre }));
+        dispatch(getCategories({ genre: genre }));
         setBrand(undefined);
         setCategory(undefined);
         setPrice(undefined);
@@ -91,7 +91,7 @@ export default function Filter({ paginado }) {
         dispatch(getProduct({ search: "", genre: genre }));
         dispatch(getBrand({ genre: genre }));
         dispatch(getCategories({ genre: genre }));
-        dispatch()
+        dispatch();
         setBrand(undefined);
         setCategory(undefined);
         setPrice(undefined);
@@ -146,7 +146,7 @@ export default function Filter({ paginado }) {
     );
 
     dispatch(getCategories({ genre: genre, brand: e.target.value }));
-    paginado(1)
+    paginado(1);
     // } else {
     //   setBrand(e.target.value);
     //   setCategory(undefined);
@@ -164,8 +164,8 @@ export default function Filter({ paginado }) {
         <div className="ml-2 ">
           <div className="item-left  ">
             <button
-              className="text-lg"
               name="all"
+              className="hover:bg-blue-200 active:bg-violet-200 focus:bg-red-500 rounded-sm flex inline capitalize ml-2 text-lg"
               onClick={(e) => handleReset(e)}
             >
               Todos los Productos
@@ -174,7 +174,7 @@ export default function Filter({ paginado }) {
 
           <div className="">
             <button
-              className="text-lg"
+              className="hover:bg-blue-200 active:bg-violet-200 focus:bg-red-500 rounded-sm flex inline capitalize ml-2 text-lg"
               name="women"
               onClick={(e) => handleReset(e)}
             >
@@ -182,10 +182,9 @@ export default function Filter({ paginado }) {
             </button>
           </div>
 
-
           <div className="">
             <button
-              className="text-lg"
+              className="hover:bg-blue-200 active:bg-violet-200 focus:bg-red-500 rounded-sm flex inline capitalize ml-2 text-lg"
               name="men"
               onClick={(e) => handleReset(e)}
             >
@@ -194,7 +193,7 @@ export default function Filter({ paginado }) {
           </div>
           <div className="">
             <button
-              className="text-lg"
+              className="hover:bg-blue-200 active:bg-violet-200 focus:bg-red-500 rounded-sm flex inline capitalize ml-2 text-lg"
               name="no gender"
               onClick={(e) => handleReset(e)}
             >
@@ -204,7 +203,7 @@ export default function Filter({ paginado }) {
 
           <div className="">
             <button
-              className="text-lg"
+              className="hover:bg-blue-200 active:bg-violet-200 focus:bg-red-500 rounded-sm flex inline capitalize ml-2 text-lg"
               name="kids"
               onClick={(e) => handleReset(e)}
             >
@@ -214,7 +213,7 @@ export default function Filter({ paginado }) {
 
           <div className="">
             <button
-              className="text-lg"
+              className="hover:bg-blue-200 active:bg-violet-200 focus:bg-red-500 rounded-sm flex inline capitalize ml-2 text-lg"
               name="accesories"
               onClick={(e) => handleReset(e)}
             >
