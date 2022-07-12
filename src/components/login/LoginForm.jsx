@@ -55,7 +55,7 @@ function LoginForm() {
   const googleLogin = async () => {
     await loginWithGoogle();
 
-    navigate("/");
+    // navigate("/");
   };
 
   useEffect(() => {

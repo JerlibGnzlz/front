@@ -3,6 +3,7 @@ import Cart from "./Cart";
 import { useEffect,useState} from "react";
 import "./Carts.css"
 import Counter from "./Counter";
+import {toast} from 'react-toastify'
 
 
 function Carts() {
@@ -52,7 +53,12 @@ useEffect(() => {
 
         localStorage.setItem("cart", JSON.stringify(product));
       } else {
-        alert("No hay mas stock");
+        toast.error('¡Sin stock!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          draggable: true,
+        });
       }
     } else if (name === "menos") {
       if (

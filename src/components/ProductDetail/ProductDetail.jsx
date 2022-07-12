@@ -4,6 +4,8 @@ import { getProductDetail, reset, addToCartDetail,resetCart } from "../Redux/act
 import { useEffect} from "react";
 import { useParams,useNavigate} from "react-router-dom";
 import "./Detail.css";
+import {toast} from 'react-toastify'
+
 
 export default function ProductDetail() {
   const navigate = useNavigate();
@@ -57,6 +59,12 @@ export default function ProductDetail() {
   function handleAddToCart() {
     productDetail[0].quantity = 1;
     dispatch(addToCartDetail(productDetail[0]));
+    toast.success('¡Producto agregado al carrito!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      draggable: true,
+    })
     // console.log('me ejecute addToCart')
     // if (!objCart2.some((p) => p.name.includes(productDetail[0].name))) {
     //   setCart([...objCart2,productDetail[0]]);
