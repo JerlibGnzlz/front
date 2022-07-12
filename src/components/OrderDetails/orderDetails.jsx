@@ -7,13 +7,13 @@ import { Link } from "react-router-dom";
 
 export default function OrderDetails() {
   const dispatch = useDispatch();
-  const { email } = useParams();
+  
   const orderDetail = useSelector((state) => state.orderDetail);
   
 
   useEffect(() => {
-    dispatch(getOrderDetail(email));
-  }, [dispatch, email]);
+    dispatch(getOrderDetail());
+  }, [dispatch]);
 
 
   const ordersID = orderDetail.orders;

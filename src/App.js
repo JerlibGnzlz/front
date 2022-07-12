@@ -17,6 +17,7 @@ import OrderDetails from "./components/OrderDetails/OrderDetails";
 import CheckoutAddress from "./components/Checkout/CheckoutAddress";
 import EditProfile from "./components/UserDashboard/EditProfile";
 import UserProfile from "./components/UserDashboard/UserProfile";
+import Historial from "./components/historial/Historial";
 
 function App() {
   return (
@@ -34,7 +35,9 @@ function App() {
           <Route path="/reset" component={<Reset />} />
           <Route path="/profile/:id" element={<EditProfile/>} />
           <Route path="/profile" element={<UserProfile/>} />
-          <Route path="/order/:email" element={<OrderDetails/>} />
+          <Route path="/order/detail/:id" element={<OrderDetails/>} />
+          <Route path="/order/:email" element={<Historial/>} />
+
 
         </Routes>
       </AuthProvider>

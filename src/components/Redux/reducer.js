@@ -11,12 +11,14 @@ import {
   ADD_TO_CART_DETAIL,
   GET_USER_BY_EMAIL,
   USER_UPDATE,
-  GET_ORDER_DETAIL
+  GET_ORDER_DETAIL,
+  USER_HISTORY
   
 
 } from "./action";
 
 const initialState = {
+  historyPay: [],
   products: [],
   detail: [],
   categories:[],
@@ -112,6 +114,13 @@ function rootReducer(state = initialState, action) {
               orderDetail: action.payload,
             };
           }
+
+          case USER_HISTORY:
+            /* console.log(action.payload); */
+            return {
+              ...state,
+              historyPay: action.payload,
+            };
 
     default:
       return state;

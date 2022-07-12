@@ -13,6 +13,7 @@ export const ADD_TO_CART_DETAIL = "ADD_TO_CART_DETAIL";
 export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
 export const USER_UPDATE= "USER_UPDATE"
 export const GET_ORDER_DETAIL = "GET_ORDER_DETAIL"
+export const USER_HISTORY = "USER_HISTORY";
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -190,8 +191,18 @@ export function getUserByEmail(payload) {
 //   }
 // }
 
-export const getOrderDetail = (email) => async (dispatch) => {
-  console.log(email, 'email')
-  const response = await axios.get(`http://localhost:3001/order/${email}`,);
+export const getOrderDetail = (id) => async (dispatch) => {
+  //console.log(email, 'email')
+  const response = await axios.get(`http://localhost:3001/order/detail/${id}`,);
   return dispatch({ type: GET_ORDER_DETAIL, payload: response.data });
 };
+
+export function userHistoryPay(email) {
+  return async function (dispatch) {
+    var json = await axios.get(`http://localhost:3001/order/${email}`);
+    return dispatch({
+      type: USER_HISTORY,
+      payload: json.data,
+    });
+  };
+}
