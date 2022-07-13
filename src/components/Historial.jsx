@@ -31,7 +31,7 @@ function Historial() {
       <div className="flex flex-col w-9/12 h-auto p-4  bg-gradient-to-r from-black via-gray-700 to-black w-1/2 mx-auto my-5 rounded-lg shadow-lg">
         <h1 className="text-xl font-bold mx-auto text-gray-300">Historial de Compra </h1>
         <div className="bg-gray-300 w-4/5 my-5 mx-auto text-center rounded-lg shadow-lg capitalize font-semibold">
-          {order?.map((e) => {
+          {order?.length ?order?.map((e) => {
             return (
               <div
                 key={e.id}
@@ -47,7 +47,7 @@ function Historial() {
                 <span>Cantidad: {e.quantity}</span>
               </div>
             );
-          })}
+          }):'No haz comprado aún'}
         </div>
       </div>
     </div>

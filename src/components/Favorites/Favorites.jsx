@@ -101,34 +101,35 @@ export default function Favorites() {
   // const objCart2=JSON.parse(cart2)
   // console.log(objCart2, "obj")
   return (
-    <div className="flex relative bg-gray-200">
-      <SideBar />
-      <div className="flex-col">
+    <div className="radial h-full flex relative shadow-xl ">
+      <div className="h-screen mb-0">
 
-      <div className="products mx-auto">
-        <h1 className="font-semibold text-3xl mx-auto">
-          Favoritos
-        </h1>
+      <SideBar />
       </div>
-      <div className="">
-        <div className="container-favorites ">
-          {currentProduct &&
-            currentProduct?.map((p) => {
-              return (
-                <Card
-                  className="shadow-2xl"
-                  key={p.id}
-                  id={p.id}
-                  name={p.name}
-                  price={p.price}
-                  image={p.image}
-                  category={p.category.name}
-                  brand={p.brand.name}
-                />
-              );
-            })}
+      <div className="flex-col">
+        <div className="products mx-auto">
+          <h1 className="font-semibold text-3xl text-center text-gray-300 mt-8">
+            Favoritos
+          </h1>
         </div>
-      </div>
+        <div className="">
+          <div className="containerCard flex container-favorites mr-auto ml-auto my-10 ">
+            {currentProduct &&
+              currentProduct?.map((p) => {
+                return (
+                  <Card
+                    key={p.id}
+                    id={p.id}
+                    name={p.name}
+                    price={p.price}
+                    image={p.image}
+                    category={p.category.name}
+                    brand={p.brand.name}
+                  />
+                );
+              })}
+          </div>
+        </div>
       </div>
     </div>
   );
