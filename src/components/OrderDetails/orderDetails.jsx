@@ -83,7 +83,7 @@ export default function OrderDetails() {
                   <img
                     src={t}
                     alt=""
-                    className="img flex w-20 h-20 object-center mt-6 rounded-lg sm:w-40 sm:h-40 "
+                    className="img  object-center mt-6 rounded-lg sm:w-40 sm:h-40 "
                   />
                 </div>
               );

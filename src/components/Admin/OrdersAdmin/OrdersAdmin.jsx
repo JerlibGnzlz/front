@@ -78,7 +78,7 @@ export default function OrdersAdmin() {
       renderCell: (params) => {
         return (
           <div className="Products MuiDataGrid-row">
-            {parseFloat(params.row.total).toFixed(3)}
+            {parseFloat(params.row.total).toFixed(2)}
           </div>
         );
       },

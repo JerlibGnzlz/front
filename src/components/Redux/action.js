@@ -260,7 +260,9 @@ export function updateDetail(id, data) {
 
 export function createProduct(payload) {
   return async function (dispatch) {
-    var json = await axios.post("http://localhost:3001/product", payload);
+    var json = await axios.post("http://localhost:3001/product", payload, {headers: { "Content-Type": "multipart/form-data" }}
+    );
+    
 
     return json;
   };
@@ -403,6 +405,8 @@ export const editComment = (data, email, id) => async (dispatch) => {
 export const resetAllComments = () => (dispatch) => {
   return dispatch({ type: RESET_ALL_COMMENTS });
 };
+
+
 
 // export const userProfileUpdate = (id, data)=>{
 //   return async function(dispatch){

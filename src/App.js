@@ -53,7 +53,7 @@ function App() {
           <Route path="/reset" element={<Reset />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/profile" element={<AdminProfile />} />
-          <Route path="/admin/profile/edit" element={<AdminEdit />} />
+          <Route path="/admin/profile/edit/:id" element={<AdminEdit />} />
           <Route path="/admin/products" element={<ProductsAdmi />} />
           <Route path="/admin/create" element={<FormProduct />} />
           <Route path="/admin/products/:id" element={<EditProduct />} />

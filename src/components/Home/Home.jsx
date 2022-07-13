@@ -52,10 +52,10 @@ export default function Home() {
         />
 
         <button className="boton">
-          <Link to="/products/women">Ver más</Link>
+          <Link to="/products/men">Ver más</Link>
         </button>
         <button className="boton">
-          <Link to="/products/men">Ver más</Link>
+          <Link to="/products/women">Ver más</Link>
         </button>
         <button className="boton">
           <Link to="/products/kids">Ver más</Link>

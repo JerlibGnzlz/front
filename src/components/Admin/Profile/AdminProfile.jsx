@@ -4,15 +4,15 @@ import { useAuth } from "../../../context/AuthContext";
 import { getUserByEmail } from "../../Redux/action";
 import { useEffect } from "react";
 import defaultImg from "../../../img/descarga (1).jpg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LeftPanel from "../LeftPanel";
 
 export default function UserProfile() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
   const { user } = useAuth();
-
-  console.log(user, "todo esto es el usuario");
+  
+  console.log(userInfo.id, "todo esto es el usuario");
 
   useEffect(() => {
     if (user) {
@@ -195,7 +195,7 @@ export default function UserProfile() {
                           Go back
                         </button> */}
 
-                        <Link to={`/admin/profile/edit`}>
+                        <Link to={`/admin/profile/edit/${userInfo.id}`}>
                           <button
                             type="submit"
                             className="ml-3 inline-flex justify-start py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-secondary focus:outline-none "

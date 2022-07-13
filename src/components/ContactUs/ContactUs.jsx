@@ -3,11 +3,12 @@ import { MailIcon, PhoneIcon } from "@heroicons/react/outline";
 import brand from '../../img/logo.png'
 // import BotSteps from '../ContactUs/BotSteps'
 import FAQ from "./FAQ";
-
+import SideBar from '../SideBarUser.jsx/SideBar'
+import './ContactUs.css'
 export default function ContactUs() {
   return (
-    <div className="min-h-screen mb-20">
-    
+    <div className="radial flex relative">
+        <SideBar/>
       <main className="overflow-hidden">
         {/* Header */}
         <div className="bg-warm-gray-50">
@@ -17,7 +18,7 @@ export default function ContactUs() {
         {/* Contact section */}
         <section className="relative" aria-labelledby="contact-heading">
           <div
-            className="absolute w-full h-1/2 bg-warm-gray-50"
+            className="absolute w-full bg-warm-gray-50"
             aria-hidden="true"
           />
           {/* Decorative dot pattern */}
@@ -46,7 +47,7 @@ export default function ContactUs() {
                     aria-hidden="true"
                   >
                     <svg
-                      className="absolute inset-0 w-full h-full"
+                      className="absolute inset-0 w-full "
                       width={343}
                       height={388}
                       viewBox="0 0 343 388"
@@ -79,7 +80,7 @@ export default function ContactUs() {
                     aria-hidden="true"
                   >
                     <svg
-                      className="absolute inset-0 w-full h-full"
+                      className="absolute inset-0 w-full "
                       width={359}
                       height={339}
                       viewBox="0 0 359 339"
@@ -112,7 +113,7 @@ export default function ContactUs() {
                     aria-hidden="true"
                   >
                     <svg
-                      className="absolute inset-0 w-full h-full"
+                      className="absolute inset-0 w-full "
                       width={160}
                       height={678}
                       viewBox="0 0 160 678"
@@ -179,20 +180,23 @@ export default function ContactUs() {
                     <h1 className="text-4xl font-extrabold tracking-tight text-warm-gray-900 sm:text-5xl lg:text-6xl">
                       Mantente en contacto
                     </h1>
-                   <div className="mt-20">
-                   <p className="mt-6 text-xl text-warm-gray-500 max-w-3xl text-justify">
-                      Por favor, póngase en contacto con nosotros si tiene
-                      alguna pregunta o solicitud en relación con nuestros
-                      servicios. 
-                    </p>
-                      
-                      <p className="mt-6 text-xl text-warm-gray-500 max-w-3xl">Responderemos su mensaje en un plazo de 24
-                      horas. </p>
-                      
-                      
-                     <p className="mt-6 text-xl text-warm-gray-500 max-w-3xl text-justify">A continuación puedes encontrar una seccion de preguntas más frecuentes, la cual
-                      te ayudará a resolver muchas dudas.</p> 
-                   </div>
+                    <div className="mt-20">
+                      <p className="mt-6 text-xl text-warm-gray-500 max-w-3xl text-justify">
+                        Por favor, póngase en contacto con nosotros si tiene
+                        alguna pregunta o solicitud en relación con nuestros
+                        servicios.
+                      </p>
+
+                      <p className="mt-6 text-xl text-warm-gray-500 max-w-3xl">
+                        Responderemos su mensaje en un plazo de 24 horas.{" "}
+                      </p>
+
+                      <p className="mt-6 text-xl text-warm-gray-500 max-w-3xl text-justify">
+                        A continuación puedes encontrar una seccion de preguntas
+                        más frecuentes, la cual te ayudará a resolver muchas
+                        dudas.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -201,7 +205,10 @@ export default function ContactUs() {
         </section>
       </main>
       {/* <BotSteps/> */}
-      <FAQ/>
+      <div className="mr-2">
+      <FAQ />
+
+      </div>
     </div>
   );
 }

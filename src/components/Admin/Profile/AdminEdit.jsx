@@ -67,9 +67,9 @@ export default function EditProfile() {
       }}
       enableReinitialize={true}
       validationSchema={validate}
-      onSubmit={(values) => {
+      onSubmit={async (values) => {
         console.log(values, "valores");
-        axios
+        await axios
           .put(`http://localhost:3001/profile/${id}`, values)
           .then((response) => {
             Swal.fire({

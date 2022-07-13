@@ -26,7 +26,7 @@ function SideBar() {
         break;
       case 'contact':
         navigate('/profile/contact')
-      
+        break
       default:
         navigate("/products");
         break;

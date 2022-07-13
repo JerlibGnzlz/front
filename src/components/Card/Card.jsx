@@ -96,7 +96,7 @@ export default function Card({ id, name, price, category, image, brand}) {
             {name}
           </h3>
 
-          <p className="text-xl font-bold">Precio: $ {parseFloat(price).toFixed(3)}</p>
+          <p className="text-xl font-bold">Precio: $ {parseFloat(price).toFixed(2)}</p>
 
           {/* <div className="flex items-center gap-2 mt-1">
           <span className="text-sm line-through opacity-50">U$S 59.99</span>

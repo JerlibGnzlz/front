@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import defaultImg from "../../img/descarga (1).jpg";
 import { Link } from "react-router-dom";
 import SideBar from "../SideBarUser.jsx/SideBar";
+import './UserProfile.css'
 
 export default function UserProfile() {
   const dispatch = useDispatch();
@@ -27,10 +28,10 @@ export default function UserProfile() {
   };
 
   return (
-    <div className="flex relative bg-gray-300">
+    <div className=" radial flex relative ">
       <SideBar />
 
-      <div className="relative h-screen flex overflow-hidden mx-auto">
+      <div className="relative  flex overflow-hidden mx-auto">
         <div className="flex-1 min-w-0 flex flex-col overflow-y-hidden">
           <main className="flex-1 flex overflow-hidden">
             <div className="flex-1 flex flex-col overflow-y-hidden xl:overflow-hidden">

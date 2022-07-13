@@ -91,7 +91,7 @@ function Cart({ name, brandName, id, image, price,handleDelete,product,counter }
           </div>
           <div className="my-auto font-semibold text-lg">
             <p>Precio: $ {parseFloat(price).toFixed(3)}</p>
-            <p>Precio Total: $ {(price*contador2[0].quantity).toFixed(3)}</p>
+            <p>Precio Total: $ {(price*contador2[0].quantity).toFixed(2)}</p>
           </div>
 
           <div className="inline-flex justify-end">

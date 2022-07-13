@@ -59,7 +59,7 @@ export default function OrdersAdminDetail() {
                 );
               })}
               <div className="flex mt-1 font-semibold">
-                Total: {parseFloat(Order[0]?.total).toFixed(3)} AR$
+                Total: {parseFloat(Order[0]?.total).toFixed(2)} AR$
               </div>
             </div>
           </Grid>

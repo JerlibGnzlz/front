@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import LeftPanel from "../LeftPanel";
+
 export default function FormProduct() {
   const allBrand = useSelector((state) => state.brand);
   const allCategories = useSelector((state) => state.categories);
@@ -19,12 +20,27 @@ export default function FormProduct() {
     price: 0,
   });
 
-  const genre = ["Hombre", "Mujer", "Accesorios", "Niños","Sin Género"];
+  const genre = [
+    { value: "men", name: "Hombre" },
+    { value: "women", name: "Mujer" },
+    { value: "kids", name: "Niño" },
+    { value: "no-gender", name: "Sin género" },
+  ];
 
   //VALIDACIONES
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createProduct(input));
+    const formData = new FormData();
+    formData.append("name", input.name);
+    formData.append("description", input.description);
+    formData.append("genre", input.genre);
+    formData.append("brandId", input.brandId);
+    formData.append("categoryId", input.categoryId);
+    formData.append("price", input.price);
+    for (let i = 0; i < input.image.length; i++) {
+      formData.append("image", input.image[i]);
+    }
+    dispatch(createProduct(formData));
     alert("¡Product created!");
     setInput({
       name: "",
@@ -34,22 +50,32 @@ export default function FormProduct() {
       brandId: [],
       categoryId: "",
       price: 0,
-      stock:0,
+      stock: 0,
     });
   }
 
   function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === "image") {
+      setInput({
+        ...input,
+
+        [e.target.name]: e.target.files,
+      });
+    } else {
+      setInput({
+        ...input,
+        [e.target.name]: e.target.value,
+      });
+    }
   }
   console.log(input, "input");
 
   function handleCheck(e) {
+    e.preventDefault();
+    // console.log(e, "eeeee")
     setInput({
       ...input,
-      genre: e,
+      genre: e.target.name,
     });
   }
 
@@ -63,13 +89,6 @@ export default function FormProduct() {
     setInput({
       ...input,
       brandId: e.target.value,
-    });
-  }
-
-  function handleDelete(e) {
-    setInput({
-      ...input,
-      brand: input.brand.filter((b) => b !== e),
     });
   }
 
@@ -97,6 +116,7 @@ export default function FormProduct() {
           </NavLink>
           <div className="mt-5 md:mt-0 md:col-span-2">
             <form
+              encType="multipart/form-data"
               className="space-y-3"
               action="#"
               method="POST"
@@ -118,10 +138,7 @@ export default function FormProduct() {
               </div>
 
               <div>
-                <label
-                  for="about"
-                  className="block font-bold text-lg"
-                >
+                <label for="about" className="block font-bold text-lg">
                   Descripción:
                 </label>
                 <div className="mt-1">
@@ -141,22 +158,23 @@ export default function FormProduct() {
               </div>
 
               <div className="col-span-3 sm:col-span-2">
-                <label className="block font-bold text-lg">
-                  Género:
-                </label>
+                <label className="block font-bold text-lg">Género:</label>
 
                 {genre.map((g) => (
                   <div className="mt-1 ml-2 w-48 border border-gray-400  flex rounded-md shadow-sm hover:bg-gray-800 duration-500 hover:text-white hover:border-black focus:bg-gray-700">
-                    <button className="capitalize" type="button" onClick={(e) => handleCheck(g)}>
-                      {g}
+                    <button
+                      name={g.value}
+                      className="capitalize"
+                      type="button"
+                      onClick={(e) => handleCheck(e)}
+                    >
+                      {g.name}
                     </button>
                   </div>
                 ))}
 
                 <div className="my-3">
-                  <label className="block font-bold text-lg">
-                    Categorías:
-                  </label>
+                  <label className="block font-bold text-lg">Categorías:</label>
                   <select
                     className="capitalize"
                     name="categoryId"
@@ -170,22 +188,18 @@ export default function FormProduct() {
                 </div>
 
                 <div className="my-3">
-                  <label className="block font-bold text-lg">
-                    Marca:
-                  </label>
-                  <select className="capitalize" name="brandId" onChange={(e) => handleSelectBrand(e)}>
+                  <label className="block font-bold text-lg">Marca:</label>
+                  <select
+                    className="capitalize"
+                    name="brandId"
+                    onChange={(e) => handleSelectBrand(e)}
+                  >
                     {allBrand?.length &&
                       allBrand.map((e) => (
                         <option value={e.id}>{e.name}</option>
                       ))}
                   </select>
                 </div>
-                {input.brand?.map((e) => (
-                  <div>
-                    <p>{e.namw}</p>
-                    <button onClick={() => handleDelete(e)}>x</button>
-                  </div>
-                ))}
 
                 <div className="flex flex-col">
                   <label className="font-bold text-lg">Stock:</label>
@@ -199,9 +213,7 @@ export default function FormProduct() {
                   />
                 </div>
                 <div className="my-3">
-                  <label className="block font-bold text-lg">
-                    Precio:
-                  </label>
+                  <label className="block font-bold text-lg">Precio:</label>
                   <input
                     className="nombre"
                     type="number"
@@ -213,48 +225,15 @@ export default function FormProduct() {
                 </div>
 
                 <div>
-                  <label className="block font-bold text-lg">
-                    Imagen:
-                  </label>
+                  <label className="block font-bold text-lg">Imagen:</label>
 
-                  <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                    <div class="space-y-1 text-center">
-                      <svg
-                        className="mx-auto h-12 w-12 text-gray-400"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 48 48"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                      <div className="flex text-m text-gray-600">
-                        <label
-                          for="file-upload"
-                          className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                        >
-                          <span>Agregar una Imagen</span>
-                          <input
-                            // type="file"
-                            className="sr-only"
-                            type="text"
-                            value={input.image}
-                            name="image"
-                            onChange={(e) => handleChange(e)}
-                          />
-                        </label>
-                        <p className="pl-1">Arrastra y Tira</p>
-                      </div>
-                      <p className="text-xs text-gray-500">
-                        PNG, JPG, GIF up to 10MB
-                      </p>
-                    </div>
-                  </div>
+                  <input
+                    type="file"
+                    //  value={input.image}
+                    name="image"
+                    multiple
+                    onChange={(e) => handleChange(e)}
+                  />
                 </div>
                 <div className="volver">
                   <button
