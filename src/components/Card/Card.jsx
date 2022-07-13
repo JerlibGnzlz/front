@@ -7,7 +7,7 @@ import './Card.css'
 import { useAuth } from "../../context/AuthContext";
 import { getProductDetail,addToCart, addFavorites, removeFavorites, getFavorites} from "../Redux/action";
 import { useRadioGroup } from "@mui/material";
-
+import {toast} from 'react-toastify'
 
 export default function Card({ id, name, price, category, image, brand}) {
   const { user} = useAuth()
@@ -38,6 +38,12 @@ export default function Card({ id, name, price, category, image, brand}) {
     setTimeout(function(){
       dispatch(getFavorites(user.email))
     }, 70)
+    toast.success('¡Producto añadido a favoritos!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      draggable: true,
+    })
   }
 
   function removeFavorite(e, email, id){
@@ -46,6 +52,12 @@ export default function Card({ id, name, price, category, image, brand}) {
     setTimeout(function(){
       dispatch(getFavorites(user.email))
     }, 70)
+    toast.error('¡Producto retirado de favoritos!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      draggable: true,
+    })
   }
   // useEffect(() => {
 
@@ -58,6 +70,12 @@ export default function Card({ id, name, price, category, image, brand}) {
 
   function handleClick(e) {
     contador += 1;
+    toast.success('¡Producto añadido al carrito!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      draggable: true,
+    })
     e.preventDefault();
     contador < 2 && dispatch(getProductDetail(id));
   }

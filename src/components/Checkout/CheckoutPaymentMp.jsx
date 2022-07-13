@@ -36,7 +36,7 @@ function CheckoutPaymentMp({formData}) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Please complete the form below',
+        text: 'Por favor complete el formulario antes',
       })
     }else{
 

@@ -1,5 +1,7 @@
 import React from "react";
 import "./App.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes } from "react-router-dom";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Home from "./components/Home/Home.jsx";
@@ -30,10 +32,12 @@ import OrderAdminDetail from "./components/Admin/OrdersAdmin/OrdersAdminDetail";
 import Historial from "./components/Historial";
 import AdminProfile from "./components/Admin/Profile/AdminProfile";
 import AdminEdit from "./components/Admin/Profile/AdminEdit";
+import ContactUs from "./components/ContactUs/ContactUs";
 
 function App() {
   return (
     <div className="App">
+      <ToastContainer />
       <AuthProvider>
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -59,6 +63,7 @@ function App() {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/profile/favorites" element={<Favorites />} />
           <Route path="/profile/history" element={<Historial />} />
+          <Route path="/profile/contact" element={<ContactUs/>} />
         </Routes>
       </AuthProvider>
     </div>

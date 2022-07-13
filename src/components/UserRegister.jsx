@@ -17,7 +17,7 @@ const { REACT_APP_BACKEND_URL } = process.env;
 const options = [
   { value: "male", label: "Masculino" },
   { value: "female", label: "Femenino" },
-  { value: "other", label: "Prefiero no decirlo" },
+  { value: "i prefer not to say", label: "Prefiero no decirlo" },
 ];
 
 export const UserRegister = () => {
