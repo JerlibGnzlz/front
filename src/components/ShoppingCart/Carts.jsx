@@ -3,6 +3,8 @@ import Cart from "./Cart";
 import { useEffect,useState} from "react";
 import "./Carts.css"
 import Counter from "./Counter";
+import Swal from "sweetalert2";
+
 
 
 function Carts() {
@@ -52,7 +54,12 @@ useEffect(() => {
 
         localStorage.setItem("cart", JSON.stringify(product));
       } else {
-        alert("No hay mas stock");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No hay más stock!",
+          
+        });
       }
     } else if (name === "menos") {
       if (
