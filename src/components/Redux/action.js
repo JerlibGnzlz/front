@@ -25,6 +25,7 @@ export const USER_HISTORY = "USER_HISTORY";
 export const GET_COMMENTS = "GET_COMMENTS";
 export const PERMISON = "PERMISON";
 export const RESET_ALL_COMMENTS = "RESET_ALL_COMMENTS";
+export const GET_ORDER_DETAIL = "GET_ORDER_DETAIL"
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -339,6 +340,15 @@ export function userHistoryPay(email) {
     });
   };
 }
+
+export const getOrderDetail = (id) => async (dispatch) => {
+  //console.log(id, 'para el detalle')
+  const response = await axios.get(`http://localhost:3001/order/detail?id=${id}`);
+  return dispatch({ type: GET_ORDER_DETAIL, payload: response.data });
+};
+
+
+
 export const deleteComment = (id, productId) => async (dispatch) => {
   await axios.delete(
     `${REACT_APP_BACKEND_URL}/comments/delete/${id}/${productId}`

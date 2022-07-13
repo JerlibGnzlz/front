@@ -36,6 +36,10 @@ function Historial() {
             key={e.id}
             className="flex flex-col w-9/12 h-auto p-4 mx-auto "
           >
+            <a href={"detail/" + `${e.orderId}`}>
+              <button className="bg-secondary rounded-md p-2"> Detalle de la compra </button>
+            </a>
+            
             <span>{e.product.brand.name}</span>
             <span>{e.product.description}</span>
             <span>{e.product.genre}</span>

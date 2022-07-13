@@ -25,6 +25,7 @@ import {
   GET_COMMENTS,
   PERMISON,
   RESET_ALL_COMMENTS,
+  GET_ORDER_DETAIL,
 } from "./action";
 
 const initialState = {
@@ -47,6 +48,7 @@ const initialState = {
   favorites: [],
   verify: {},
   historyPay: [],
+  orderDetail:[],
   permison: false,
   comments: false,
 };
@@ -210,6 +212,13 @@ function rootReducer(state = initialState, action) {
         ...state,
         historyPay: action.payload,
       };
+
+      case GET_ORDER_DETAIL: {
+        return {
+          ...state,
+          orderDetail: action.payload,
+        };
+}
 
     default:
       return state;

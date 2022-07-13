@@ -11,9 +11,10 @@ import ShoppingCart from "./components/ShoppingCart/ShopppingCart";
 import { AuthProvider } from "./context/AuthContext";
 import Reset from "./components/reset/Reset";
 
+
 import Products from "./components/Products/Products";
 
-//import orderDetails from "./components/OrderDetails/orderDetails";
+
 
 import Checkout from "./components/Checkout/Checkout.jsx";
 import Admin from "./components/Admin/Admin";
@@ -33,6 +34,7 @@ import Historial from "./components/Historial";
 import AdminProfile from "./components/Admin/Profile/AdminProfile";
 import AdminEdit from "./components/Admin/Profile/AdminEdit";
 import ContactUs from "./components/ContactUs/ContactUs";
+import OrderDetails from "./components/OrderDetails/OrderDetails";
 
 function App() {
   return (
@@ -64,6 +66,7 @@ function App() {
           <Route path="/profile/favorites" element={<Favorites />} />
           <Route path="/profile/history" element={<Historial />} />
           <Route path="/profile/contact" element={<ContactUs/>} />
+          <Route path="/profile/detail/:id" element={<OrderDetails/>} />
         </Routes>
       </AuthProvider>
     </div>
