@@ -28,7 +28,7 @@ const initialState = {
   topSel: [],
   linkmp: [],
   user:{},
-  orderDetail:{},
+  orderDetail:[],
 };
 
 function rootReducer(state = initialState, action) {

@@ -192,12 +192,13 @@ export function getUserByEmail(payload) {
 // }
 
 export const getOrderDetail = (id) => async (dispatch) => {
-  //console.log(email, 'email')
-  const response = await axios.get(`http://localhost:3001/order/detail/${id}`,);
+  //console.log(id, 'para el detalle')
+  const response = await axios.get(`http://localhost:3001/order/detail?id=${id}`);
   return dispatch({ type: GET_ORDER_DETAIL, payload: response.data });
 };
 
 export function userHistoryPay(email) {
+  
   return async function (dispatch) {
     var json = await axios.get(`http://localhost:3001/order/${email}`);
     return dispatch({

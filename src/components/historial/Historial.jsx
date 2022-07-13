@@ -2,31 +2,45 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userHistoryPay } from "../Redux/action";
 import { useAuth } from "../../context/AuthContext.js";
+import { Link } from "react-router-dom";
 
 function Historial() {
   const dispatch = useDispatch();
   const history = useSelector((state) => state.historyPay);
   const { user } = useAuth();
 
-  /* let order = history.orders[0].orderItems.map((e) => e);
-  console.log(order); */
-  let order = history.orders[0].orderItems.map((e) => e);
+  let order =
+    Object.entries(history).length > 0
+      ? history.orders[0].orderItems.map((e) => e)
+      : undefined;
 
   useEffect(() => {
     if (user) {
-      dispatch(userHistoryPay(user.email));
+      dispatch(userHistoryPay(user?.email));
+      console.log("dispare");
     }
-  }, [dispatch, user]);
+  }, [dispatch, user?.email, user]);
+
+  let prueba = Object.entries(history).length > 0 ? "algo" : "vacio";
+  console.log(order, "esto lo trae order");
+  console.log(prueba, "esto es la prueba");
+
+  // console.log(order, 'lo que necesitoooo')
 
   return (
     <div className="flex flex-col w-9/12 h-auto p-4 items-center ">
       <h1>Historial de Compra </h1>
-      {/* {order.map((e) => {
+      {order?.map((e) => {
+        
         return (
           <div
             key={e.id}
             className="flex flex-col w-9/12 h-auto p-4 items-center "
           >
+            <a href={"detail/" + `${e.orderId}`}>
+              <button> Detalle</button>
+            </a>
+
             <span>{e.product.brand.name}</span>
             <span>{e.product.description}</span>
             <span>{e.product.genre}</span>
@@ -37,7 +51,7 @@ function Historial() {
             <span>{e.quantity}</span>
           </div>
         );
-      })} */}
+      })}
     </div>
   );
 }
