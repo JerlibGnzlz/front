@@ -3,22 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../context/AuthContext";
 import { getUserByEmail } from "../Redux/action";
 import { useEffect } from "react";
-import defaultImg from '../../img/descarga (1).jpg'
-import { Link} from "react-router-dom";
-import  SideBar  from "../SideBarUser.jsx/SideBar";
+import defaultImg from "../../img/descarga (1).jpg";
+import { Link } from "react-router-dom";
+import SideBar from "../SideBarUser.jsx/SideBar";
 
 export default function UserProfile() {
-  
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
   const { user } = useAuth();
-  
-  console.log(user,'todo esto es el usuario')
+
+  console.log(user, "todo esto es el usuario");
 
   useEffect(() => {
     if (user) {
       dispatch(getUserByEmail(user.email));
-      
     }
   }, [dispatch, user]);
 
@@ -205,7 +203,7 @@ export default function UserProfile() {
                             Volver
                           </button>
                         </Link>
-                        <Link to={`/profile/user`}>
+                        <Link to={`/profile/${userInfo.id}`}>
                           <button
                             type="submit"
                             className="ml-3 inline-flex justify-start py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-secondary focus:outline-none "

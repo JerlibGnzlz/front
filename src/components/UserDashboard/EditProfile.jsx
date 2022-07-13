@@ -1,23 +1,23 @@
 import React from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
-import {useEffect } from "react";
-import { getUserByEmail, reset} from "../Redux/action";
+import { useEffect } from "react";
+import { getUserByEmail, reset } from "../Redux/action";
 import { Formik, ErrorMessage, Field, Form } from "formik";
 import * as Yup from "yup";
 import moment from "moment";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import defaultImg from '../../img/descarga (1).jpg'
+import defaultImg from "../../img/descarga (1).jpg";
 import Swal from "sweetalert2";
 
 export default function EditProfile() {
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // const {names, lastNames, birthDate, phone, image} = useSelector((state) => state.user);
-  const userInfo = useSelector((state)=> state.user)
+  const userInfo = useSelector((state) => state.user);
   const { user } = useAuth();
-  const {id}= useParams()
+  const { id } = useParams();
 
   useEffect(() => {
     if (user) {
@@ -25,15 +25,13 @@ export default function EditProfile() {
     }
   }, [dispatch, user, id]);
 
-  console.log(userInfo, 'usuario db')
- 
+  console.log(userInfo, "usuario db");
 
   function backOnClicke(e) {
-    e.preventDefault()
-    dispatch(reset())
-    navigate('/profile')
+    e.preventDefault();
+    dispatch(reset());
+    navigate("/profile");
   }
-  
 
   const validate = Yup.object({
     names: Yup.string()
@@ -69,9 +67,9 @@ export default function EditProfile() {
       }}
       enableReinitialize={true}
       validationSchema={validate}
-      onSubmit={(values) => {
+      onSubmit={async (values) => {
         console.log(values, "valores");
-        axios
+        await axios
           .put(`http://localhost:3001/profile/${id}`, values)
           .then((response) => {
             Swal.fire({

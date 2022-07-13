@@ -14,13 +14,11 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import UserRegisterSelect from "./UserRegisterSelect";
 const { REACT_APP_BACKEND_URL } = process.env;
 
-
-const options=[
-    {value: 'male', label: 'Masculino'},
-    {value: 'female', label: 'Femenino'},
-    {value: 'other', label: 'Prefiero no decirlo'},
-  ]
-
+const options = [
+  { value: "male", label: "Masculino" },
+  { value: "female", label: "Femenino" },
+  { value: "other", label: "Prefiero no decirlo" },
+];
 
 export const UserRegister = () => {
   const navigate = useNavigate();
@@ -79,7 +77,7 @@ export const UserRegister = () => {
       }}
       validationSchema={validate}
       onSubmit={async (values) => {
-        // console.log(values);
+        console.log(values);
 
         try {
           await signup(values.email, values.password);
@@ -147,8 +145,8 @@ export const UserRegister = () => {
 
               <TextField
                 label="Confirmar contraseña"
-                name="ConfirmPassword"
-                type="contraseña"
+                name="confirmPassword"
+                type="password"
                 placeholder="******"
               />
 
