@@ -10,6 +10,7 @@ import {
   getBrand,
   process_payment,
   resetAllComments,
+  userType
 } from "../Redux/action";
 import { useParams, useSearchParams, useLocation, useNavigate} from "react-router-dom";
 import Paginado from "../Paginado/Paginado";
@@ -57,6 +58,9 @@ export default function Products() {
         paymentStatus === "approved" && localStorage.removeItem("cart");
         navegate("/products")
       }
+    }
+    if(user){
+      dispatch(userType(user.email))
     }
     dispatch(getProduct({ genre: genre }));
     dispatch(getCategories({ genre: genre }));
