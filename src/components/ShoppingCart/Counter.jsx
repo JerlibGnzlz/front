@@ -44,7 +44,7 @@ function Counter({ product }) {
         <h2 className="my-10 ml-5 ">
           SubTotal{" "}
           <p className="text-xl mt-5 ml-5">
-            {accounting.formatMoney(subTotal, "$ ", 3)}
+            {accounting.formatMoney(subTotal, "$ ")}
           </p>
         </h2>
         <h2 className="my-10 ml-5 ">
@@ -54,7 +54,7 @@ function Counter({ product }) {
         <h2 className="my-10 ml-5 mr-5 border-t-2 border-gray-500">
           Total
           <p className="text-xl mt-5 ml-5">
-            {accounting.formatMoney(subTotal, "$ ", 3)}
+            {accounting.formatMoney(subTotal, "$ ")}
           </p>
         </h2>
       </div>

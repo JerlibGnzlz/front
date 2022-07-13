@@ -4,6 +4,7 @@ import { useEffect,useState} from "react";
 import "./Carts.css"
 import Counter from "./Counter";
 import Swal from "sweetalert2";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 
 
@@ -46,7 +47,8 @@ useEffect(() => {
     const { name } = e.target;
 
     if (name === "mas") {
-      if (product.find((p) => p.id === id).quantity < stock) {
+      
+      if (product.find((p) => p.id === id).quantity < product.find((p) => p.id === id).stock) {
         product.find((p) => p.id === id).quantity += 1;
         let contador = product.filter((e) => e.id === id);
 
@@ -62,8 +64,9 @@ useEffect(() => {
         });
       }
     } else if (name === "menos") {
+      
       if (
-        product.find((p) => p.id === id).quantity <= stock &&
+        product.find((p) => p.id === id).quantity <= product.find((p) => p.id === id).stock &&
         product.find((p) => p.id === id).quantity > 1
       ) {
         product.find((p) => p.id === id).quantity -= 1;
