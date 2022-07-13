@@ -28,6 +28,8 @@ import EditProfile from "./components/UserDashboard/EditProfile";
 import UserProfile from "./components/UserDashboard/UserProfile";
 import OrderAdminDetail from './components/Admin/OrdersAdmin/OrdersAdminDetail';
 import Historial from "./components/Historial";
+import AdminProfile from "./components/Admin/Profile/AdminProfile";
+import AdminEdit from "./components/Admin/Profile/AdminEdit";
 
 function App() {
   return (
@@ -44,7 +46,8 @@ function App() {
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/reset" element={<Reset />} />
           <Route path="/admin" element={<Admin />} />
-
+          <Route path="/admin/profile" element={<AdminProfile />} />
+          <Route path='/admin/profile/edit' element={<AdminEdit />}/>
           <Route path="/admin/products" element={<ProductsAdmi />} />
           <Route path="/admin/create" element={<FormProduct />} />
           <Route path="/admin/products/:id" element={<EditProduct />} />

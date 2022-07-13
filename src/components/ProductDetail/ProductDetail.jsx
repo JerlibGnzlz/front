@@ -224,9 +224,9 @@ export default function ProductDetail() {
                 <h3 className=" mt-2 text-xl font-bold text-gray-900">
                   Puntuación
                 </h3>
-                {
-                  productDetail[0] ? <Rating value={productDetail[0].rating} readOnly /> : null
-                }
+                {productDetail[0] ? (
+                  <Rating value={productDetail[0].rating} readOnly />
+                ) : null}
               </div>
 
               {/* Product price */}
@@ -236,10 +236,11 @@ export default function ProductDetail() {
                   Precio: ${productDetail[0] && productDetail[0].price}
                 </p>
                 <button
-                    type="submit"
-                    className="mt-10 w-full bg-primary border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    onClick={(e) => handleComments(e)}>
-                    ver comentarios
+                  type="submit"
+                  className="mt-10 w-full bg-primary border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={(e) => handleComments(e)}
+                >
+                  ver comentarios
                 </button>
 
                 {/* Product bottom cart */}
@@ -305,8 +306,8 @@ export default function ProductDetail() {
           ) : null}
           {comments ? (
             comments[0] ? (
-              <div>
-                Comentarios
+              <div className="ml-5">
+                <h1 className="text-lg font-bold">Comentarios</h1>
                 {comments.map((c, index) => {
                   return (
                     <div
@@ -317,19 +318,22 @@ export default function ProductDetail() {
                           : "anable"
                       }
                     >
-                      comentario de {c.user.email.split("@")[0]}
+                      Comentario de {c.user.email.split("@")[0]}
                       <Rating name="read-only" value={c.rating} readOnly />
-                      <div>{c.review}</div>
+                      <div className="my-2">{c.review}</div>
                       {c.user.email === user?.email ? (
                         <div>
                           <button
+                            className="bg-black p-2 rounded-lg text-white font-semibold hover:bg-gray-800 duration-500"
                             onClick={(e) =>
                               handleEdit(e, c.rating, c.review, c.id)
                             }
                           >
                             Editar comentario
                           </button>
-                          <button onClick={(e) => handleDelete(e, c.id)}>
+                          <button
+                            className="ml-2"
+                            onClick={(e) => handleDelete(e, c.id)}>
                             <CancelIcon />
                           </button>
                         </div>

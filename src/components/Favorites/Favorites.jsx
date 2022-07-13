@@ -102,7 +102,7 @@ export default function Favorites() {
   // console.log(objCart2, "obj")
   return (
     <div className="radial h-full flex relative shadow-xl ">
-      <div className="h-screen mb-0">
+      <div className="mb-0">
 
       <SideBar />
       </div>

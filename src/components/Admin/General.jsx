@@ -14,7 +14,7 @@ import {
 import { useAuth } from "../../context/AuthContext.js";
 const data = [
   {
-    name: "Jan",
+    name: "Ene",
     "Sales": 2000,
     
   },
@@ -49,7 +49,7 @@ const data = [
     
   },
   {
-    name: "Aug",
+    name: "Ago",
     "Sales": 2145,
     
   },
@@ -69,7 +69,7 @@ const data = [
     
   },
   {
-    name: "Dec",
+    name: "Dic",
     "Sales": 3490,
     
   },

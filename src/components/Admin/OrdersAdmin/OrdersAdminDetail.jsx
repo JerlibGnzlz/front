@@ -1,55 +1,82 @@
 import { useSelector, useDispatch } from "react-redux";
 import { getAdminOrderDetail } from "../../Redux/action";
-import { useEffect} from "react";
-import { useParams,useNavigate} from "react-router-dom";
+import { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import "./OrdersAdminDetail.css";
-import {Grid} from "@mui/material"
-
+import { Grid } from "@mui/material";
+import {Link} from 'react-router-dom'
 export default function OrdersAdminDetail() {
   const navigate = useNavigate();
-  const { user} = useAuth()
+  const { user } = useAuth();
   const dispatch = useDispatch();
   const Order = useSelector((state) => state.adminOrderDetail);
   const { id } = useParams();
-  
 
   // console.log(productDetail, "prodDetail");
   useEffect(() => {
-    if(user){
-    dispatch(getAdminOrderDetail(user.email ,id));
+    if (user) {
+      dispatch(getAdminOrderDetail(user.email, id));
     }
   }, [dispatch, user]);
 
-  console.log(Order)
+  console.log(Order);
   return (
-    <Grid container spacing={3}>
-    <Grid item xs> Información del Usuario
-        <div>Id Usuario: {Order[0]?.userId}</div>
-        <div>Email Usuario: {Order[0]?.user.email}</div>
-        <div>Nombre: {Order[0]?.user.names} Surname: {Order[0]?.user.lastNames}</div>
-        <div>Número de Teléfono: {Order[0]?.user.phone} Fecha de Nacimiento: {Order[0]?.user.birthDate}</div>
-    </Grid>
-    <Grid item xs={6}> Información del Producto
-        {
-            Order[0]?.orderItems.map(o => {
-                return(
-                    <ul key={o.id} className="product-detail">
-                        <li>Nombre: {o.product.name}</li>
-                        <li>Cantidad: {o.quantity}</li>
-                        <li>Marca: {o.product.brand.name}</li>
-                        <li>Precio: {o.product.price} AR$</li>
-                    </ul>
-                )
-            })
-        }
-        <div>Total: {parseFloat(Order[0]?.total).toFixed(2)} AR$</div>
-    </Grid>
-    <Grid item xs> Información de la Orden
-        <div>Id: {Order[0]?.id}</div>
-        <div>Estado: {Order[0]?.state}</div>
-        <div>Fecha: {Order[0]?.date}</div>
-    </Grid>
-    </Grid>
+    
+      <div className="mx-auto bg-gray-400 w-[500px] rounded-lg shadow-lg">
+        <div className="my-2 ml-2">
+          <Grid item xs>
+            {" "}
+            <h1 className="text-2xl font-bold">Información del Usuario</h1>
+            <div className="text-lg mt-1">Id Usuario: {Order[0]?.userId}</div>
+            <div className="text-lg mt-1">
+              Email Usuario: {Order[0]?.user.email}
+            </div>
+            <div className="text-lg mt-1">
+              Nombre: {Order[0]?.user.names} Surname: {Order[0]?.user.lastNames}
+            </div>
+            <div className="text-lg mt-1">
+              Número de Teléfono: {Order[0]?.user.phone}{" "}
+              <p className="text-lg mt-1">
+                Fecha de Nacimiento: {Order[0]?.user.birthDate}
+              </p>
+            </div>
+          </Grid>
+        </div>
+        <div className="my-2 ml-2">
+          <Grid item xs={6}>
+            {" "}
+            <h1 className="text-2xl font-bold">Información del Producto</h1>
+            <div className="mt-1 text-lg">
+              {Order[0]?.orderItems.map((o) => {
+                return (
+                  <ul key={o.id} className="product-detail">
+                    <li>Nombre: {o.product.name}</li>
+                    <li>Cantidad: {o.quantity}</li>
+                    <li>Marca: {o.product.brand.name}</li>
+                    <li>Precio: {o.product.price} AR$</li>
+                  </ul>
+                );
+              })}
+              <div className="flex mt-1 font-semibold">
+                Total: {parseFloat(Order[0]?.total).toFixed(3)} AR$
+              </div>
+            </div>
+          </Grid>
+        </div>
+        <div className="my-2 ml-2">
+          <Grid item xs>
+            {" "}
+            <h1 className="text-2xl font-bold">Información de la Orden</h1>
+            <div className="mt-1 text-lg">Id: {Order[0]?.id}</div>
+            <div className="mt-1 text-lg">Estado: {Order[0]?.state}</div>
+            <div className="mt-1 text-lg">Fecha: {Order[0]?.date}</div>
+        <Link to='/admin/order'>
+        <button className="p-2 bg-black text-white rounded-lg hover:bg-gray-800 duration-500 my-2">Volver</button>
+        </Link>
+        </Grid>
+        </div>
+      </div>
+    
   );
 }
