@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { getProduct, getCategories, getBrand } from "../Redux/action";
 import "./Filter.css";
+import { bgBG } from "@mui/x-data-grid";
 
 export default function Filter({ paginado }) {
   const [genres, setGenres] = useState();
@@ -108,8 +109,8 @@ export default function Filter({ paginado }) {
         setPrice(undefined);
 
         break;
-      case "accesories":
-        navigate("/products/accesories");
+      case "no-gender":
+        navigate("/products/no-gender");
         paginado(1);
         dispatch(getProduct({ search: "", genre: genre }));
         dispatch(getBrand({ genre: genre }));
@@ -156,7 +157,7 @@ export default function Filter({ paginado }) {
     //   dispatch(getCategories({ genre: genre, brand: e.target.value }));
     // }
   }
-
+  console.log(brands, 'estas son las marcas6')
   return (
     <div>
       <div className="category flex flex-col">
@@ -164,17 +165,17 @@ export default function Filter({ paginado }) {
         <div className="ml-2 ">
           <div className="item-left  ">
             <button
-              className="text-lg"
+              className={genre === undefined ? "On" : "Off"}
               name="all"
               onClick={(e) => handleReset(e)}
             >
-              Todos los Productos
+              Productos
             </button>
           </div>
 
           <div className="">
             <button
-              className="text-lg"
+              className={genre === "women" ? "On" : "Off"}
               name="women"
               onClick={(e) => handleReset(e)}
             >
@@ -182,10 +183,9 @@ export default function Filter({ paginado }) {
             </button>
           </div>
 
-
           <div className="">
             <button
-              className="text-lg"
+              className={genre === "men" ? "On" : "Off"}
               name="men"
               onClick={(e) => handleReset(e)}
             >
@@ -194,8 +194,8 @@ export default function Filter({ paginado }) {
           </div>
           <div className="">
             <button
-              className="text-lg"
-              name="no gender"
+              className={genre === "no-gender" ? "On" : "Off"}
+              name="no-gender"
               onClick={(e) => handleReset(e)}
             >
               Sin Género
@@ -204,21 +204,11 @@ export default function Filter({ paginado }) {
 
           <div className="">
             <button
-              className="text-lg"
+              className={genre === "kids" ? "On" : "Off"}
               name="kids"
               onClick={(e) => handleReset(e)}
             >
               Niños
-            </button>
-          </div>
-
-          <div className="">
-            <button
-              className="text-lg"
-              name="accesories"
-              onClick={(e) => handleReset(e)}
-            >
-              Accesorios
             </button>
           </div>
         </div>

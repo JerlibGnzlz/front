@@ -71,6 +71,11 @@ export default function OrdersAdminDetail() {
             <div className="mt-1 text-lg">Id: {Order[0]?.id}</div>
             <div className="mt-1 text-lg">Estado: {Order[0]?.state}</div>
             <div className="mt-1 text-lg">Fecha: {Order[0]?.date}</div>
+            <div className="mt-1 text-lg">Provincia: {Order[0]?.estado}</div>
+            <div className="mt-1 text-lg">Ciudad: {Order[0]?.city}</div>
+            <div className="mt-1 text-lg">Codigo Postal: {Order[0]?.postalCode}</div>
+            <div className="mt-1 text-lg">Direccion: {Order[0]?.address}</div>
+            <div className="mt-1 text-lg">Apartamento: {Order[0]?.partment}</div>
         <Link to='/admin/order'>
         <button className="p-2 bg-black text-white rounded-lg hover:bg-gray-800 duration-500 my-2">Volver</button>
         </Link>

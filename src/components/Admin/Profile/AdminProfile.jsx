@@ -9,7 +9,7 @@ import LeftPanel from "../LeftPanel";
 
 export default function UserProfile() {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.user);
+  const userInfo = useSelector((state) => state.user.users);
   const { user } = useAuth();
   
   console.log(userInfo.id, "todo esto es el usuario");
@@ -85,7 +85,7 @@ export default function UserProfile() {
                           <input
                             type="text"
                             name="names"
-                            value={userInfo.names || ""}
+                            value={userInfo?.names || ""}
                             id="names"
                             readOnly
                             disabled={true}
@@ -104,7 +104,7 @@ export default function UserProfile() {
                             type="text"
                             name="names"
                             id="last-name"
-                            value={userInfo.lastNames || ""}
+                            value={userInfo?.lastNames || ""}
                             disabled={true}
                             autoComplete="family-name"
                             className="mt-1 bg-transparent font-semibold block py-2 w-full border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm"
@@ -143,7 +143,7 @@ export default function UserProfile() {
                             type="text"
                             name="email-address"
                             id="email-address"
-                            value={userInfo.email || ""}
+                            value={userInfo?.email || ""}
                             autoComplete="email"
                             disabled={true}
                             className="mt-1 bg-transparent font-bold block py-2 w-full border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm"
@@ -161,7 +161,7 @@ export default function UserProfile() {
                             type="text"
                             name="phone"
                             id="phone"
-                            value={userInfo.phone || ""}
+                            value={userInfo?.phone || ""}
                             disabled
                             autoComplete="tel"
                             className="mt-1 bg-transparent font-bold block py-2 w-full border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
@@ -180,7 +180,7 @@ export default function UserProfile() {
                             name="birthDate"
                             id="birthDate"
                             autoComplete="off"
-                            value={userInfo.birthDate || ""}
+                            value={userInfo?.birthDate || ""}
                             disabled
                             className="mt-1 font-bold bg-transparent block w-full py-2 border-blue-gray-300 rounded-md text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
                           />
@@ -195,7 +195,7 @@ export default function UserProfile() {
                           Go back
                         </button> */}
 
-                        <Link to={`/admin/profile/edit/${userInfo.id}`}>
+                        <Link to={`/admin/profile/edit/${userInfo?.id}`}>
                           <button
                             type="submit"
                             className="ml-3 inline-flex justify-start py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-secondary focus:outline-none "

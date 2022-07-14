@@ -44,6 +44,16 @@
     tracking-wider transition;
   }
 }
+@layer utilities{
+   .On{
+  
+  transform: translateX(15px);
+  @apply text-lg
+}
+.Off{
+  @apply text-lg
+}
+}
 
 
 

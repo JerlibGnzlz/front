@@ -76,7 +76,7 @@ export default function ProductDetail() {
                 className="object-contain h-96 w-96 detalle"
               />
 
-              {pen ? (
+              {/* {pen ? (
                 <textarea
                   className="w-full rounded-lg bg-gray-300 text-sm "
                   name="image"
@@ -85,7 +85,7 @@ export default function ProductDetail() {
                   rows={2}
                   defaultValue={productDetail[0] && productDetail[0].image[0]}
                 ></textarea>
-              ) : null}
+              ) : null} */}
             </div>
 
             {/* Product name */}

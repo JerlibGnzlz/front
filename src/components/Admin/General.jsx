@@ -82,7 +82,7 @@ function General() {
     await logout();
   };
 
-  let welcome = user ? "Hola, " + user.email : "Hola!!";
+  let welcome = user ? "Hola, " + user.email.split('@')[0] : "Hola!!";
   return (
     <>
       <h1 className="flex justify-center text-3xl font-semibold tracking-wider mt-10	">

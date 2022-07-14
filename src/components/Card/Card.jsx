@@ -86,7 +86,7 @@ export default function Card({ id, name, price, category, image, brand}) {
       <div className="card">
         <div className="img">
           <img
-            className="object-contain h-52 w-96 "
+            className="object-contain p-4 h-52 w-96 "
             src={image}
             alt="Pic not found"
           />
@@ -96,7 +96,7 @@ export default function Card({ id, name, price, category, image, brand}) {
             {name}
           </h3>
 
-          <p className="text-xl font-bold">Precio: $ {parseFloat(price).toFixed(2)}</p>
+          <p className="text-xl font-bold">Precio: $ {parseFloat(price)}</p>
 
           {/* <div className="flex items-center gap-2 mt-1">
           <span className="text-sm line-through opacity-50">U$S 59.99</span>

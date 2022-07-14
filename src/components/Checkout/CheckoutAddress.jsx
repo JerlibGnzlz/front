@@ -8,11 +8,13 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import CheckoutPaymentMp from "./CheckoutPaymentMp";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
 function CheckoutAddress() {
   //const navigate = useNavigate();
+  const { user} = useAuth()
   const [formData, setFormData] = useState(null);
 
   const divStyle = {
@@ -36,6 +38,8 @@ function CheckoutAddress() {
       .required("Required"),
   });
 
+  console.log(formData)
+
   return (
     <Formik
       initialValues={{
@@ -50,11 +54,12 @@ function CheckoutAddress() {
       }}
       validationSchema={validate}
       onSubmit={(values) => {
+        values.email = user.email
         // console.log(values, 'valores')
         axios
           .post(`${REACT_APP_BACKEND_URL}/userAddress`, values)
           .then((response) => {
-            // console.log('Shipping information added successfully')
+            console.log(response)
             setFormData(values);
 
             Swal.fire({

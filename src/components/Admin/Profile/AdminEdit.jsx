@@ -15,7 +15,7 @@ export default function EditProfile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const {names, lastNames, birthDate, phone, image} = useSelector((state) => state.user);
-  const userInfo = useSelector((state) => state.user);
+  const userInfo = useSelector((state) => state.user.users);
   const { user } = useAuth();
   const { id } = useParams();
 
@@ -59,11 +59,11 @@ export default function EditProfile() {
   return (
     <Formik
       initialValues={{
-        names: userInfo.names,
-        lastNames: userInfo.lastNames,
-        birthDate: userInfo.birthDate,
-        phone: userInfo.phone,
-        image: userInfo.image,
+        names: userInfo?.names,
+        lastNames: userInfo?.lastNames,
+        birthDate: userInfo?.birthDate,
+        phone: userInfo?.phone,
+        image: userInfo?.image,
       }}
       enableReinitialize={true}
       validationSchema={validate}

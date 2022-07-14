@@ -35,6 +35,7 @@ import AdminProfile from "./components/Admin/Profile/AdminProfile";
 import AdminEdit from "./components/Admin/Profile/AdminEdit";
 import ContactUs from "./components/ContactUs/ContactUs";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
+import Chards from "./components/Admin/Chard/Chards"
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           <Route path="/admin/user" element={<ListUser />} />
           <Route path="/admin/order" element={<OrdersAdmin />} />
           <Route path="/admin/order/:id" element={<OrderAdminDetail />} />
+          <Route path="/admin/stats" element={<Chards />} />
           <Route path="/reset" component={<Reset />} />
           <Route path="/profile/:id" element={<EditProfile />} />
           <Route path="/profile" element={<UserProfile />} />

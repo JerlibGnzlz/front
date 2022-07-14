@@ -25,7 +25,9 @@ export const USER_HISTORY = "USER_HISTORY";
 export const GET_COMMENTS = "GET_COMMENTS";
 export const PERMISON = "PERMISON";
 export const RESET_ALL_COMMENTS = "RESET_ALL_COMMENTS";
-export const GET_ORDER_DETAIL = "GET_ORDER_DETAIL"
+export const GET_ORDER_DETAIL = "GET_ORDER_DETAIL";
+export const DATA_ORDERS = "DATA_ORDERS";
+export const DATA_EARNINGS = "DATA_EARNINGS"
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -206,7 +208,7 @@ export function enableUsers(id) {
 
 export function statusAdmi(id) {
   return async function () {
-    await axios.put(`${REACT_APP_BACKEND_URL}/${id}`);
+    await axios.put(`${REACT_APP_BACKEND_URL}/adminMod/${id}`);
   };
 }
 
@@ -406,7 +408,15 @@ export const resetAllComments = () => (dispatch) => {
   return dispatch({ type: RESET_ALL_COMMENTS });
 };
 
+export const chardOrders = () => async (dispatch) => {
+  let data = await axios.get(`${REACT_APP_BACKEND_URL}/chards/orders`)
+  return dispatch({ type: DATA_ORDERS, payload: data.data });
+}
 
+export const chardEarnings = () => async (dispatch) => {
+  let data = await axios.get(`${REACT_APP_BACKEND_URL}/chards/earnings`)
+  return dispatch({ type: DATA_EARNINGS, payload: data.data });
+}
 
 // export const userProfileUpdate = (id, data)=>{
 //   return async function(dispatch){

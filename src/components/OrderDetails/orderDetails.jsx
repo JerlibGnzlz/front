@@ -29,47 +29,48 @@ export default function OrderDetails() {
   //console.log(images);
 
   let name = [];
-   for (var i in orderItems) {
+   for (let i in orderItems) {
      name.push(orderItems[i].product.name);
    }
   // // console.log(name);
 
   let price = [];
-  for (var i in orderItems) {
+  for (let i in orderItems) {
     price.push(orderItems[i].product.price);
   }
   // // console.log(price);
 
   let quantity = [];
-  for (var i in orderItems) {
+  for (let i in orderItems) {
     quantity.push(orderItems[i].quantity);
   }
   // // console.log(quantity);
 
  
   let subtotal = [];
-  for (var i in price) {
+  for (let i in price) {
     subtotal.push(parseFloat(price[i] * quantity[i]));
   }
 
   return (
-    <main className="px-4 pt-16 pb-24 sm:px-6 sm:pt-24 lg:px-8 lg:py-32">
+    <main className="radial px-4 pt-16 pb-24 sm:px-6 sm:pt-24 lg:px-8 lg:py-32">
       <div className="max-w-4xl mx-auto">
         <div className="max-w-xl">
-          <h1 className="text-sm font-semibold uppercase tracking-wide text-secondary">
+          <h1 className="text-sm font-semibold uppercase tracking-wide  text-gray-300">
             Gracias!
           </h1>
-          <p className="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
-          ¡Está en camino!
+          <p className="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl text-gray-300">
+            ¡Está en camino!
           </p>
-          <p className="mt-2 text-base text-gray-900 ">
-            Tu orden <span className="font-bold">#{orderDetail[0]?.id}</span> se ha enviado y estará contigo pronto.
+          <p className="mt-2 text-base text-gray-300 ">
+            Tu orden <span className="font-bold">#{orderDetail[0]?.id}</span> se
+            ha enviado y estará contigo pronto.
           </p>
         </div>
 
         <section
           aria-labelledby="order-heading"
-          className="mt-10 border-gray-800 w-fit border rounded-md"
+          className="mt-10 border-2 border-gray-600 shadow-lg w-fit border rounded-md bg-gray-200"
         >
           <h2 id="order-heading" className="sr-only">
             Tu orden
@@ -79,7 +80,7 @@ export default function OrderDetails() {
           <div className="py-10  flex  ">
             {images?.map((t) => {
               return (
-                <div key={t.id} className='flex-wrap mx-20'>
+                <div key={t.id} className="flex-wrap mx-20">
                   <img
                     src={t}
                     alt=""
@@ -95,10 +96,10 @@ export default function OrderDetails() {
               <h2 className="mb-5 ml-20 font-bold text-base">Productos</h2>
               {name?.map((t) => {
                 return (
-                  <div key={t.id} className='flex-wrap mx-20'>
+                  <div key={t.id} className="flex-wrap mx-20">
                     <h2 className="font-semibold capitalize text-gray-600">
-                    {t}
-                  </h2>
+                      {t}
+                    </h2>
                   </div>
                 );
               })}
@@ -110,34 +111,34 @@ export default function OrderDetails() {
                 return (
                   <div key={t.id}>
                     <h4 className="flex mr-4 font-semibold text-green-500">
-                    $ {t}
-                  </h4>
+                      $ {t}
+                    </h4>
                   </div>
                 );
               })}
             </div>
 
             <div className="pl-4 mx-auto flex flex-col sm:pl-6  ">
-            <h2 className="mb-5 font-bold text-base"> Cantidad </h2>
+              <h2 className="mb-5 font-bold text-base"> Cantidad </h2>
               {quantity?.map((t) => {
                 return (
-                 <div key={t.id}>
-                   <h4 className="flex ml-10 font-semibold text-gray-600">
-                    x {t}
-                  </h4>
-                 </div>
+                  <div key={t.id}>
+                    <h4 className="flex ml-10 font-semibold text-gray-600">
+                      x {t}
+                    </h4>
+                  </div>
                 );
               })}
             </div>
 
             <div className="pl-4 mx-auto flex flex-col sm:pl-6">
-            <h2 className="mb-5 font-bold text-base"> Subtotal </h2>
+              <h2 className="mb-5 font-bold text-base"> Subtotal </h2>
               {subtotal?.map((t) => {
                 return (
                   <div key={t.id}>
                     <h4 className="flex ml-2 font-semibold text-green-500">
-                    $ {t}
-                  </h4>
+                      $ {t}
+                    </h4>
                   </div>
                 );
               })}
@@ -154,7 +155,8 @@ export default function OrderDetails() {
                 <dd className="mt-2 text-gray-700">
                   <address className="not-italic">
                     <span className="block capitalize">
-                      {orderDetail[0]?.user.names} {orderDetail[0]?.user.lastNames}
+                      {orderDetail[0]?.user.names}{" "}
+                      {orderDetail[0]?.user.lastNames}
                     </span>
                     {/* <span className="block">7363 Cynthia Pass</span> */}
                     <span className="block">Argentina</span>
@@ -188,14 +190,14 @@ export default function OrderDetails() {
               <div className="flex justify-between ">
                 <dt className="font-bold text-lg text-gray-900">Total</dt>
                 <dd className="text-green-500 text-xl font-bold mr-12 mb-4">
-                  {orderDetail[0]?.total}
+                  ${orderDetail[0]?.total}
                 </dd>
               </div>
             </dl>
           </div>
         </section>
         <Link to="/profile/history">
-          <button className="button-primary mt-16 mx-96 p-3">Salir</button>
+          <button className="button-primary mt-16 mx-96 w-32 p-3 duration-500">Salir</button>
         </Link>
       </div>
     </main>

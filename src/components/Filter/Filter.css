@@ -58,10 +58,16 @@
     font-size: 1.2vw;
     font-weight: 700;
 } */
-.On{
-  color:red;
+/* .On{
+  text-decoration: underline;
+  transform: translateX(15px);
 }
 
 .Off{
-  color:blue
+  color:black;
 }
+
+.On1{
+    text-decoration: underline;
+  transform: translateX(15px);
+} */

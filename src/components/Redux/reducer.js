@@ -26,6 +26,8 @@ import {
   PERMISON,
   RESET_ALL_COMMENTS,
   GET_ORDER_DETAIL,
+  DATA_ORDERS,
+  DATA_EARNINGS
 } from "./action";
 
 const initialState = {
@@ -51,6 +53,8 @@ const initialState = {
   orderDetail:[],
   permison: false,
   comments: false,
+  dataOrders: [],
+  dataEarnings: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -128,6 +132,20 @@ function rootReducer(state = initialState, action) {
         permison: false,
         comments: false,
       };
+    }
+
+    case DATA_ORDERS: {
+      return {
+        ...state,
+        dataOrders: action.payload
+      }
+    }
+
+    case DATA_EARNINGS: {
+      return {
+        ...state,
+        dataEarnings: action.payload
+      }
     }
 
     case FAVORITES:

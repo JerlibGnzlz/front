@@ -19,14 +19,20 @@ function ListUser() {
   const enable = (e) => {
     e.preventDefault();
     dispatch(enableUsers(e.target.name));
-    /* dispatch(getAllUsers()); */
+    setTimeout(function () {
+      dispatch(getAllUsers());
+    }, 70);
   };
 
   const statusAdmin = (e) => {
     e.preventDefault();
-
+    
     dispatch(statusAdmi(e.target.name));
-    /* dispatch(getAllUsers()); */
+    setTimeout(function () {
+      dispatch(getAllUsers())
+    },70 )
+    
+    
   };
 
   useEffect(() => {
