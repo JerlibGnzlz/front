@@ -12,7 +12,7 @@ export default function UserProfile() {
   const userInfo = useSelector((state) => state.user.users);
   const { user } = useAuth();
   
-  console.log(userInfo.id, "todo esto es el usuario");
+  // console.log(userInfo.id, "todo esto es el usuario");
 
   useEffect(() => {
     if (user) {

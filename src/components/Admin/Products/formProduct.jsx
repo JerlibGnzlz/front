@@ -9,7 +9,7 @@ export default function FormProduct() {
   const allBrand = useSelector((state) => state.brand);
   const allCategories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
-
+  
   const [input, setInput] = useState({
     name: "",
     image: [],
@@ -30,13 +30,18 @@ export default function FormProduct() {
   //VALIDACIONES
   function handleSubmit(e) {
     e.preventDefault();
+    
     const formData = new FormData();
-    formData.append("name", input.name);
-    formData.append("description", input.description);
-    formData.append("genre", input.genre);
-    formData.append("brandId", input.brandId);
-    formData.append("categoryId", input.categoryId);
-    formData.append("price", input.price);
+    const validate = () => {
+      
+    }
+    formData.append("name", input?.name);
+    formData.append("description", input?.description);
+    formData.append("genre", input?.genre);
+    formData.append("brandId", input?.brandId);
+    formData.append("categoryId", input?.categoryId);
+    formData.append("price", input?.price);
+
     for (let i = 0; i < input.image.length; i++) {
       formData.append("image", input.image[i]);
     }
@@ -55,6 +60,8 @@ export default function FormProduct() {
   }
 
   function handleChange(e) {
+
+    e.preventDefault();
     if (e.target.name === "image") {
       setInput({
         ...input,
@@ -124,7 +131,7 @@ export default function FormProduct() {
             >
               <div className="col-span-3 sm:col-span-2">
                 <label className="font-bold text-lg">Nombre:</label>
-                <div class="mt-1 flex rounded-md shadow-sm">
+                <div className="mt-1 flex rounded-md shadow-sm">
                   <input
                     className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                     placeholder="Nombre del Producto"
@@ -160,8 +167,11 @@ export default function FormProduct() {
               <div className="col-span-3 sm:col-span-2">
                 <label className="block font-bold text-lg">Género:</label>
 
-                {genre.map((g) => (
-                  <div className="mt-1 ml-2 w-48 border border-gray-400  flex rounded-md shadow-sm hover:bg-gray-800 duration-500 hover:text-white hover:border-black focus:bg-gray-700">
+                {genre?.map((g) => (
+                  <div
+                    key={g.id}
+                    className="mt-1 ml-2 w-48 border border-gray-400  flex rounded-md shadow-sm hover:bg-gray-800 duration-500 hover:text-white hover:border-black focus:bg-gray-700"
+                    >
                     <button
                       name={g.value}
                       className="capitalize"
@@ -182,7 +192,9 @@ export default function FormProduct() {
                   >
                     {allCategories?.length &&
                       allCategories.map((e) => (
-                        <option value={e.id}>{e.name}</option>
+                        <option key={e.id} value={e.id}>
+                          {e.name}
+                        </option>
                       ))}
                   </select>
                 </div>
@@ -195,8 +207,10 @@ export default function FormProduct() {
                     onChange={(e) => handleSelectBrand(e)}
                   >
                     {allBrand?.length &&
-                      allBrand.map((e) => (
-                        <option value={e.id}>{e.name}</option>
+                      allBrand?.map((e) => (
+                        <option key={e.id} value={e.id}>
+                        {e.name}
+                        </option>
                       ))}
                   </select>
                 </div>
@@ -208,7 +222,7 @@ export default function FormProduct() {
                     type="number"
                     placeholder="Escribe una descripcion"
                     value={input.stock}
-                    name="price"
+                    name=""
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -217,7 +231,7 @@ export default function FormProduct() {
                   <input
                     className="nombre"
                     type="number"
-                    placeholder="Escribe una descripcion"
+                    placeholder="Ingrese el precio"
                     value={input.price}
                     name="price"
                     onChange={(e) => handleChange(e)}

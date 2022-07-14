@@ -152,7 +152,7 @@ export default function ProductDetail() {
                       >
                         <option value={"women"}>Mujer</option>
                         <option value={"men"}>Hombre</option>
-                        <option value={"neutral"}>Sin Género</option>
+                        <option value={"no-gender"}>Sin Género</option>
                         <option value={"kids"}>Niño</option>
                       </select>
                     ) : null}
@@ -208,8 +208,8 @@ export default function ProductDetail() {
                 {/* Sustituir el 4 por productDetail[0].rating */}
                 <h3 className=" mt-2 text-xl font-bold text-gray-900"></h3>
                 <div className="flex flex-col">
-                  <p className="text-2xl">
-                    {productDetail[0] && productDetail[0].stock}
+                  <p className="text-2xl font-semibold">
+                    Stock: {productDetail[0] && productDetail[0].stock}
                   </p>
                   {pen ? (
                     <div>

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { getProduct, getCategories, getBrand } from "../Redux/action";
 import "./Filter.css";
-import { bgBG } from "@mui/x-data-grid";
+// import { bgBG } from "@mui/x-data-grid";
 
 export default function Filter({ paginado }) {
   const [genres, setGenres] = useState();
@@ -45,6 +45,7 @@ export default function Filter({ paginado }) {
   function handleCheck(e) {
     // console.log(e.target.value === category, "esto es loo que llega");
     // if (genres === genre && genre) {
+    e.preventDefault();
       setGenres(genre);
       setCategory(e.target.value);
       dispatch(
@@ -92,7 +93,6 @@ export default function Filter({ paginado }) {
         dispatch(getProduct({ search: "", genre: genre }));
         dispatch(getBrand({ genre: genre }));
         dispatch(getCategories({ genre: genre }));
-        dispatch()
         setBrand(undefined);
         setCategory(undefined);
         setPrice(undefined);
@@ -135,6 +135,7 @@ export default function Filter({ paginado }) {
 
   function handleCheckBrand(e) {
     // if (genres === genre && genre) {
+    e.preventDefault();
     setGenres(genre);
     setBrand(e.target.value);
     dispatch(
