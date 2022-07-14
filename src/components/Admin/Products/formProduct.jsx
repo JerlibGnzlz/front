@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import LeftPanel from "../LeftPanel";
+import Swal from "sweetalert2";
 
 export default function FormProduct() {
   const allBrand = useSelector((state) => state.brand);
@@ -27,10 +28,46 @@ export default function FormProduct() {
     { value: "no-gender", name: "Sin género" },
   ];
 
+  const validate = (dataObject)=>{
+   const errors = []
+   
+   if (!dataObject.name ){
+    errors.push(input.name)
+   }
+
+   if(!dataObject.description){
+    errors.push(input.description)
+   }
+
+   if(!dataObject.genre){
+    errors.push(input.genre)
+   }
+
+   if(!dataObject.brandId){
+    errors.push(input.brandId)
+   }
+
+   if(!dataObject.categoryId){
+    errors.push(input.categoryId)
+   }
+
+   if(!dataObject.price){
+    errors.push(input.price)
+   }
+   return errors
+  }
+
   //VALIDACIONES
   function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
+    if(validate(input).length > 0){
+      return alert('Llene todos los campos')
+    }
+    
     const formData = new FormData();
+
+
+
     formData.append("name", input.name);
     formData.append("description", input.description);
     formData.append("genre", input.genre);
