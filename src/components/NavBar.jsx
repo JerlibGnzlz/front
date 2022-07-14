@@ -8,12 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { userType } from "./Redux/action";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-
 function NavBar() {
   const { user, logout } = useAuth();
   const dispatch = useDispatch();
   const userT = useSelector((state) => state.verify);
-  console.log(userT,'esto es el UserT')
+
   const handleLogout = async () => {
     await logout();
   };
@@ -22,8 +21,6 @@ function NavBar() {
       dispatch(userType(user.email));
     }
   }, [dispatch, user]);
-
-  
 
   let welcome = user ? "Hola, " + user.email.split("@")[0] : "Hola";
 
@@ -43,14 +40,14 @@ function NavBar() {
       </Link>
       {/* Boton Login */}
 
-      {user && (userT.isAdmin===false ? (
-        <Link to='/profile/favorites'>
-
-          <button className="mb-4">
-            <FavoriteIcon />
-          </button>
-        </Link>
-      ) : null)}
+      {user &&
+        (userT.isAdmin === false ? (
+          <Link to="/profile/favorites">
+            <button className="mb-4">
+              <FavoriteIcon />
+            </button>
+          </Link>
+        ) : null)}
 
       {user &&
         (userT.isAdmin === true ? (
