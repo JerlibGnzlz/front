@@ -1,145 +1,205 @@
-// import React from "react"
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getOrderDetail } from "../Redux/action";
+import { useEffect } from "react";
+import { useParams} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-// const products = [
-//     {
-//       id: 1,
-//       name: 'Cold Brew Bottle',
-//       description:
-//         'This glass bottle comes with a mesh insert for steeping tea or cold-brewing coffee. Pour from any angle and remove the top for easy cleaning.',
-//       href: '#',
-//       quantity: 1,
-//       price: '$32.00',
-//       imageSrc: 'https://tailwindui.com/img/ecommerce-images/confirmation-page-05-product-01.jpg',
-//       imageAlt: 'Glass bottle with black plastic pour top and mesh insert.',
-//     },
-//   ]
+export default function OrderDetails() {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const orderDetail = useSelector((state) => state.orderDetail);
+
+  useEffect(() => {
+    dispatch(getOrderDetail(id));
+  }, [dispatch, id]);
+
   
-//   export default function orderDetails() {
-//     return (
-//       <main className="px-4 pt-16 pb-24 sm:px-6 sm:pt-24 lg:px-8 lg:py-32">
-//         <div className="max-w-3xl mx-auto">
-//           <div className="max-w-xl">
-//             <h1 className="text-sm font-semibold uppercase tracking-wide text-secondary">Thank you!</h1>
-//             <p className="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl">It's on the way!</p>
-//             <p className="mt-2 text-base text-gray-900 ">Your order #14034056 has shipped and will be with you soon.</p>
-  
-//             <dl className="mt-12 text-md font-medium">
-//               <dt className="text-gray-900 font-semibold">Tracking number</dt>
-//               <dd className="text-gray-700 mt-2">51547878755545848512</dd>
-//             </dl>
-//           </div>
-  
-//           <section aria-labelledby="order-heading" className="mt-10 border-t border-gray-200">
-//             <h2 id="order-heading" className="sr-only">
-//               Your order
-//             </h2>
-  
-//             <h3 className="sr-only">Items</h3>
-//             {products.map((product) => (
-//               <div key={product.id} className="py-10 border-b border-gray-200 flex space-x-6">
-//                 <img
-//                   src={product.imageSrc}
-//                   alt={product.imageAlt}
-//                   className="flex-none w-20 h-20 object-center object-cover bg-gray-100 rounded-lg sm:w-40 sm:h-40"
-//                 />
-//                 <div className="flex-auto flex flex-col">
-//                   <div>
-//                     <h4 className="font-semibold  text-gray-900">
-//                       {/* <a href={product.href}>{product.name}</a> */}
-//                     </h4>
-//                     <p className="mt-2 text-md text-gray-600">{product.description}</p>
-//                   </div>
-//                   <div className="mt-6 flex-1 flex items-end">
-//                     <dl className="flex text-sm divide-x divide-gray-200 space-x-4 sm:space-x-6">
-//                       <div className="flex">
-//                         <dt className="font-medium text-gray-900">Quantity</dt>
-//                         <dd className="ml-2 text-gray-700">{product.quantity}</dd>
-//                       </div>
-//                       <div className="pl-4 flex sm:pl-6">
-//                         <dt className="font-medium text-gray-900">Price</dt>
-//                         <dd className="ml-2 text-gray-700">{product.price}</dd>
-//                       </div>
-//                     </dl>
-//                   </div>
-//                 </div>
-//               </div>
-//             ))}
-  
-//             <div className="sm:ml-40 sm:pl-6">
-//               <h3 className="sr-only">Your information</h3>
-  
-//               <h4 className="sr-only">Addresses</h4>
-//               <dl className="grid grid-cols-2 gap-x-6 text-md py-10">
-//                 <div>
-//                   <dt className="font-semibold text-gray-900">Shipping address</dt>
-//                   <dd className="mt-2 text-gray-700">
-//                     <address className="not-italic">
-//                       <span className="block">Kristin Watson</span>
-//                       <span className="block">7363 Cynthia Pass</span>
-//                       <span className="block">Toronto, ON N3Y 4H8</span>
-//                     </address>
-//                   </dd>
-//                 </div>
-//                 <div>
-//                   {/* <dt className="font-medium text-gray-900">Billing address</dt>
-//                   <dd className="mt-2 text-gray-700">
-//                     <address className="not-italic">
-//                       <span className="block">Kristin Watson</span>
-//                       <span className="block">7363 Cynthia Pass</span>
-//                       <span className="block">Toronto, ON N3Y 4H8</span>
-//                     </address>
-//                   </dd> */}
-//                 </div>
-//               </dl>
-  
-//               <h4 className="sr-only">Payment</h4>
-//               <dl className="grid grid-cols-2 gap-x-6 border-t border-gray-200 text-md py-10">
-//                 <div>
-//                   <dt className="font-medium text-gray-900">Payment method</dt>
-//                   <dd className="mt-2 text-gray-700">
-//                     <p>Mercado Pago</p>
-//                     <p>Mastercard</p>
-//                     <p>
-//                       <span aria-hidden="true">•••• </span>
-//                       <span className="sr-only">Ending in </span>1545
-//                     </p>
-//                   </dd>
-//                 </div>
-//                 <div>
-//                   <dt className="font-medium text-gray-900">Shipping method</dt>
-//                   <dd className="mt-2 text-gray-700">
-//                     <p>DHL</p>
-//                     <p>Takes up to 3 working days</p>
-//                   </dd>
-//                 </div>
-//               </dl>
-  
-//               <h3 className="sr-only">Summary</h3>
-  
-//               <dl className="space-y-6 border-t border-gray-200 text-md pt-10">
-//                 <div className="flex justify-between">
-//                   <dt className="font-medium text-gray-900">Subtotal</dt>
-//                   <dd className="text-gray-700">$36.00</dd>
-//                 </div>
-//                 <div className="flex justify-between">
-//                   <dt className="flex font-medium text-gray-900">
-//                     Discount
-//                     <span className="rounded-full bg-gray-200 text-xs text-gray-600 py-0.5 px-2 ml-2">STUDENT50</span>
-//                   </dt>
-//                   <dd className="text-gray-700">-$18.00 (50%)</dd>
-//                 </div>
-//                 <div className="flex justify-between">
-//                   <dt className="font-medium text-gray-900">Shipping</dt>
-//                   <dd className="text-gray-700">$5.00</dd>
-//                 </div>
-//                 <div className="flex justify-between">
-//                   <dt className="font-medium text-gray-900">Total</dt>
-//                   <dd className="text-gray-900">$23.00</dd>
-//                 </div>
-//               </dl>
-//             </div>
-//           </section>
-//         </div>
-//       </main>
-//     )
-//   }
+  //console.log(orderDetail[0]?.user.names, 'posicion 0')
+  //console.log(orderDetail[0], 'posic0')
+
+
+   const orderItems= orderDetail[0]?.orderItems?.map((e)=>e)
+   //console.log(orderItems, 'items de la compra')
+
+   let images = [];
+   for (var i in orderItems) {
+    images.push(orderItems[i].product.image[0]);
+  }
+  //console.log(images);
+
+  let name = [];
+   for (let i in orderItems) {
+     name.push(orderItems[i].product.name);
+   }
+  // // console.log(name);
+
+  let price = [];
+  for (let i in orderItems) {
+    price.push(orderItems[i].product.price);
+  }
+  // // console.log(price);
+
+  let quantity = [];
+  for (let i in orderItems) {
+    quantity.push(orderItems[i].quantity);
+  }
+  // // console.log(quantity);
+
+ 
+  let subtotal = [];
+  for (let i in price) {
+    subtotal.push(parseFloat(price[i] * quantity[i]));
+  }
+
+  return (
+    <main className="radial px-4 pt-16 pb-24 sm:px-6 sm:pt-24 lg:px-8 lg:py-32">
+      <div className="max-w-4xl mx-auto">
+        <div className="max-w-xl">
+          <h1 className="text-sm font-semibold uppercase tracking-wide  text-gray-300">
+            Gracias!
+          </h1>
+          <p className="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl text-gray-300">
+            ¡Está en camino!
+          </p>
+          <p className="mt-2 text-base text-gray-300 ">
+            Tu orden <span className="font-bold">#{orderDetail[0]?.id}</span> se
+            ha enviado y estará contigo pronto.
+          </p>
+        </div>
+
+        <section
+          aria-labelledby="order-heading"
+          className="mt-10 border-2 border-gray-600 shadow-lg w-fit border rounded-md bg-gray-200"
+        >
+          <h2 id="order-heading" className="sr-only">
+            Tu orden
+          </h2>
+
+          <h3 className="sr-only">Items</h3>
+          <div className="py-10  flex  ">
+            {images?.map((t) => {
+              return (
+                <div key={t.id} className="flex-wrap mx-20">
+                  <img
+                    src={t}
+                    alt=""
+                    className="img  object-center mt-6 rounded-lg sm:w-40 sm:h-40 "
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          <div className=" flex-row py-10  flex  items-center  min-w-fit">
+            <div>
+              <h2 className="mb-5 ml-20 font-bold text-base">Productos</h2>
+              {name?.map((t) => {
+                return (
+                  <div key={t.id} className="flex-wrap mx-20">
+                    <h2 className="font-semibold capitalize text-gray-600">
+                      {t}
+                    </h2>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="pl-4 my-auto flex flex-col sm:pl-6 ">
+              <h2 className="mb-5 font-bold text-base">Precio</h2>
+              {price?.map((t) => {
+                return (
+                  <div key={t.id}>
+                    <h4 className="flex mr-4 font-semibold text-green-500">
+                      $ {t}
+                    </h4>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="pl-4 mx-auto flex flex-col sm:pl-6  ">
+              <h2 className="mb-5 font-bold text-base"> Cantidad </h2>
+              {quantity?.map((t) => {
+                return (
+                  <div key={t.id}>
+                    <h4 className="flex ml-10 font-semibold text-gray-600">
+                      x {t}
+                    </h4>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="pl-4 mx-auto flex flex-col sm:pl-6">
+              <h2 className="mb-5 font-bold text-base"> Subtotal </h2>
+              {subtotal?.map((t) => {
+                return (
+                  <div key={t.id}>
+                    <h4 className="flex ml-2 font-semibold text-green-500">
+                      $ {t}
+                    </h4>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className=" lg:ml-16 sm:ml-40 sm:pl-6">
+            <h3 className="sr-only">Tu información</h3>
+
+            <h4 className="sr-only">Direccion</h4>
+            <dl className="grid grid-cols-2 gap-x-6 text-md py-10">
+              <div>
+                <dt className="font-bold text-gray-900">Datos de envío</dt>
+                <dd className="mt-2 text-gray-700">
+                  <address className="not-italic">
+                    <span className="block capitalize">
+                      {orderDetail[0]?.user.names}{" "}
+                      {orderDetail[0]?.user.lastNames}
+                    </span>
+                    {/* <span className="block">7363 Cynthia Pass</span> */}
+                    <span className="block">Argentina</span>
+                  </address>
+                </dd>
+              </div>
+              <div>
+                <h4 className="sr-only">Pago</h4>
+
+                <div className="ml-32">
+                  <dt className="font-bold text-gray-900 ">Métodos de pago</dt>
+                  <dd className="mt-2 text-gray-700">
+                    <p>Mercado Pago</p>
+                    <p className="capitalize">{orderDetail[0]?.payment_type}</p>
+                    <p>
+                      <span aria-hidden="true">•••• </span>
+                      <span className="sr-only">Ending in </span>0604
+                    </p>
+                  </dd>
+                </div>
+              </div>
+            </dl>
+
+            <h3 className="sr-only">Summary</h3>
+
+            <dl className="space-y-6 text-md pt-10 mr-28">
+              <div className="flex justify-between">
+                <dt className="font-bold text-lg  text-gray-900">Envío</dt>
+                <dd className="font-semibold text-gray-700 mr-12">GRATIS</dd>
+              </div>
+              <div className="flex justify-between ">
+                <dt className="font-bold text-lg text-gray-900">Total</dt>
+                <dd className="text-green-500 text-xl font-bold mr-12 mb-4">
+                  ${orderDetail[0]?.total}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+        <Link to="/profile/history">
+          <button className="button-primary mt-16 mx-96 w-32 p-3 duration-500">Salir</button>
+        </Link>
+      </div>
+    </main>
+  );
+}

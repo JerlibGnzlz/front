@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { getProduct, getCategories, getBrand } from "../Redux/action";
 import "./Filter.css";
+// import { bgBG } from "@mui/x-data-grid";
 
 export default function Filter({ paginado }) {
   const [genres, setGenres] = useState();
@@ -44,6 +45,7 @@ export default function Filter({ paginado }) {
   function handleCheck(e) {
     // console.log(e.target.value === category, "esto es loo que llega");
     // if (genres === genre && genre) {
+    e.preventDefault();
       setGenres(genre);
       setCategory(e.target.value);
       dispatch(
@@ -91,7 +93,6 @@ export default function Filter({ paginado }) {
         dispatch(getProduct({ search: "", genre: genre }));
         dispatch(getBrand({ genre: genre }));
         dispatch(getCategories({ genre: genre }));
-        dispatch()
         setBrand(undefined);
         setCategory(undefined);
         setPrice(undefined);
@@ -108,8 +109,8 @@ export default function Filter({ paginado }) {
         setPrice(undefined);
 
         break;
-      case "accesories":
-        navigate("/products/accesories");
+      case "no-gender":
+        navigate("/products/no-gender");
         paginado(1);
         dispatch(getProduct({ search: "", genre: genre }));
         dispatch(getBrand({ genre: genre }));
@@ -134,6 +135,7 @@ export default function Filter({ paginado }) {
 
   function handleCheckBrand(e) {
     // if (genres === genre && genre) {
+    e.preventDefault();
     setGenres(genre);
     setBrand(e.target.value);
     dispatch(
@@ -156,77 +158,76 @@ export default function Filter({ paginado }) {
     //   dispatch(getCategories({ genre: genre, brand: e.target.value }));
     // }
   }
-
+  console.log(brands, 'estas son las marcas6')
   return (
     <div>
       <div className="category flex flex-col">
-        <h1 className="text-3xl font-semibold">Genres</h1>
+        <h1 className="text-3xl font-semibold">Géneros</h1>
         <div className="ml-2 ">
           <div className="item-left  ">
             <button
-              className="text-lg"
+              className={genre === undefined ? "On" : "Off"}
               name="all"
               onClick={(e) => handleReset(e)}
             >
-              All Products
+              Productos
             </button>
           </div>
 
           <div className="">
             <button
-              className="text-lg"
+              className={genre === "women" ? "On" : "Off"}
               name="women"
               onClick={(e) => handleReset(e)}
             >
-              Women
+              Mujer
             </button>
           </div>
 
           <div className="">
             <button
-              className="text-lg"
+              className={genre === "men" ? "On" : "Off"}
               name="men"
               onClick={(e) => handleReset(e)}
             >
-              Men
+              Hombre
+            </button>
+          </div>
+          <div className="">
+            <button
+              className={genre === "no-gender" ? "On" : "Off"}
+              name="no-gender"
+              onClick={(e) => handleReset(e)}
+            >
+              Sin Género
             </button>
           </div>
 
           <div className="">
             <button
-              className="text-lg"
+              className={genre === "kids" ? "On" : "Off"}
               name="kids"
               onClick={(e) => handleReset(e)}
             >
-              Kids
-            </button>
-          </div>
-
-          <div className="">
-            <button
-              className="text-lg"
-              name="accesories"
-              onClick={(e) => handleReset(e)}
-            >
-              Accesories
+              Niños
             </button>
           </div>
         </div>
       </div>
       <div className="price mt-4 ">
-        <h1 className="text-3xl font-semibold">Price</h1>
+        <h1 className="text-3xl font-semibold">Precio</h1>
 
         <select
           onChange={(e) => handleOrderPrice(e)}
           className="border-solid border-2 border-black mt-4 rounded-lg capitalize font-semibold"
         >
-          <option value="">select price</option>
-          <option value="ASC">Lower price</option>
-          <option value="DESC">Higher price</option>
+          <option value="">Selecciona Precio</option>
+          <option value="ASC">Menor Precio</option>
+          <option value="DESC">Mayor Precio</option>
         </select>
       </div>
       <div className="brands mt-6 ">
-        <h1 className="text-3xl font-semibold">Brands</h1>
+        <h1 className="text-3xl font-semibold">Marcas</h1>
 
         {brands?.map((b) => {
           return (
@@ -245,7 +246,7 @@ export default function Filter({ paginado }) {
       </div>
 
       <div className="categories mt-6 ">
-        <h1 className="text-3xl font-semibold">Categories</h1>
+        <h1 className="text-3xl font-semibold">Categorías</h1>
         {categories?.map((c) => {
           return (
             <div key={c.id}>

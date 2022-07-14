@@ -14,13 +14,11 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import UserRegisterSelect from "./UserRegisterSelect";
 const { REACT_APP_BACKEND_URL } = process.env;
 
-
-const options=[
-    {value: 'male', label: 'Male'},
-    {value: 'female', label: 'Female'},
-    {value: 'other', label: 'Other'},
-  ]
-
+const options = [
+  { value: "male", label: "Masculino" },
+  { value: "female", label: "Femenino" },
+  { value: "i prefer not to say", label: "Prefiero no decirlo" },
+];
 
 export const UserRegister = () => {
   const navigate = useNavigate();
@@ -47,7 +45,7 @@ export const UserRegister = () => {
 
     //   /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
 
-    //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+    //   /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
 
     //   /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
 
@@ -75,30 +73,37 @@ export const UserRegister = () => {
         confirmPassword: "",
         phone: "",
         birthDate: "",
-        genre: 'female',
+        genre: "female",
       }}
       validationSchema={validate}
       onSubmit={async (values) => {
-        // console.log(values);
+        console.log(values);
 
         try {
           await signup(values.email, values.password);
           await logout();
-        } catch (error) {}
-
-        axios
-          .post(`${REACT_APP_BACKEND_URL}/users`, values)
-          .then((response) => {
-            console.log("Data added successfully.");
-            Swal.fire({
-              // position: 'center',
-              // icon: 'success',
-              title: "User created successfully",
-              showConfirmButton: false,
-              timer: 2000,
+          axios
+            .post(`${REACT_APP_BACKEND_URL}/users`, values)
+            .then((response) => {
+              console.log("Data added successfully.");
+              Swal.fire({
+                // position: 'center',
+                // icon: 'success',
+                title: "Usuario Creado Exitosamente",
+                showConfirmButton: false,
+                timer: 2000,
+              });
+              navigate("/login");
             });
-            navigate("/login");
+        } catch (error) {
+          Swal.fire({
+            // position: 'center',
+            // icon: 'success',
+            title: "El email ya existe",
+            showConfirmButton: false,
+            timer: 2000,
           });
+        }
       }}
     >
       {(formik) => (
@@ -117,39 +122,39 @@ export const UserRegister = () => {
             </Link>
 
             <div className="mb-6 text-4xl font-bold">
-              <label>Register</label>
+              <label>Registrate</label>
             </div>
             <div className="mb-8 text-md">
-              <p>Welcome!</p>
+              <p>Bienvenido!</p>
             </div>
 
             <Form className=" m-auto pr-4 flex flex-wrap md:justify-center sm:justify-center gap-2 ">
               <TextField
-                label="First Name"
+                label="Nombre"
                 name="names"
                 type="text"
                 placeholder="John"
               />
 
               <TextField
-                label="Last Name"
+                label="Apellido"
                 name="lastNames"
                 type="text"
                 placeholder="Doe"
               />
 
               <TextField
-                label="Password"
+                label="Contraseña"
                 name="password"
                 type="password"
-                placeholder="******"
+                placeholder="**"
               />
 
               <TextField
-                label="Confirm Password"
+                label="Confirmar contraseña"
                 name="confirmPassword"
                 type="password"
-                placeholder="******"
+                placeholder="**"
               />
 
               <TextField
@@ -160,44 +165,44 @@ export const UserRegister = () => {
               />
 
               <TextField
-                label="Phone"
+                label="Teléfono"
                 name="phone"
                 type="text"
                 placeholder="1145879293"
               />
 
               <TextField
-                label="Birthdate"
+                label="Fecha de nacimiento"
                 name="birthDate"
                 type="text"
                 placeholder="yyyy-mm-dd"
               />
 
-          
-               <div className="mb-3 mt-4 flex justify-center">
-               <UserRegisterSelect
-               options={options}
-               value={formik.values.genre}
-              //className={'input'}
-              className="p-2 ml-5 w-60 outline-none rounded text-sm  text-black font-bold  placeholder:text-slate-500 "
-               onChange={value=>formik.setFieldValue('genre', value.value)}
-               
-               />
-              </div> 
+              <div className="mb-3 mt-4 flex justify-center">
+                <UserRegisterSelect
+                  options={options}
+                  value={formik.values.genre}
+                  //className={'input'}
+                  className="p-2 ml-5 w-60 outline-none rounded text-sm  text-black font-bold  placeholder:text-slate-500 "
+                  onChange={(value) =>
+                    formik.setFieldValue("genre", value.value)
+                  }
+                />
+              </div>
 
               <div className="mt-8 ml-2 flex flex-row justify-center space-x-4 ">
                 <button
                   className="p-2 w-64 outline-none rounded  text-primary bg-white font-bold hover:bg-tertiary hover:cursor-pointer hover:text-white"
                   type="submit"
                 >
-                  Register
+                  Registro
                 </button>
 
                 <button
                   className="p-2 w-64 outline-none rounded  text-primary bg-white font-bold hover:bg-tertiary hover:cursor-pointer hover:text-white"
                   type="reset"
                 >
-                  Reset
+                  Limpiar campos
                 </button>
               </div>
             </Form>

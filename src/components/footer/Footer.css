@@ -1,15 +1,12 @@
 .footer {
     background-color: black;
-    width: 150vw;
+    width: 100%;
     height: 385px;
     color: #FFFFFF;
     position: relative;
-    top: 25vw;
+    margin-top: 10rem;
 
-    display: grid;
-    grid-template-columns: repeat(4, 2fr);
-    grid-column-gap: 5px;
-
+    
 
 }
 

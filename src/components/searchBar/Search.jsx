@@ -10,19 +10,24 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../img/logo.png";
 import { useAuth } from "../../context/AuthContext";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+
+
 
 function Search() {
   const [product] = useState();
   const dispatch = useDispatch();
   const { genre } = useParams();
   const productState = useSelector((state) => state.products);
+  const userT = useSelector((state) => state.verify);
   let StyleInput = {};
   let StyleError = {
     color: "red",
     textShadow: "1px 1px 3px black",
   };
   const { user, logout } = useAuth();
-  let welcome = user ? "Hello, " + user.email : "Hello, Guest";
+  let welcome = user ? "Hola, " + user.email.split("@")[0] : "Hola";
    const handleLogout = async () => {
      await logout();
    };
@@ -49,16 +54,7 @@ function Search() {
         </div>
       </Link>
 
-    
-
       <div className="text-black flex ">
-        <select className="outline-0 h-8 text-sm text-tertiary w-auto text-center rounded-l bg-secondary hover:cursor-pointer hover:text-white">
-          <option value="all">All</option>
-          <option value="mens">Mens</option>
-          <option value="women">Women</option>
-          <option value="kids">Kids</option>
-        </select>
-
         <input
           type="search"
           value={product}
@@ -78,15 +74,39 @@ function Search() {
       <div>{welcome}</div>
       <Link to="/cart">
         <div className="hover:text-white">
-          <FontAwesomeIcon icon={faShoppingCart} /> Cart
+          <FontAwesomeIcon icon={faShoppingCart} /> Carro
         </div>
       </Link>
+      {user &&
+        (userT.isAdmin === false ? (
+          <Link to="/profile/favorites">
+            <button className="mb-4">
+              <FavoriteIcon />
+            </button>
+          </Link>
+        ) : null)}
+      {user &&
+        (userT.isAdmin === true ? (
+          <Link to="/admin">
+            <div className=" px-3 rounded py-1.5 w-30 hover:text-white ">
+              <FontAwesomeIcon icon={faUser} className="mr-3" />
+              Perfil
+            </div>
+          </Link>
+        ) : (
+          <Link to="/profile">
+            <div className=" px-3 rounded py-1.5 w-30 hover:text-white ">
+              <FontAwesomeIcon icon={faUser} className="mr-3" />
+              Perfil
+            </div>
+          </Link>
+        ))}
 
       <button
         onClick={handleLogout}
         className="bg-secondary px-3 rounded py-1.5 hover:text-white "
       >
-        {user ? "Log out" : <Link to="/login">Log in</Link>}
+        {user ? "Cerrar sesión" : <Link to="/login">Iniciar sesión</Link>}
       </button>
     </div>
   );

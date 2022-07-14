@@ -1,11 +1,8 @@
-
 import React, { useState, useEffect } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth } from "../../context/AuthContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userGoogleRegister } from "../Redux/action.js";
 import { verification } from "../Redux/action.js";
 
@@ -30,6 +27,8 @@ function LoginForm() {
     password: "",
   });
 
+  let verifyEnabled = useSelector((state) => state.verifyUserEnabled.enabled);
+
   const [err, setErr] = useState();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -42,20 +41,22 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      await login(User.email, User.password);
-      navigate("/");
-
       dispatch(verification(User.email));
+
+      if (verifyEnabled) {
+        await login(User.email, User.password);
+
+        navigate("/");
+      }
     } catch (error) {
       setErr("Sucedio un error");
-      console.log(error);
     }
   };
 
   const googleLogin = async () => {
     await loginWithGoogle();
 
-    navigate("/");
+    //navigate("/");
   };
 
   useEffect(() => {
@@ -86,10 +87,10 @@ function LoginForm() {
         </Link>
         <form onSubmit={handleSubmit}>
           <div className="mb-6 text-4xl font-bold  ">
-            <label>Login</label>
+            <label>Iniciar Sesión</label>
           </div>
           <div className="mb-8 text-md">
-            <p>Welcome!</p>
+            <p>Bienvenido!</p>
           </div>
           <div className="mb-3 flex justify-center ">
             <div className="bg-tertiary w-6 rounded-l flex justify-center items-center  pl-3">
@@ -103,7 +104,7 @@ function LoginForm() {
               onChange={handleChange}
             />
           </div>
-          <p className="text-red-600 mb-2 ">{err && "Wrong credentials"}</p>
+          <p className="text-red-600 mb-2 ">{err && err}</p>
           <div className="mb-3 flex justify-center ">
             <div className="bg-tertiary w-6 rounded-l  flex justify-center items-center pl-3">
               <FontAwesomeIcon icon={faLock} />
@@ -118,13 +119,13 @@ function LoginForm() {
           </div>
           <div className="mb-6">
             <Link to="/reset">
-              <p className="text-xs">Forgot your password?</p>
+              <p className="text-xs">Olvidaste tu contraseña?</p>
             </Link>
           </div>
 
           <div className="mb-6 mt-1">
             <Link to="/register">
-              <p className="text-xs">Forgot to register? do it here</p>
+              <p className="text-xs">Olvidaste de Registrarte? Hazlo aquí</p>
             </Link>
           </div>
 
@@ -136,7 +137,7 @@ function LoginForm() {
             />
           </div>
         </form>
-        <button onClick={googleLogin}>Login With Google</button>
+        <button onClick={googleLogin}>Iniciar sesión con Google</button>
       </div>
     </div>
   );

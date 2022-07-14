@@ -8,11 +8,13 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import CheckoutPaymentMp from "./CheckoutPaymentMp";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
 function CheckoutAddress() {
   //const navigate = useNavigate();
+  const { user} = useAuth()
   const [formData, setFormData] = useState(null);
 
   const divStyle = {
@@ -36,6 +38,8 @@ function CheckoutAddress() {
       .required("Required"),
   });
 
+  console.log(formData)
+
   return (
     <Formik
       initialValues={{
@@ -50,11 +54,12 @@ function CheckoutAddress() {
       }}
       validationSchema={validate}
       onSubmit={(values) => {
+        values.email = user.email
         // console.log(values, 'valores')
         axios
           .post(`${REACT_APP_BACKEND_URL}/userAddress`, values)
           .then((response) => {
-            // console.log('Shipping information added successfully')
+            console.log(response)
             setFormData(values);
 
             Swal.fire({
@@ -118,7 +123,7 @@ function CheckoutAddress() {
                 {/* Shipping information */}
                 <div className="mt-4 pt-4">
                   <h2 className="text-xl font-bold text-white">
-                    Shipping information
+                    Información de Envio
                   </h2>
                   <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
                     {/* <div>
@@ -172,7 +177,7 @@ function CheckoutAddress() {
                         htmlFor="address"
                         className="block text-md font-medium text-white"
                       >
-                        Address
+                        Domicilio
                       </label>
                       <div className="mt-1">
                         <Field
@@ -195,7 +200,7 @@ function CheckoutAddress() {
                         htmlFor="apartment"
                         className="block text-md font-medium text-white"
                       >
-                        Apartment, suite, etc.
+                        Departamento, Edificio, etc.
                       </label>
                       <div className="mt-1">
                         <Field
@@ -217,7 +222,7 @@ function CheckoutAddress() {
                         htmlFor="state"
                         className="block text-md font-medium text-white"
                       >
-                        State
+                        Provincia
                       </label>
                       <div className="mt-1">
                         <Field
@@ -239,7 +244,7 @@ function CheckoutAddress() {
                         htmlFor="country"
                         className="block text-md font-medium text-white"
                       >
-                        City
+                        Ciudad
                       </label>
                       <div className="mt-1">
                         <Field
@@ -261,7 +266,7 @@ function CheckoutAddress() {
                         htmlFor="postal-code"
                         className="block text-md font-medium text-white"
                       >
-                        Postal code
+                        Código Postal
                       </label>
                       <div className="mt-1">
                         <Field
@@ -284,7 +289,7 @@ function CheckoutAddress() {
                         htmlFor="phone"
                         className="block text-md font-medium text-white"
                       >
-                        Phone
+                        Teléfono
                       </label>
                       <div className="mt-1">
                         <Field
@@ -308,7 +313,7 @@ function CheckoutAddress() {
                     type="submit"
                     className="w-full mt-10 bg-primary border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary"
                   >
-                    Confirm Information
+                    Confirmar Información
                   </button>
                 </div>
               </Form>

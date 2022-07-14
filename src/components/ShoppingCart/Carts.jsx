@@ -3,9 +3,14 @@ import Cart from "./Cart";
 import { useEffect,useState} from "react";
 import "./Carts.css"
 import Counter from "./Counter";
+import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
+
 
 
 function Carts() {
+  const carro = useSelector((state) => state?.cart.stock)
+  console.log(carro,'esto es el carro')
   let cart;
   
   cart = localStorage.getItem("cart");
@@ -17,7 +22,7 @@ useEffect(() => {
    // const product2 = JSON.parse(cart2);
 
 }, [cart])
-  
+ 
   function handleDelete(id) {
     // console.log(id,'soy el id')
     // e.preventDefault();
@@ -30,9 +35,9 @@ useEffect(() => {
 
     // const pro = localStorage.getItem(cart);
   }
-
   
-  let stock = 5;
+  
+ 
 
   const [count, setCount] = useState(1);
 
@@ -44,7 +49,7 @@ useEffect(() => {
     const { name } = e.target;
 
     if (name === "mas") {
-      if (product.find((p) => p.id === id).quantity < stock) {
+      if (product.find((p) => p.id === id).quantity < carro) {
         product.find((p) => p.id === id).quantity += 1;
         let contador = product.filter((e) => e.id === id);
 
@@ -52,11 +57,16 @@ useEffect(() => {
 
         localStorage.setItem("cart", JSON.stringify(product));
       } else {
-        alert("No hay mas stock");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No hay más stock!",
+          
+        });
       }
     } else if (name === "menos") {
       if (
-        product.find((p) => p.id === id).quantity <= stock &&
+        product.find((p) => p.id === id).quantity <= carro &&
         product.find((p) => p.id === id).quantity > 1
       ) {
         product.find((p) => p.id === id).quantity -= 1;
@@ -75,13 +85,14 @@ useEffect(() => {
     <>
       <div>
         {product?.length
-          ? product.map((e) => (
+          ? product?.map((e) => (
             
             <Cart
                 
                 counter={counter}
                 product={product}
                 handleDelete={handleDelete}
+                carro={e.carro}
                 price={e.price}
                 id={e.id}
                 key={e.id}
@@ -90,7 +101,7 @@ useEffect(() => {
                 brandName={e.brand?.name}
               />
             ))
-          : "tu carrito esta vacio"}
+          : "Tu carrito está vacío"}
       </div>
       <Counter product={product} />
     </>

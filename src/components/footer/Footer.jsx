@@ -1,33 +1,15 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import "./Footer.css"
-
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./Footer.css";
+import logo from '../../img/logo.png';
 export default function footer() {
-    return (
-        <div>
-            <div className="footer">
-                <h4>Company</h4>
-                <h4>Support</h4>
-                <h4>Legal</h4>
-            </div>
+  return (
+    
+      <div className="footer flex flex-col justify-between items-center mx-auto">
+        <img src={logo} className="mx-auto mt-12 mb-20" alt="" />
+        <h6 className="">©2022 Free Style. Todos los derechos reservados </h6>
 
-            <div className="link">
-                <NavLink to="#"><h5>About Us</h5></NavLink>
-                <NavLink to="#"><h5>Help Center</h5></NavLink>
-                <NavLink to="#"><h5>Cookies Policy</h5></NavLink>
-                <NavLink to="#"><h5>Blog</h5></NavLink>
-                <NavLink to="#"><h5 >Safety Center</h5></NavLink>
-                <NavLink to="#"><h5>Privacy Policy</h5></NavLink>
-                <NavLink to="#"><h5>Community Guidelines</h5></NavLink>
-                <NavLink to="#"><h5 >Terms of Service</h5></NavLink>
-                <NavLink to="#"><h5>Contact Us</h5></NavLink>
-                <h6>© 2022 Free Style. All rights reserved</h6>
-            </div>
-
-
-
-
-        </div>
-
-    )
+      </div>
+    
+  );
 }

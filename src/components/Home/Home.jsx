@@ -1,10 +1,11 @@
 import React from "react";
 import eslogan from "./imagenes/eslogan.png";
-import linea from "./imagenes/lineaDeportiva.png";
-import envios from "./imagenes/envios.png";
+import linea from "./imagenes/lineadeportiva1.png";
+import envios from "./imagenes/envios1.png";
 import mujer from "./imagenes/mujer.png";
 import hombre from "./imagenes/hombre.png";
 import niños from "./imagenes/niños.png";
+import unisex from "./imagenes/unisex.jpg";
 import accesorios from "./imagenes/accesorios.png";
 import testimonial1 from "./imagenes/testimoniales1.png";
 import testimonial2 from "./imagenes/testimonial2.png";
@@ -15,6 +16,12 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import TopSellers from "../topSeller/TopSellers";
 import { useAuth } from "../../context/AuthContext";
+import adiddas from "../../img/ardidas.png"
+import nike from "../../img/naiki.png"
+import fendi from "../../img/fendi.png"
+import guess from "../../img/guess.png"
+import boss from "../../img/Boss.png"
+import calvin from "../../img/Calvin.png"
 
 export default function Home() {
   //const { user } = useAuth();
@@ -37,92 +44,67 @@ export default function Home() {
         </ul>
       </div>
       <div className="all">
-        <h4 className="names">Women Clothes</h4>
-        <h4 className="names">Men Clothes</h4>
-        <h4 className="names">Kids Clothes</h4>
-        <h4 className="names">Accessories</h4>
-        <img src={mujer} alt="mujer" />
+        <h4 className="names">Hombres</h4>
+        <h4 className="names">Mujeres</h4>
+        <h4 className="names">Niños</h4>
+        <h4 className="names">Sin género</h4>
         <img src={hombre} alt="hombre" />
+        <img src={mujer} alt="mujer" />
         <img src={niños} alt="niños" />
-        <img src={accesorios} alt="accesorios" />
+        <img
+          className="w-[20rem] h-[22.8rem] ml-8 "
+          src={unisex}
+          alt="sin género"
+        />
 
         <button className="boton">
-          <Link to="/products/women">See more</Link>
+          <Link to="/products/men">Ver más</Link>
         </button>
         <button className="boton">
-          <Link to="/products/men">See more</Link>
+          <Link to="/products/women">Ver más</Link>
         </button>
         <button className="boton">
-          <Link to="/products/kids">See more</Link>
+          <Link to="/products/kids">Ver más</Link>
         </button>
         <button className="boton">
-          <Link to="/products/accesories">See more</Link>
+          <Link to="/products/no-gender">Ver más</Link>
         </button>
       </div>
 
-      <h4 className="Top">Top Sellers</h4>
+      <h4 className="Top font-semibold mt-[10rem] text-center">
+        Productos más vendidos
+      </h4>
 
       <TopSellers />
 
-      <h2 className="opinions">Our Costumers Speak</h2>
+      <h2 className="opinions mt-[10rem]">Marcas Asociadas </h2>
       <h3 className="under-text">
-        We have been working with costumers around the world
+        Las marcas de vanguardia las encontras aquí{" "}
       </h3>
 
-      <div className="testimonials">
-        <blockquote>
-          <div className="frame">
-            <h5>The best clothes</h5>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perferendis a natus laboriosam vitae eos. In optio, perspiciatis
-              deleniti nemo{" "}
-            </p>
+      <div className="bg-gray-[#f3f3f3]">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+          <div className="img mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-8">
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-32" src={adiddas} alt="Workcation" />
+            </div>
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-36" src={nike} alt="Mirage" />
+            </div>
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-28" src={guess} alt="StaticKit" />
+            </div>
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-24 m" src={calvin} alt="Laravel" />
+            </div>
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-24" src={boss} alt="Tuple" />
+            </div>
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-20" src={fendi} alt="Statamic" />
+            </div>
           </div>
-          <img className="Photo" src={testimonial1} alt="testimonial" />
-          <cite>David Cooper</cite>
-        </blockquote>
-        <blockquote>
-          <div className="frame">
-            <h5>On-time delivery</h5>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perferendis a natus laboriosam vitae eos. In optio, perspiciatis
-              deleniti nemo{" "}
-            </p>
-          </div>
-          <img className="Photo" src={testimonial2} alt="testimonial" />
-
-          <cite>Esther Hawkins</cite>
-        </blockquote>
-        <blockquote>
-          <div className="frame">
-            <h5>I could buy easily</h5>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perferendis a natus laboriosam vitae eos. In optio, perspiciatis
-              deleniti nemo{" "}
-            </p>
-          </div>
-
-          <img className="Photo" src={testimonial3} alt="testimonial" />
-          <cite>Devon Lane</cite>
-        </blockquote>
-      </div>
-
-      <div className="stats">
-        <h3>5K+</h3>
-        <h3>4.5K+</h3>
-        <h3>3K+</h3>
-        <h3>25+</h3>
-        <h4>Happy Costumers</h4>
-        <h4>Deliveries</h4>
-        <h4>Rewiews</h4>
-        <h4>Awards Won</h4>
-        <b></b>
-        <b></b>
-        <b></b>
-        <b></b>
+        </div>
       </div>
 
       <Footer />

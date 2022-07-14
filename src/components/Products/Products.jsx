@@ -4,7 +4,14 @@ import Filter from "../Filter/Filter";
 import Card from "../Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getCategories, getProduct, getBrand, process_payment } from "../Redux/action";
+import {
+  getCategories,
+  getProduct,
+  getBrand,
+  process_payment,
+  resetAllComments,
+  userType
+} from "../Redux/action";
 import { useParams, useSearchParams, useLocation, useNavigate} from "react-router-dom";
 import Paginado from "../Paginado/Paginado";
 import "./Products.css";
@@ -52,9 +59,13 @@ export default function Products() {
         navegate("/products")
       }
     }
+    if(user){
+      dispatch(userType(user.email))
+    }
     dispatch(getProduct({ genre: genre }));
     dispatch(getCategories({ genre: genre }));
     dispatch(getBrand({ genre: genre }));
+    dispatch(resetAllComments())
   }, [dispatch, genre, user]);
 
   // const localStorageCard = localStorage.getItem("cartProducts");
@@ -107,14 +118,14 @@ export default function Products() {
   return (
     <div>
       <NavBar />
-      <div className="products">
-        <h1>Products</h1>
+      <div className="productsCards">
+        <h1>Productos</h1>
       </div>
       <div className="cards2">
         <div className="card2">
           <Filter paginado={paginado} />
         </div>
-        <div className="container">
+        <div className="containerCards">
           {currentProduct &&
             currentProduct?.map((p) => {
               return (
@@ -131,12 +142,14 @@ export default function Products() {
             })}
         </div>
       </div>
+      <div className="mb-4">
       <Paginado
         productPerPage={productPerPage}
         currentPage={currentPage}
         Products={Products.length}
         paginado={paginado}
-      />
+        />
+        </div>
     </div>
   );
 }
