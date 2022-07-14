@@ -8,12 +8,12 @@ import { statusAdmi } from "../../Redux/action.js";
 import { userDetailAdmin } from "../../Redux/action.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import LeftPanel from '../LeftPanel'
+import LeftPanel from "../LeftPanel";
 
 function ListUser() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.allUsers);
-  const userDetail = useSelector((state) => state.userDetailAdmin);
+  const userDetail = useSelector((state) => state.userDetailAdmin.users);
   const rows = users.map((e) => e);
 
   const enable = (e) => {
@@ -26,13 +26,11 @@ function ListUser() {
 
   const statusAdmin = (e) => {
     e.preventDefault();
-    
+
     dispatch(statusAdmi(e.target.name));
     setTimeout(function () {
-      dispatch(getAllUsers())
-    },70 )
-    
-    
+      dispatch(getAllUsers());
+    }, 70);
   };
 
   useEffect(() => {
@@ -45,7 +43,7 @@ function ListUser() {
       headerName: "ID",
       width: 70,
       renderCell: (params) => {
-        return <span>{params.row.id}</span>;
+        return <span>{params?.row.id}</span>;
       },
     },
     {
@@ -60,7 +58,7 @@ function ListUser() {
               alt="avatar"
               className="w-10 h-10 rounded-full mr-4"
             ></img> */}
-            {params.row.names}
+            {params?.row.names}
           </div>
         );
       },
@@ -70,7 +68,7 @@ function ListUser() {
       headerName: "Last name",
       width: 160,
       renderCell: (params) => {
-        return <span>{params.row.lastNames}</span>;
+        return <span>{params?.row.lastNames}</span>;
       },
     },
 
@@ -79,7 +77,7 @@ function ListUser() {
       headerName: "Email",
       width: 250,
       renderCell: (params) => {
-        return <span>{params.row.email}</span>;
+        return <span>{params?.row.email}</span>;
       },
     },
     {
@@ -87,7 +85,7 @@ function ListUser() {
       headerName: "Enable",
       width: 100,
       renderCell: (params) => {
-        return <span>{params.row.enabled === true ? "true" : "false"}</span>;
+        return <span>{params?.row.enabled === true ? "true" : "false"}</span>;
       },
     },
     {
@@ -98,10 +96,10 @@ function ListUser() {
         return (
           <button
             onClick={enable}
-            name={params.row.id}
+            name={params?.row.id}
             className="bg-tertiary text-black rounded-md p-2 hover:bg-gray-600 transition duration-500 ease-in-out shadow-lg hover:text-white font-semibold"
           >
-            {params.row.enabled === true ? "Disable" : "Enable"}
+            {params?.row.enabled === true ? "Disable" : "Enable"}
           </button>
         );
       },
@@ -112,7 +110,7 @@ function ListUser() {
       headerName: "Admin",
       width: 100,
       renderCell: (params) => {
-        return <span>{params.row.isAdmin === true ? "true" : "false"}</span>;
+        return <span>{params?.row.isAdmin === true ? "true" : "false"}</span>;
       },
     },
 
@@ -124,7 +122,7 @@ function ListUser() {
         return (
           <button
             onClick={statusAdmin}
-            name={params.row.id}
+            name={params?.row.id}
             className="bg-tertiary text-black rounded-md p-2 hover:bg-gray-600 transition duration-500 ease-in-out shadow-lg hover:text-white font-semibold"
           >
             Admin
@@ -140,7 +138,7 @@ function ListUser() {
       renderCell: (params) => {
         return (
           <button
-            name={params.row.email}
+            name={params?.row.email}
             onClick={handleOpen}
             className="cursor-pointer m-auto"
           >
@@ -190,11 +188,13 @@ function ListUser() {
             alt="avatar"
             className="w-40 h-40 rounded-full"
           />
-          <span className="mb-2 mt-2">Nombre: {userDetail.names}</span>
-          <span className="mb-2">Apellido: {userDetail.lastNames}</span>
-          <span className="mb-2">Email: {userDetail.email}</span>
-          <span className="mb-2">Fecha de Nacimiento: {userDetail.birthDate}</span>
-          <span>Número de Teléfono: {userDetail.phone}</span>
+          <span className="mb-2 mt-2">Nombre: {userDetail?.names}</span>
+          <span className="mb-2">Apellido: {userDetail?.lastNames}</span>
+          <span className="mb-2">Email: {userDetail?.email}</span>
+          <span className="mb-2">
+            Fecha de Nacimiento: {userDetail?.birthDate}
+          </span>
+          <span>Número de Teléfono: {userDetail?.phone}</span>
         </div>
       </Modal>
     </div>

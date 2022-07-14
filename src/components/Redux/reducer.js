@@ -27,7 +27,8 @@ import {
   RESET_ALL_COMMENTS,
   GET_ORDER_DETAIL,
   DATA_ORDERS,
-  DATA_EARNINGS
+  DATA_EARNINGS,
+  VERIFY_ENABLED,
 } from "./action";
 
 const initialState = {
@@ -50,11 +51,12 @@ const initialState = {
   favorites: [],
   verify: {},
   historyPay: [],
-  orderDetail:[],
+  orderDetail: [],
   permison: false,
   comments: false,
   dataOrders: [],
   dataEarnings: [],
+  verifyUserEnabled: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -137,15 +139,15 @@ function rootReducer(state = initialState, action) {
     case DATA_ORDERS: {
       return {
         ...state,
-        dataOrders: action.payload
-      }
+        dataOrders: action.payload,
+      };
     }
 
     case DATA_EARNINGS: {
       return {
         ...state,
-        dataEarnings: action.payload
-      }
+        dataEarnings: action.payload,
+      };
     }
 
     case FAVORITES:
@@ -231,12 +233,18 @@ function rootReducer(state = initialState, action) {
         historyPay: action.payload,
       };
 
-      case GET_ORDER_DETAIL: {
-        return {
-          ...state,
-          orderDetail: action.payload,
-        };
-}
+    case GET_ORDER_DETAIL: {
+      return {
+        ...state,
+        orderDetail: action.payload,
+      };
+    }
+
+    case VERIFY_ENABLED:
+      return {
+        ...state,
+        verifyUserEnabled: action.payload,
+      };
 
     default:
       return state;

@@ -27,7 +27,8 @@ export const PERMISON = "PERMISON";
 export const RESET_ALL_COMMENTS = "RESET_ALL_COMMENTS";
 export const GET_ORDER_DETAIL = "GET_ORDER_DETAIL";
 export const DATA_ORDERS = "DATA_ORDERS";
-export const DATA_EARNINGS = "DATA_EARNINGS"
+export const DATA_EARNINGS = "DATA_EARNINGS";
+export const VERIFY_ENABLED = "VERIFY_ENABLED";
 
 const { REACT_APP_BACKEND_URL } = process.env;
 
@@ -190,16 +191,31 @@ export function userGoogleRegister(payload) {
   };
 }
 
-export function verification(payload) {
+/* export function verification(payload) {
   return async function () {
     try {
       var json = await axios.get(
         `${REACT_APP_BACKEND_URL}/verify?email=${payload}`
       );
+
       return json;
     } catch (error) {}
   };
+} */
+
+export function verification(payload) {
+  return async function (dispatch) {
+    var json = await axios.get(
+      `${REACT_APP_BACKEND_URL}/verify?email=${payload}`
+    );
+    console.log("estoy en la accion");
+    return dispatch({
+      type: VERIFY_ENABLED,
+      payload: json.data,
+    });
+  };
 }
+
 export function enableUsers(id) {
   return async function () {
     await axios.put(`${REACT_APP_BACKEND_URL}/users/${id}`);
@@ -262,9 +278,9 @@ export function updateDetail(id, data) {
 
 export function createProduct(payload) {
   return async function (dispatch) {
-    var json = await axios.post("http://localhost:3001/product", payload, {headers: { "Content-Type": "multipart/form-data" }}
-    );
-    
+    var json = await axios.post("http://localhost:3001/product", payload, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
     return json;
   };
@@ -347,11 +363,11 @@ export function userHistoryPay(email) {
 
 export const getOrderDetail = (id) => async (dispatch) => {
   //console.log(id, 'para el detalle')
-  const response = await axios.get(`http://localhost:3001/order/detail?id=${id}`);
+  const response = await axios.get(
+    `http://localhost:3001/order/detail?id=${id}`
+  );
   return dispatch({ type: GET_ORDER_DETAIL, payload: response.data });
 };
-
-
 
 export const deleteComment = (id, productId) => async (dispatch) => {
   await axios.delete(
@@ -409,14 +425,14 @@ export const resetAllComments = () => (dispatch) => {
 };
 
 export const chardOrders = () => async (dispatch) => {
-  let data = await axios.get(`${REACT_APP_BACKEND_URL}/chards/orders`)
+  let data = await axios.get(`${REACT_APP_BACKEND_URL}/chards/orders`);
   return dispatch({ type: DATA_ORDERS, payload: data.data });
-}
+};
 
 export const chardEarnings = () => async (dispatch) => {
-  let data = await axios.get(`${REACT_APP_BACKEND_URL}/chards/earnings`)
+  let data = await axios.get(`${REACT_APP_BACKEND_URL}/chards/earnings`);
   return dispatch({ type: DATA_EARNINGS, payload: data.data });
-}
+};
 
 // export const userProfileUpdate = (id, data)=>{
 //   return async function(dispatch){
