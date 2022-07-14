@@ -19,7 +19,7 @@ import Products from "./components/Products/Products";
 import Checkout from "./components/Checkout/Checkout.jsx";
 import Admin from "./components/Admin/Admin";
 
-import FormProduct from "./components/Admin/Products/formProduct";
+import FormProduct from "./components/Admin/Products/FormProduct";
 import EditProduct from "./components/Admin/Products/EditProduct";
 import ProductsAdmi from "./components/Admin/Products/ProductsAdmi";
 import ListUser from "./components/Admin/Users/ListUser";

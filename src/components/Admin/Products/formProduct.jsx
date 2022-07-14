@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import LeftPanel from "../LeftPanel";
+import Swal from "sweetalert2";
 
 export default function FormProduct() {
   const allBrand = useSelector((state) => state.brand);
   const allCategories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
-  
+
   const [input, setInput] = useState({
     name: "",
     image: [],
@@ -27,21 +28,50 @@ export default function FormProduct() {
     { value: "no-gender", name: "Sin género" },
   ];
 
+  const validate = (dataObject) => {
+    const errors = [];
+
+    if (!dataObject.name) {
+      errors.push(input.name);
+    }
+
+    if (!dataObject.description) {
+      errors.push(input.description);
+    }
+
+    if (!dataObject.genre) {
+      errors.push(input.genre);
+    }
+
+    if (!dataObject.brandId) {
+      errors.push(input.brandId);
+    }
+
+    if (!dataObject.categoryId) {
+      errors.push(input.categoryId);
+    }
+
+    if (!dataObject.price) {
+      errors.push(input.price);
+    }
+    return errors;
+  };
+
   //VALIDACIONES
   function handleSubmit(e) {
     e.preventDefault();
-    
-    const formData = new FormData();
-    const validate = () => {
-      
+    if (validate(input).length > 0) {
+      return alert("Llene todos los campos");
     }
-    formData.append("name", input?.name);
-    formData.append("description", input?.description);
-    formData.append("genre", input?.genre);
-    formData.append("brandId", input?.brandId);
-    formData.append("categoryId", input?.categoryId);
-    formData.append("price", input?.price);
 
+    const formData = new FormData();
+
+    formData.append("name", input.name);
+    formData.append("description", input.description);
+    formData.append("genre", input.genre);
+    formData.append("brandId", input.brandId);
+    formData.append("categoryId", input.categoryId);
+    formData.append("price", input.price);
     for (let i = 0; i < input.image.length; i++) {
       formData.append("image", input.image[i]);
     }
@@ -60,8 +90,6 @@ export default function FormProduct() {
   }
 
   function handleChange(e) {
-
-    e.preventDefault();
     if (e.target.name === "image") {
       setInput({
         ...input,
@@ -167,11 +195,8 @@ export default function FormProduct() {
               <div className="col-span-3 sm:col-span-2">
                 <label className="block font-bold text-lg">Género:</label>
 
-                {genre?.map((g) => (
-                  <div
-                    key={g.id}
-                    className="mt-1 ml-2 w-48 border border-gray-400  flex rounded-md shadow-sm hover:bg-gray-800 duration-500 hover:text-white hover:border-black focus:bg-gray-700"
-                    >
+                {genre.map((g) => (
+                  <div className="mt-1 ml-2 w-48 border border-gray-400  flex rounded-md shadow-sm hover:bg-gray-800 duration-500 hover:text-white hover:border-black focus:bg-gray-700">
                     <button
                       name={g.value}
                       className="capitalize"
@@ -192,9 +217,7 @@ export default function FormProduct() {
                   >
                     {allCategories?.length &&
                       allCategories.map((e) => (
-                        <option key={e.id} value={e.id}>
-                          {e.name}
-                        </option>
+                        <option value={e.id}>{e.name}</option>
                       ))}
                   </select>
                 </div>
@@ -207,10 +230,8 @@ export default function FormProduct() {
                     onChange={(e) => handleSelectBrand(e)}
                   >
                     {allBrand?.length &&
-                      allBrand?.map((e) => (
-                        <option key={e.id} value={e.id}>
-                        {e.name}
-                        </option>
+                      allBrand.map((e) => (
+                        <option value={e.id}>{e.name}</option>
                       ))}
                   </select>
                 </div>
@@ -222,7 +243,7 @@ export default function FormProduct() {
                     type="number"
                     placeholder="Escribe una descripcion"
                     value={input.stock}
-                    name=""
+                    name="stock"
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -231,7 +252,7 @@ export default function FormProduct() {
                   <input
                     className="nombre"
                     type="number"
-                    placeholder="Ingrese el precio"
+                    placeholder="Escribe una descripcion"
                     value={input.price}
                     name="price"
                     onChange={(e) => handleChange(e)}

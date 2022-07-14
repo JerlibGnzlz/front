@@ -1,11 +1,8 @@
-
 import React, { useState, useEffect } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth } from "../../context/AuthContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userGoogleRegister } from "../Redux/action.js";
 import { verification } from "../Redux/action.js";
 
@@ -30,6 +27,8 @@ function LoginForm() {
     password: "",
   });
 
+  let verifyEnabled = useSelector((state) => state.verifyUserEnabled.enabled);
+
   const [err, setErr] = useState();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -42,13 +41,15 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      await login(User.email, User.password);
-      navigate("/");
-
       dispatch(verification(User.email));
+
+      if (verifyEnabled) {
+        await login(User.email, User.password);
+
+        navigate("/");
+      }
     } catch (error) {
       setErr("Sucedio un error");
-      console.log(error);
     }
   };
 
@@ -103,7 +104,7 @@ function LoginForm() {
               onChange={handleChange}
             />
           </div>
-          <p className="text-red-600 mb-2 ">{err && "Wrong credentials"}</p>
+          <p className="text-red-600 mb-2 ">{err && err}</p>
           <div className="mb-3 flex justify-center ">
             <div className="bg-tertiary w-6 rounded-l  flex justify-center items-center pl-3">
               <FontAwesomeIcon icon={faLock} />

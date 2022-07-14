@@ -45,7 +45,7 @@ export const UserRegister = () => {
 
     //   /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
 
-    //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+    //   /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
 
     //   /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
 
@@ -82,21 +82,28 @@ export const UserRegister = () => {
         try {
           await signup(values.email, values.password);
           await logout();
-        } catch (error) {}
-
-        axios
-          .post(`${REACT_APP_BACKEND_URL}/users`, values)
-          .then((response) => {
-            console.log("Data added successfully.");
-            Swal.fire({
-              // position: 'center',
-              // icon: 'success',
-              title: "User created successfully",
-              showConfirmButton: false,
-              timer: 2000,
+          axios
+            .post(`${REACT_APP_BACKEND_URL}/users`, values)
+            .then((response) => {
+              console.log("Data added successfully.");
+              Swal.fire({
+                // position: 'center',
+                // icon: 'success',
+                title: "Usuario Creado Exitosamente",
+                showConfirmButton: false,
+                timer: 2000,
+              });
+              navigate("/login");
             });
-            navigate("/login");
+        } catch (error) {
+          Swal.fire({
+            // position: 'center',
+            // icon: 'success',
+            title: "El email ya existe",
+            showConfirmButton: false,
+            timer: 2000,
           });
+        }
       }}
     >
       {(formik) => (
@@ -140,14 +147,14 @@ export const UserRegister = () => {
                 label="Contraseña"
                 name="password"
                 type="password"
-                placeholder="******"
+                placeholder="**"
               />
 
               <TextField
                 label="Confirmar contraseña"
                 name="confirmPassword"
                 type="password"
-                placeholder="******"
+                placeholder="**"
               />
 
               <TextField

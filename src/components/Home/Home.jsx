@@ -16,6 +16,12 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import TopSellers from "../topSeller/TopSellers";
 import { useAuth } from "../../context/AuthContext";
+import adiddas from "../../img/ardidas.png"
+import nike from "../../img/naiki.png"
+import fendi from "../../img/fendi.png"
+import guess from "../../img/guess.png"
+import boss from "../../img/Boss.png"
+import calvin from "../../img/Calvin.png"
 
 export default function Home() {
   //const { user } = useAuth();
@@ -65,64 +71,40 @@ export default function Home() {
         </button>
       </div>
 
-      <h4 className="Top">Productos más vendidos</h4>
+      <h4 className="Top font-semibold mt-[10rem] text-center">
+        Productos más vendidos
+      </h4>
 
       <TopSellers />
 
-      <h2 className="opinions">Nuestros clientes </h2>
-      <h3 className="under-text">Hemos venido a clientes de todo el país.</h3>
+      <h2 className="opinions mt-[10rem]">Marcas Asociadas </h2>
+      <h3 className="under-text">
+        Las marcas de vanguardia las encontras aquí{" "}
+      </h3>
 
-      <div className="testimonials">
-        <blockquote>
-          <div className="frame">
-            <h5>La mejor calidad</h5>
-            <p>
-              He comprado en varias oportunidades y es de hermosa calidad, son
-              mi tienda favorita!!{" "}
-            </p>
+      <div className="bg-gray-[#f3f3f3]">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+          <div className="img mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-8">
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-32" src={adiddas} alt="Workcation" />
+            </div>
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-36" src={nike} alt="Mirage" />
+            </div>
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-28" src={guess} alt="StaticKit" />
+            </div>
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-24 m" src={calvin} alt="Laravel" />
+            </div>
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-24" src={boss} alt="Tuple" />
+            </div>
+            <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
+              <img className="max-h-20" src={fendi} alt="Statamic" />
+            </div>
           </div>
-          <img className="Photo" src={testimonial1} alt="testimonial" />
-          <cite>David Cooper</cite>
-        </blockquote>
-        <blockquote>
-          <div className="frame">
-            <h5>Siempre cumpliendo</h5>
-            <p>
-              Cada compra que he realizado ha llegado siempre el dia del envio
-              correctamente, muy buenos precios y calidad.{" "}
-            </p>
-          </div>
-          <img className="Photo" src={testimonial2} alt="testimonial" />
-
-          <cite>Esther Vegas</cite>
-        </blockquote>
-        <blockquote>
-          <div className="frame">
-            <h5>Gran variedad</h5>
-            <p>
-              Siempre tienen todo lo que necesito para mi y mi familia, sin duda
-              los elijo siempre!{" "}
-            </p>
-          </div>
-
-          <img className="Photo" src={testimonial3} alt="testimonial" />
-          <cite>Daniel Lane</cite>
-        </blockquote>
-      </div>
-
-      <div className="stats">
-        <h3>5K+</h3>
-        <h3>4.5K+</h3>
-        <h3>3K+</h3>
-        <h3>25+</h3>
-        <h4>Clientes felices</h4>
-        <h4>Envios</h4>
-        <h4>Vistas</h4>
-        <h4>Seguidores</h4>
-        <b></b>
-        <b></b>
-        <b></b>
-        <b></b>
+        </div>
       </div>
 
       <Footer />

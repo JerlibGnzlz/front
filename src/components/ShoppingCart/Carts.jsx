@@ -4,10 +4,13 @@ import { useEffect,useState} from "react";
 import "./Carts.css"
 import Counter from "./Counter";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
 
 
 
 function Carts() {
+  const carro = useSelector((state) => state?.cart.stock)
+  console.log(carro,'esto es el carro')
   let cart;
   
   cart = localStorage.getItem("cart");
@@ -19,7 +22,7 @@ useEffect(() => {
    // const product2 = JSON.parse(cart2);
 
 }, [cart])
-  
+ 
   function handleDelete(id) {
     // console.log(id,'soy el id')
     // e.preventDefault();
@@ -34,7 +37,7 @@ useEffect(() => {
   }
   
   
-  let stock = 5;
+ 
 
   const [count, setCount] = useState(1);
 
@@ -46,7 +49,7 @@ useEffect(() => {
     const { name } = e.target;
 
     if (name === "mas") {
-      if (product.find((p) => p.id === id).quantity < stock) {
+      if (product.find((p) => p.id === id).quantity < carro) {
         product.find((p) => p.id === id).quantity += 1;
         let contador = product.filter((e) => e.id === id);
 
@@ -63,7 +66,7 @@ useEffect(() => {
       }
     } else if (name === "menos") {
       if (
-        product.find((p) => p.id === id).quantity <= stock &&
+        product.find((p) => p.id === id).quantity <= carro &&
         product.find((p) => p.id === id).quantity > 1
       ) {
         product.find((p) => p.id === id).quantity -= 1;
@@ -89,7 +92,7 @@ useEffect(() => {
                 counter={counter}
                 product={product}
                 handleDelete={handleDelete}
-                stock={e.stock}
+                carro={e.carro}
                 price={e.price}
                 id={e.id}
                 key={e.id}
